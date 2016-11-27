@@ -15,21 +15,9 @@
  */
 package com.google.gwt.dev.util;
 
-import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -90,6 +78,7 @@ public final class Util {
    * @return a big fat string encoding of the MD5 for the content, suitably
    *         formatted for use as a file name
    */
+  @Deprecated
   public static String computeStrongName(byte[] content) {
     return computeStrongName(new byte[][] {content});
   }
@@ -100,6 +89,7 @@ public final class Util {
    * @return a big fat string encoding of the MD5 for the content, suitably
    *         formatted for use as a file name
    */
+  @Deprecated
   public static String computeStrongName(byte[][] contents) {
     MessageDigest md5;
     try {
@@ -141,12 +131,12 @@ public final class Util {
    * Copies an input stream out to an output stream. Closes the input steam and
    * output stream.
    */
-  public static void copy(TreeLogger logger, InputStream is, OutputStream os)
+  @Deprecated
+  public static void copy(Object logger, InputStream is, OutputStream os)
       throws UnableToCompleteException {
     try {
       copy(is, os);
     } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Error during copy", e);
       throw new UnableToCompleteException();
     }
   }
@@ -168,12 +158,12 @@ public final class Util {
     }
   }
 
-  public static Reader createReader(TreeLogger logger, URL url)
+  @Deprecated
+  public static Reader createReader(Object logger, URL url)
       throws UnableToCompleteException {
     try {
       return new InputStreamReader(url.openStream());
     } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Unable to open resource: " + url, e);
       throw new UnableToCompleteException();
     }
   }
@@ -687,7 +677,8 @@ public final class Util {
     }
   }
 
-  public static void writeBytesToFile(TreeLogger logger, File where, byte[] what)
+  @Deprecated
+  public static void writeBytesToFile(Object logger, File where, byte[] what)
       throws UnableToCompleteException {
     writeBytesToFile(logger, where, new byte[][] {what});
   }
@@ -695,7 +686,8 @@ public final class Util {
   /**
    * Gathering write.
    */
-  public static void writeBytesToFile(TreeLogger logger, File where,
+  @Deprecated
+  public static void writeBytesToFile(Object logger, File where,
       byte[][] what) throws UnableToCompleteException {
     FileOutputStream f = null;
     Throwable caught;
@@ -715,16 +707,16 @@ public final class Util {
       Utility.close(f);
     }
     String msg = "Unable to write file '" + where + "'";
-    logger.log(TreeLogger.ERROR, msg, caught);
     throw new UnableToCompleteException();
   }
 
   /**
    * Serializes an object and writes it to a file.
    */
-  public static void writeObjectAsFile(TreeLogger logger, File file,
+  @Deprecated
+  public static void writeObjectAsFile(Object logger, File file,
       Object... objects) throws UnableToCompleteException {
-    Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+//    Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
     FileOutputStream stream = null;
     try {
       // No need to check mkdirs result because an IOException will occur anyway
@@ -732,12 +724,10 @@ public final class Util {
       stream = new FileOutputStream(file);
       writeObjectToStream(stream, objects);
     } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Unable to write file: "
-          + file.getAbsolutePath(), e);
       throw new UnableToCompleteException();
     } finally {
       Utility.close(stream);
-      writeObjectAsFileEvent.end();
+//      writeObjectAsFileEvent.end();
     }
   }
 
@@ -775,7 +765,8 @@ public final class Util {
     return true;
   }
 
-  public static void writeStringAsFile(TreeLogger logger, File file,
+  @Deprecated
+  public static void writeStringAsFile(Object logger, File file,
       String string) throws UnableToCompleteException {
     FileOutputStream stream = null;
     OutputStreamWriter writer = null;
@@ -788,8 +779,6 @@ public final class Util {
       file.getParentFile().mkdirs();
       buffered.write(string);
     } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Unable to write file: "
-          + file.getAbsolutePath(), e);
       throw new UnableToCompleteException();
     } finally {
       Utility.close(buffered);
@@ -913,108 +902,6 @@ public final class Util {
     }
 
     return null;
-  }
-
-  private static void writeAttribute(PrintWriter w, Attr attr, int depth)
-      throws IOException {
-    w.write(attr.getName());
-    w.write('=');
-    Node c = attr.getFirstChild();
-    while (c != null) {
-      w.write('"');
-      writeNode(w, c, depth);
-      w.write('"');
-      c = c.getNextSibling();
-    }
-  }
-
-  private static void writeDocument(PrintWriter w, Document d)
-      throws IOException {
-    w.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    Node c = d.getFirstChild();
-    while (c != null) {
-      writeNode(w, c, 0);
-      c = c.getNextSibling();
-    }
-  }
-
-  private static void writeElement(PrintWriter w, Element el, int depth)
-      throws IOException {
-    String tagName = el.getTagName();
-
-    writeIndent(w, depth);
-    w.write('<');
-    w.write(tagName);
-    NamedNodeMap attrs = el.getAttributes();
-    for (int i = 0, n = attrs.getLength(); i < n; ++i) {
-      w.write(' ');
-      writeNode(w, attrs.item(i), depth);
-    }
-
-    Node c = el.getFirstChild();
-    if (c != null) {
-      // There is at least one child.
-      //
-      w.println('>');
-
-      // Write the children.
-      //
-      while (c != null) {
-        writeNode(w, c, depth + 1);
-        w.println();
-        c = c.getNextSibling();
-      }
-
-      // Write the closing tag.
-      //
-      writeIndent(w, depth);
-      w.write("</");
-      w.write(tagName);
-      w.print('>');
-    } else {
-      // There are no children, so just write the short form close.
-      //
-      w.print("/>");
-    }
-  }
-
-  private static void writeIndent(PrintWriter w, int depth) {
-    for (int i = 0; i < depth; ++i) {
-      w.write('\t');
-    }
-  }
-
-  private static void writeNode(PrintWriter w, Node node, int depth)
-      throws IOException {
-    short nodeType = node.getNodeType();
-    switch (nodeType) {
-      case Node.ELEMENT_NODE:
-        writeElement(w, (Element) node, depth);
-        break;
-      case Node.ATTRIBUTE_NODE:
-        writeAttribute(w, (Attr) node, depth);
-        break;
-      case Node.DOCUMENT_NODE:
-        writeDocument(w, (Document) node);
-        break;
-      case Node.TEXT_NODE:
-        writeText(w, (Text) node);
-        break;
-
-      case Node.COMMENT_NODE:
-      case Node.CDATA_SECTION_NODE:
-      case Node.ENTITY_REFERENCE_NODE:
-      case Node.ENTITY_NODE:
-      case Node.PROCESSING_INSTRUCTION_NODE:
-      default:
-        throw new RuntimeException("Unsupported DOM node type: " + nodeType);
-    }
-  }
-
-  private static void writeText(PrintWriter w, Text text) throws DOMException {
-    String nodeValue = text.getNodeValue();
-    String escaped = escapeXml(nodeValue);
-    w.write(escaped);
   }
 
   /**
