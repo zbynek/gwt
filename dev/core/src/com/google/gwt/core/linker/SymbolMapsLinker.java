@@ -34,9 +34,6 @@ import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.SoftPermutation;
 import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
-import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
-import com.google.gwt.dev.cfg.ResourceLoader;
-import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapConsumerV3;
@@ -288,7 +285,6 @@ public class SymbolMapsLinker extends AbstractLinker {
 
 //      Event writeSourceMapsEvent =
 //          SpeedTracerLogger.start(CompilerEventType.WRITE_SOURCE_MAPS);
-      StandardLinkerContext stdContext = (StandardLinkerContext) context;
       for (SourceMapArtifact se : artifacts.find(SourceMapArtifact.class)) {
         // filename is permutation_id/sourceMap<fragmentNumber>.json
         String sourceMapString = Util.readStreamAsString(se.getContents(logger));
@@ -326,8 +322,13 @@ public class SymbolMapsLinker extends AbstractLinker {
             }
 
             // TODO(cromwellian): apply insert and remove edits
-            if (stdContext.getModule().shouldEmbedSourceMapContents()) {
-              embedSourcesInSourceMaps(logger, stdContext, artifacts, sourceMapGenerator,
+            if (context.getConfigurationProperties().stream()
+                    .filter(configurationProperty -> "compiler.embedSourceMaps".equals(
+                            configurationProperty.getName()))
+                    .findFirst()
+                    .map(configurationProperty -> Boolean.valueOf(configurationProperty.getValues().get(0)))
+                    .orElse(false)) {
+              embedSourcesInSourceMaps(logger, context, artifacts, sourceMapGenerator,
                   totalPrefixLines, sourceMapString, partialPath);
             } else {
               sourceMapGenerator.mergeMapSection(totalPrefixLines, 0, sourceMapString,
@@ -349,7 +350,7 @@ public class SymbolMapsLinker extends AbstractLinker {
     return artifacts;
   }
 
-  private static void embedSourcesInSourceMaps(TreeLogger logger, StandardLinkerContext context,
+  private static void embedSourcesInSourceMaps(TreeLogger logger, LinkerContext context,
                                                ArtifactSet artifacts,
                                                SourceMapGeneratorV3 sourceMapGenerator,
                                                int totalPrefixLines, String sourceMapString,
@@ -365,8 +366,6 @@ public class SymbolMapsLinker extends AbstractLinker {
       sourceMapGenerator.addExtension(extensionKey, entry.getValue());
     }
 
-    ResourceLoader resourceLoader = ResourceLoaders.fromContextClassLoader();
-
     Map<String, EmittedArtifact> generatedSources = Maps.newHashMap();
     artifacts.find(EmittedArtifact.class)
         .forEach(emittedArtifact -> {
@@ -379,10 +378,9 @@ public class SymbolMapsLinker extends AbstractLinker {
       String content;
       InputStream cis = null;
       try {
-        cis = loadSource(logger, sourceFileName, generatedSources,
-            resourceLoader);
+        cis = loadSource(logger, sourceFileName, generatedSources);
         if (isNull(cis)) {
-          cis = context.getModule().findSourceFile(sourceFileName).openContents();
+          cis = context.findSourceFile(sourceFileName).openContents();
         }
         content = Util.readStreamAsString(cis);
         sourceMapGenerator.addSourcesContent(sourceFileName, content);
@@ -396,14 +394,13 @@ public class SymbolMapsLinker extends AbstractLinker {
   }
 
   private static InputStream loadSource(TreeLogger logger, String sourceFileName,
-                                            Map<String, EmittedArtifact> generatedSources,
-                                        ResourceLoader resourceLoader)
+                                            Map<String, EmittedArtifact> generatedSources)
       throws UnableToCompleteException, URISyntaxException, IOException {
     if (generatedSources.containsKey(sourceFileName)) {
       return generatedSources.get(sourceFileName).getContents(logger);
     } else {
       // ask the resourceOracle for the file contents and add it
-      URL resource = resourceLoader.getResource(sourceFileName);
+      URL resource = Thread.currentThread().getContextClassLoader().getResource(sourceFileName);
       if (nonNull(resource)) {
         return resource.openStream();
       }
