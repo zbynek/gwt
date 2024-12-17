@@ -180,14 +180,17 @@ public class JdtCompiler {
    * annotated with a *.GwtIncompatible annotation.
    */
   private static class ParserImpl extends Parser {
+    private final TreeLogger logger;
 
     // A place to stash imports before removal. These are needed to correctly check the
     // references in Jsni.
     // TODO(rluble): find a more modular way for this fix.
     public final ListMultimap<CompilationUnitDeclaration, ImportReference> originalImportsByCud =
         ArrayListMultimap.create();
-    public ParserImpl(ProblemReporter problemReporter, boolean optimizeStringLiterals) {
+    public ParserImpl(ProblemReporter problemReporter, boolean optimizeStringLiterals,
+                      TreeLogger logger) {
       super(problemReporter, optimizeStringLiterals);
+      this.logger = logger;
     }
 
     /**
@@ -201,7 +204,14 @@ public class JdtCompiler {
       // would be ignored.
       boolean saveDiet = this.diet;
       this.diet = false;
-      CompilationUnitDeclaration decl = super.parse(sourceUnit, compilationResult);
+      CompilationUnitDeclaration decl = null;
+      try {
+        decl = super.parse(sourceUnit, compilationResult);
+      } catch (RuntimeException ex) {
+        logger.log(TreeLogger.Type.ERROR, "Problem compiling "
+                + new String(sourceUnit.getFileName()));
+        throw ex;
+      }
       this.diet = saveDiet;
       // Remove @GwtIncompatible classes and members.
       // It is safe to remove @GwtIncompatible types, fields and methods on incomplete ASTs due
@@ -274,7 +284,7 @@ public class JdtCompiler {
     @Override
     public void initializeParser() {
       this.parser = new ParserImpl(this.problemReporter,
-          this.options.parseLiteralExpressionsAsConstants);
+          this.options.parseLiteralExpressionsAsConstants, this.logger);
     }
 
     @Override
