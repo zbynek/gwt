@@ -13,12 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest.java11.lang;
+package com.google.gwt.emultest.java17.lang;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Tests for java.lang.String Java 12 API emulation.
@@ -26,7 +23,8 @@ import java.util.stream.Collectors;
 public class StringTest extends EmulTestBase {
 
   public void testTransform() {
-    assertEquals(3, hideFromCompiler("foo").transform(String::length));
+    int stringLength = hideFromCompiler("foo").transform(String::length);
+    assertEquals(3, stringLength);
   }
 
   public void testIndent() {
@@ -38,13 +36,5 @@ public class StringTest extends EmulTestBase {
     assertEquals("x\ny", hideFromCompiler("  x\n  y").indent(-2));
     assertEquals("x\r\ny", hideFromCompiler("  x\r\n  y").indent(-2));
     assertEquals("x\ry", hideFromCompiler("  x\r  y").indent(-2));
-  }
-
-  private <T> T hideFromCompiler(T value) {
-    if (Math.random() < -1) {
-      // Can never happen, but fools the compiler enough not to optimize this call.
-      fail();
-    }
-    return value;
   }
 }

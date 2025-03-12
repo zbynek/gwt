@@ -200,7 +200,8 @@ public class CssOutputTestCase extends TestCase {
     String expectedOutput = "test-class-type-1-basename1,TESTCSSNAME1\n" +
         "test-class-type-2-basename2,TESTCSSNAME2\n" +
         "test-class-type-3-basename3,TESTCSSNAME3\n";
-    assertEquals(expectedOutput, testOutputStream.toString());
+    assertEquals(expectedOutput, testOutputStream.toString()
+        .replaceAll("\r\n", "\n"));
 
     testLogger.assertCorrectLogEntries();
 

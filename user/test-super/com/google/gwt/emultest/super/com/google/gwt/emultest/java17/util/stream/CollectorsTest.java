@@ -13,12 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest.java12.util.stream;
+package com.google.gwt.emultest.java17.util.stream;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
-import java.util.Arrays;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Tests for java.lang.String Java 12 API emulation.
@@ -26,8 +27,11 @@ import java.util.stream.Collectors;
 public class CollectorsTest extends EmulTestBase {
 
   public void testTeeing() {
-    assertEquals(4, Stream.of(2, 4, 6).teeing(Collectors.summingToDouble(n -> n),
-        Collectors.counting(), (sum, count) -> sum / count));
+    Collector<Double, ?, Double> teeing = Collectors.teeing(
+        Collectors.reducing(Double::sum),
+        Collectors.counting(),
+        (sum, count) -> sum.orElse(0.0) / count);
+    assertEquals(4.0, Stream.of(2.0, 4.0, 6.0).collect(teeing), 0.01);
   }
 
 }
