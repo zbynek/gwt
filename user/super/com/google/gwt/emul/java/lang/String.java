@@ -32,6 +32,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import javaemul.internal.ArrayHelper;
@@ -815,6 +816,42 @@ public final class String implements Comparable<String>, CharSequence,
     return length;
   }
 
+  public String indent(int spaces) {
+    if (spaces  == 0) {
+      return this;
+    }
+    int nPosition = -1;
+    int rPosition = -1;
+    int nextIndex = 0;
+    StringBuilder ret = new StringBuilder();
+    String spaceString = spaces > 0 ? " ".repeat(spaces) : "";
+    while (nextIndex < length()) {
+      if (rPosition < nextIndex) {
+        rPosition = cappedIndexOf('\r', nextIndex);
+      }
+      if (nPosition < nextIndex) {
+        nPosition = cappedIndexOf('\n', nextIndex);
+      }
+      int lineEnd = Math.min(nPosition, rPosition) + 1;
+      if (nPosition == rPosition + 1) {
+        lineEnd++;
+      }
+      String line = substring(nextIndex, Math.min(lineEnd, length()));
+      nextIndex = lineEnd;
+      if (spaces > 0) {
+        ret.append(spaceString).append(line);
+      } else {
+        int prefixLength = 0;
+        while (prefixLength < line.length() && line.charAt(prefixLength) == ' '
+            && prefixLength < -spaces) {
+          prefixLength++;
+        }
+        ret.append(line.substring(prefixLength));
+      }
+    }
+    return ret.toString();
+  }
+
   private class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {
     private int nextIndex = 0;
     private int rPosition = -1;
@@ -830,10 +867,10 @@ public final class String implements Comparable<String>, CharSequence,
         return false;
       }
       if (rPosition < nextIndex) {
-        rPosition = cappedIndexOf('\r');
+        rPosition = cappedIndexOf('\r', nextIndex);
       }
       if (nPosition < nextIndex) {
-        nPosition = cappedIndexOf('\n');
+        nPosition = cappedIndexOf('\n', nextIndex);
       }
       int lineEnd = Math.min(nPosition, rPosition);
       action.accept(substring(nextIndex, lineEnd));
@@ -843,11 +880,11 @@ public final class String implements Comparable<String>, CharSequence,
       }
       return nextIndex < length();
     }
+  }
 
-    private int cappedIndexOf(char c) {
-      int index = indexOf(c, nextIndex);
-      return index == -1 ? length() : index;
-    }
+  private int cappedIndexOf(char c, int nextIndex) {
+    int index = indexOf(c, nextIndex);
+    return index == -1 ? length() : index;
   }
 
   @JsType(isNative = true, name = "String", namespace = "<window>")

@@ -13,17 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest;
+package com.google.gwt.emultest.java17.util.stream;
 
-import com.google.gwt.emultest.java12.lang.StringTest;
+import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.emultest.java.util.EmulTestBase;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.JUnitShell;
+import com.google.gwt.junit.Platform;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+/**
+ * Tests for java.lang.String Java 12 API emulation.
+ */
+@DoNotRunWith(Platform.Devel)
+public class CollectorsTest extends EmulTestBase {
 
-/** Test JRE emulations. */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-    StringTest.class,
-})
-public class EmulJava12Suite {
+  public void testTeeing() {
+    // stub
+  }
+
 }

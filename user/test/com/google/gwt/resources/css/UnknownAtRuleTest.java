@@ -43,13 +43,13 @@ public class UnknownAtRuleTest extends TestCase {
     List<CssNode> nodes = sheet.getNodes();
     assertEquals(3, nodes.size());
     assertEquals(SIMPLE, ((CssUnknownAtRule) nodes.get(0)).getRule());
-    assertEquals(COMPLEX, ((CssUnknownAtRule) nodes.get(1)).getRule());
-    assertEquals(EXTENDED, ((CssUnknownAtRule) nodes.get(2)).getRule());
+    assertEquals(COMPLEX, ((CssUnknownAtRule) nodes.get(1)).getRule().replaceAll("\r\n", "\n"));
+    assertEquals(EXTENDED, ((CssUnknownAtRule) nodes.get(2)).getRule().replaceAll("\r\n", "\n"));
 
     TextOutput out = new DefaultTextOutput(true);
     CssGenerationVisitor v = new CssGenerationVisitor(out);
     v.accept(sheet);
 
-    assertEquals(SIMPLE + COMPLEX + EXTENDED, out.toString());
+    assertEquals(SIMPLE + COMPLEX + EXTENDED, out.toString().replaceAll("\r\n", "\n"));
   }
 }

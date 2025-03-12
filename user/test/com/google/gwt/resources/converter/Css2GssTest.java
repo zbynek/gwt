@@ -130,7 +130,7 @@ public class Css2GssTest extends TestCase {
     set.add(Css2GssTest.class.getResource("variable_defined_in_file.css"));
     String convertedGss =
         new Css2Gss(resource, false, Predicates.<String>alwaysFalse(), set).toGss();
-    String gss = IOUtils.toString(stream, "UTF-8");
+    String gss = IOUtils.toString(stream, "UTF-8").replaceAll("\r\n", "\n");
     assertEquals(gss, convertedGss);
   }
 
@@ -158,7 +158,7 @@ public class Css2GssTest extends TestCase {
     InputStream stream = Css2GssTest.class.getResourceAsStream(expectedGssFile);
     String convertedGss =
         new Css2Gss(resource, lenient, simpleBooleanConditionPredicate, new HashSet<URL>()).toGss();
-    String gss = IOUtils.toString(stream, "UTF-8");
+    String gss = IOUtils.toString(stream, "UTF-8").replaceAll("\r\n", "\n");
     assertEquals(gss, convertedGss);
 
     // assert the convertedGss is compatible with GSS
