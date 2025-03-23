@@ -19,7 +19,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 import java.util.Locale;
 
-
 /**
  * Class representing DataTransfer interface.
  * 

@@ -198,7 +198,8 @@ public class CwCustomDataGrid extends ContentWidget {
 
       // Add column headers.
       tr = startRow();
-      buildHeader(tr, firstNameHeader, firstNameColumn, sortedColumn, isSortAscending, false, false);
+      buildHeader(tr, firstNameHeader, firstNameColumn, sortedColumn, isSortAscending,
+          false, false);
       buildHeader(tr, lastNameHeader, lastNameColumn, sortedColumn, isSortAscending, false, false);
       buildHeader(tr, ageHeader, ageColumn, sortedColumn, isSortAscending, false, false);
       buildHeader(tr, categoryHeader, categoryColumn, sortedColumn, isSortAscending, false, false);

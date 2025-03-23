@@ -38,7 +38,7 @@ public class FakeEditorSource<T> extends EditorSource<FakeLeafValueEditor<T>> {
    * created by this FakeEditorSource.
    */
   public static final int UNKNOWN = -1;
-  private final Map<FakeLeafValueEditor<T>, Integer> lastKnownPosition = new HashMap<FakeLeafValueEditor<T>, Integer>();
+  private final Map<FakeLeafValueEditor<T>, Integer> lastKnownPosition = new HashMap<>();
 
   @Override
   public FakeLeafValueEditor<T> create(int index) {

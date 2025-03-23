@@ -486,7 +486,6 @@ public class SimpleFoo {
     }
   }
 
-
   Integer version = 1;
 
   private Long id = 1L;

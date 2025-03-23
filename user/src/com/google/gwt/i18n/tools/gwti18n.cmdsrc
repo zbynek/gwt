@@ -1,1 +1,2 @@
-@java -cp "%~dp0\src;%~dp0\bin;@gwtUserPath;@gwtDevPath" @i18nClass -out "%~dp0\src" @className @createMessages
+@java -cp "%~dp0\src;%~dp0\bin;@gwtUserPath;@gwtDevPath" @i18nClass \
+    -out "%~dp0\src" @className @createMessages

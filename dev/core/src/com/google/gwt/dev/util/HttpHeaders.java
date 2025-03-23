@@ -48,7 +48,8 @@ public final class HttpHeaders {
   public static final String CONTENT_ENCODING_GZIP = "gzip";
   public static final String CONTENT_LENGTH = "Content-Length";
   public static final String CONTENT_TYPE = "Content-Type";
-  public static final String CONTENT_TYPE_APPLICATION_XJAVASCRIPT_UTF8 = "application/x-javascript; charset=utf-8";
+  public static final String CONTENT_TYPE_APPLICATION_XJAVASCRIPT_UTF8
+      = "application/x-javascript; charset=utf-8";
   public static final String CONTENT_TYPE_TEXT_CSS = "text/css";
   public static final String CONTENT_TYPE_TEXT_HTML = "text/html";
   public static final String CONTENT_TYPE_TEXT_HTML_UTF8 = "text/html; charset=utf-8";

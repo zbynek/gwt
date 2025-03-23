@@ -122,7 +122,7 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
   }
 
   /**
-   * See https://code.google.com/p/google-web-toolkit/issues/detail?id=8036
+   * See <a href="https://code.google.com/p/google-web-toolkit/issues/detail?id=8036">issue 8036</a>.
    */
   public void testSortOrder() {
     PlaceHistoryMapper subject = GWT.create(SortOrder.class);

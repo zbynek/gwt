@@ -26,7 +26,8 @@ import javaemul.internal.annotations.HasNoSideEffects;
  *
  * TODO(jat): many of the classification methods implemented here are not
  * correct in that they only handle ASCII characters, and many other methods
- * are not currently implemented.  I think the proper approach is to introduce * a deferred binding parameter which substitutes an implementation using
+ * are not currently implemented.  I think the proper approach is to introduce
+ * a deferred binding parameter which substitutes an implementation using
  * a fully-correct Unicode character database, at the expense of additional
  * data being downloaded.  That way developers that need the functionality
  * can get it without those who don't need it paying for it.

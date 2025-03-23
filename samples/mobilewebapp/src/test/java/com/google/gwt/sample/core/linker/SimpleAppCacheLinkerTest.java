@@ -149,7 +149,8 @@ public class SimpleAppCacheLinkerTest extends TestCase {
     artifacts.add(new SyntheticArtifact(SimpleAppCacheLinker.class, "foo.xml.gz", new byte[0]));
     artifacts.add(new SyntheticArtifact(SimpleAppCacheLinker.class, "foo.rpc.log", new byte[0]));
     artifacts.add(new SyntheticArtifact(SimpleAppCacheLinker.class, "foo.gwt.rpc", new byte[0]));
-    artifacts.add(new SyntheticArtifact(SimpleAppCacheLinker.class, "rpcPolicyManifest.bar", new byte[0]));
+    artifacts.add(new SyntheticArtifact(SimpleAppCacheLinker.class, "rpcPolicyManifest.bar",
+        new byte[0]));
 
     ArtifactSet result = linker.link(TreeLogger.NULL, new MockLinkerContext(), artifacts, false);
 

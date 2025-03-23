@@ -598,8 +598,8 @@ public class DatePicker extends Composite implements
   }
 
   /**
-   * If the <code>dropdownVisible</code> is equal to true, the user will be able to change the current month and
-   * the current year of the date picker via two dropdown lists.
+   * If the <code>dropdownVisible</code> is equal to true, the user will be able to change
+   * the current month and the current year of the date picker via two dropdown lists.
    */
   public void setYearAndMonthDropdownVisible(boolean dropdownVisible) {
     this.yearAndMonthDropdownVisible = dropdownVisible;

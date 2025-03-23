@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.server.rpc;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,9 +61,11 @@ public class RPCServletUtils {
 
   private static final String CONTENT_ENCODING_GZIP = "gzip";
 
-  private static final String CONTENT_TYPE_APPLICATION_JSON_UTF8 = "application/json; charset=utf-8";
+  private static final String CONTENT_TYPE_APPLICATION_JSON_UTF8
+      = "application/json; charset=utf-8";
 
-  private static final String GENERIC_FAILURE_MSG = "The call failed on the server; see server log for details";
+  private static final String GENERIC_FAILURE_MSG
+      = "The call failed on the server; see server log for details";
 
   private static final String GWT_RPC_CONTENT_TYPE = "text/x-gwt-rpc";
 
@@ -431,7 +432,8 @@ public class RPCServletUtils {
        * properly parsed character encoding string if we decide to make this
        * change.
        */
-      if (characterEncoding.toLowerCase(Locale.ROOT).contains(expectedCharSet.toLowerCase(Locale.ROOT))) {
+      if (characterEncoding.toLowerCase(Locale.ROOT)
+          .contains(expectedCharSet.toLowerCase(Locale.ROOT))) {
         encodingOkay = true;
       }
     }

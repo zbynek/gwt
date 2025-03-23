@@ -15,7 +15,6 @@
  */
 package org.hibernate.jsr303.tck.tests.validation;
 
-
 /**
  * Test wrapper for {@link ValidateValueTest}.
  */

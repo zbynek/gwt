@@ -84,7 +84,7 @@ public class GwtUint8ClampedArrayTest extends Uint8ClampedArrayTest {
   }
 
   /**
-   * Initialize from a JSO rather than a Java array
+   * Initialize from a JSO rather than a Java array.
    */
   protected void setFromJsArray(Uint8ClampedArray array, int offset) {
     JsUtils.set(array, getJsoArray(), offset);

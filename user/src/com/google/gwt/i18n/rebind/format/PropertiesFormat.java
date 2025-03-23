@@ -43,7 +43,8 @@ public class PropertiesFormat implements MessageCatalogFormat {
   /*
    * (non-Javadoc)
    *
-   * @see com.google.gwt.i18n.rebind.format.MessageCatalogFormat#write(com.google.gwt.i18n.rebind.util.AbstractResource,
+   * @see com.google.gwt.i18n.rebind.format.MessageCatalogFormat#write(
+   *      com.google.gwt.i18n.rebind.util.AbstractResource,
    *      java.io.File, com.google.gwt.core.ext.typeinfo.JClassType)
    */
   public void write(TreeLogger logger, String locale,

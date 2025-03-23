@@ -124,7 +124,7 @@ public class JUnitMessageQueue {
    * null, it means that the client requested the test but did not report the
    * results yet.
    */
-  private final Map<TestInfo, Map<ClientStatus, JUnitResult>> testResults = new HashMap<TestInfo, Map<ClientStatus, JUnitResult>>();
+  private final Map<TestInfo, Map<ClientStatus, JUnitResult>> testResults = new HashMap<>();
 
   /**
    * Only instantiable within this package.

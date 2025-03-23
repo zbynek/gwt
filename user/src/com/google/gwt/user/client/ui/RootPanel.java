@@ -63,7 +63,8 @@ public class RootPanel extends AbsolutePanel {
   /**
    * The singleton command used to detach widgets.
    */
-  private static final AttachDetachException.Command maybeDetachCommand = new AttachDetachException.Command() {
+  private static final AttachDetachException.Command maybeDetachCommand
+      = new AttachDetachException.Command() {
     public void execute(Widget w) {
       if (w.isAttached()) {
         w.onDetach();

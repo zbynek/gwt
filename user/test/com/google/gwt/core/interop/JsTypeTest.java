@@ -528,8 +528,13 @@ public class JsTypeTest extends GWTTestCase {
   }
 
   static class NonPublicJsMethodClass {
-    @JsMethod private String foo() { return "foo"; }
-    @JsMethod String bar() { return "bar"; }
+    @JsMethod private String foo() {
+      return "foo";
+    }
+
+    @JsMethod String bar() {
+      return "bar";
+    }
   }
 
   public void testJsMethodWithDifferentVisiblities() {

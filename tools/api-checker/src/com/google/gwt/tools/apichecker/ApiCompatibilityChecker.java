@@ -613,7 +613,8 @@ public class ApiCompatibilityChecker extends ToolBase {
       if (!PRINT_COMPATIBLE && apiChange.getStatus().equals(ApiChange.Status.COMPATIBLE)) {
         continue;
       }
-      if (!PRINT_COMPATIBLE_WITH && apiChange.getStatus().equals(ApiChange.Status.COMPATIBLE_WITH)) {
+      if (!PRINT_COMPATIBLE_WITH && apiChange.getStatus()
+          .equals(ApiChange.Status.COMPATIBLE_WITH)) {
         continue;
       }
       prunedCollection.add(apiChange);
@@ -867,8 +868,10 @@ public class ApiCompatibilityChecker extends ToolBase {
     sb.append("the tool without the whitelist.\n");
     sb.append("Each repository is specified by the following four properties:\n");
     sb.append("name             specifies how the api should be refered to in the output\n");
-    sb.append("dirRoot          optional argument that specifies the base directory of all other file/directory names\n");
-    sb.append("sourceFiles      a colon-separated list of files/directories that specify the roots of the filesystem trees to be included.\n");
+    sb.append("dirRoot          optional argument that specifies the base directory ")
+        .append("of all other file/directory names\n");
+    sb.append("sourceFiles      a colon-separated list of files/directories that specify ")
+        .append("the roots of the filesystem trees to be included.\n");
     sb.append("excludeFiles     a colon-separated lists of ant patterns to exclude");
     sb.append("sourceLevel      Java source level compatibility");
 
@@ -960,11 +963,12 @@ public class ApiCompatibilityChecker extends ToolBase {
                     "com/google/gwt/i18n/tools",
                     "com/google/gwt/json",
                     "com/google/gwt/junit",
-                    "com/google/gwt/user/client/rpc/core/java/util/LinkedHashMap_CustomFieldSerializer.java",
+                    "com/google/gwt/user/client/rpc/core/java/util/" +
+                        "LinkedHashMap_CustomFieldSerializer.java",
                     "com/google/gwt/user/rebind", "com/google/gwt/user/server",
                     "com/google/gwt/user/tools",}));
-    Resources cu =
-        new JarFileResources(new JarFile[] {gwtUserJar}, gwtIncludedPaths, gwtExcludedPaths, logger);
+    Resources cu = new JarFileResources(new JarFile[] {gwtUserJar},
+        gwtIncludedPaths, gwtExcludedPaths, logger);
     resources.addAll(cu.getResources());
 
     // gwt-dev-*.jar

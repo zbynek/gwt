@@ -204,7 +204,7 @@ public class BindingProperty extends Property {
    */
   public Map<String,? extends List<? extends Set<String>>> getFallbackValuesMap() {
     if (fallbackValueMap == null) {
-      HashMap<String,LinkedList<LinkedHashSet<String>>> valuesMap = new HashMap<String,LinkedList<LinkedHashSet<String>>>();
+      HashMap<String,LinkedList<LinkedHashSet<String>>> valuesMap = new HashMap<>();
       // compute closure of fall back values preserving order
       for (Entry<String, LinkedList<String>> e : fallbackValues.entrySet()) {
         String from = e.getKey();

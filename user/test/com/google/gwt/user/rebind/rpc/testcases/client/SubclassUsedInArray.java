@@ -42,7 +42,7 @@ public class SubclassUsedInArray {
     private Subtype[] array;
   }
 
-  /** Used to create a type parameter with Subtype as its upper bound */
+  /** Used to create a type parameter with Subtype as its upper bound. */
   public static class GenericHasArray<T extends Subtype> implements Serializable {
     private T[] array;
   }

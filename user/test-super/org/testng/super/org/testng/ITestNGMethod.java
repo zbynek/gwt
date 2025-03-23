@@ -1,6 +1,5 @@
 package org.testng;
 
-
 import java.io.Serializable;
 import java.util.List;
 

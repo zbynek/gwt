@@ -51,7 +51,7 @@ public class CssGenerationVisitor extends CssVisitor {
   private final TextOutput out;
 
   private final boolean substituteDots;
-  private final SortedMap<Integer, List<CssSubstitution>> substitutionPositions = new TreeMap<Integer, List<CssSubstitution>>();
+  private final SortedMap<Integer, List<CssSubstitution>> substitutionPositions = new TreeMap<>();
 
   /**
    * Constructor.

@@ -75,14 +75,14 @@ public final class DefaultMonthSelector extends MonthSelector {
   }
 
   /**
-   * Returns the ListBox for selecting the month
+   * Returns the ListBox for selecting the month.
    */
   public ListBox getMonthSelectListBox() {
     return monthSelect;
   }
 
   /**
-   * Returns the ListBox for selecting the year
+   * Returns the ListBox for selecting the year.
    */
   public ListBox getYearSelectListBox() {
     return yearSelect;
@@ -172,7 +172,6 @@ public final class DefaultMonthSelector extends MonthSelector {
 
     return yearListBox;
   }
-
 
   private boolean isDatePickerConfigChanged() {
     boolean isMonthCurrentlySelectable = monthSelect.getParent() != null;

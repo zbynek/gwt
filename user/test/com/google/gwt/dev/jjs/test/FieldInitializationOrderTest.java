@@ -73,7 +73,9 @@ public class FieldInitializationOrderTest extends GWTTestCase {
 
     static class Child extends Base {
       int i = 1;
-      void m() { assertEquals(0, i); }
+      void m() {
+        assertEquals(0, i);
+      }
     }
 
     void performTest() {
@@ -94,7 +96,9 @@ public class FieldInitializationOrderTest extends GWTTestCase {
 
     static class Child extends Base {
       int i = 1;
-      void m() { assertEquals(0, i); }
+      void m() {
+        assertEquals(0, i);
+      }
     }
     void performTest() {
       // Construct both parent and child to ensure that polymorphic dispatch for m() does not go
@@ -114,7 +118,9 @@ public class FieldInitializationOrderTest extends GWTTestCase {
 
     static class Child extends Base {
       String s = "blah";
-      void m() { assertTrue(s == null); }
+      void m() {
+        assertTrue(s == null);
+      }
     }
     void performTest() {
       // Construct both parent and child to ensure that polymorphic dispatch for m() does not go

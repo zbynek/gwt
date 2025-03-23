@@ -38,7 +38,7 @@ public class CharIndexTest extends TestCase {
     generalVerify(idx, string, "xyz012\u0123\u1234");
   }
 
-  /** Tests fullhash.Char overridden methods */
+  /** Tests fullhash.Char overridden methods. */
   public void testFullHashChar() {
     CharIndex.FullHash.Char x = new CharIndex.FullHash.Char();
     x.c = 'A';
@@ -72,7 +72,7 @@ public class CharIndexTest extends TestCase {
   }
 
   /**
-   * Verifies abstract properties of any CharIndex
+   * Verifies abstract properties of any CharIndex.
    * @param idx index to test
    * @param string characters in the pattern for that index
    * @param more characters not in the pattern

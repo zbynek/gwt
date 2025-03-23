@@ -88,7 +88,6 @@ public class StaticResourceServer extends ServletContainerLauncher {
     return true;
   }
 
-
   @Override
   public ServletContainer start(TreeLogger logger, int port, File appRootDir) throws Exception {
     TreeLogger branch = logger.branch(TreeLogger.TRACE,

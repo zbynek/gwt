@@ -293,7 +293,6 @@ public class CodeServerGwtTest extends GWTTestCase {
       return null;
     };
 
-
     baseUrlProvider.__getBaseElements = function() {
       return [
         {href: 'http://localhost:9876/somepath1/'},

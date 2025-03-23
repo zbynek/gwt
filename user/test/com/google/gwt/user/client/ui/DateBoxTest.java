@@ -139,7 +139,6 @@ public class DateBoxTest extends WidgetTestBase {
     }.run();
   }
 
-
   private static void enterViaTextBox(DateBox db, Date d) {
     // Intended use of higher resolution formatter to test normalization
     db.getTextBox().setText(DateTimeFormat.getFormat(PredefinedFormat.DATE_TIME_LONG).format(d));

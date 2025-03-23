@@ -152,8 +152,6 @@ public class SchedulerImpl extends Scheduler {
     return queue;
   }
 
-
-
   /**
    * Execute a list of Tasks that hold both ScheduledCommands and
    * RepeatingCommands. Any RepeatingCommands in the <code>tasks</code> queue
@@ -326,7 +324,7 @@ public class SchedulerImpl extends Scheduler {
   }
 
   /**
-   * there for testing
+   * Can be overridden for testing.
    */
   Duration createDuration() {
     return new Duration();

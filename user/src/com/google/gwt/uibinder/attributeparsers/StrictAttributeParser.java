@@ -85,12 +85,14 @@ class StrictAttributeParser implements AttributeParser {
    */
   public String parse(XMLElement source, String value) throws UnableToCompleteException {
     if ("".equals(value.trim())) {
-      logger.die(source, "Cannot use empty value as type %s", FieldReference.renderTypesList(types));
+      logger.die(source, "Cannot use empty value as type %s",
+          FieldReference.renderTypesList(types));
     }
     try {
       return converter.convert(source, value, new FieldReferenceDelegate(types));
     } catch (IllegalFieldReferenceException e) {
-      logger.die(source, "Cannot parse value: \"%s\" as type %s", value, FieldReference.renderTypesList(types));
+      logger.die(source, "Cannot parse value: \"%s\" as type %s", value,
+          FieldReference.renderTypesList(types));
       return null; // Unreachable
     }
   }

@@ -51,7 +51,8 @@ public class JsniRef {
    * <li>the method parameter types, excluding the parentheses
    * </ol>
    */
-  private static Pattern JsniRefPattern = Pattern.compile("@?([^:@\\[\\]]*)((?:\\[\\])*)::([^(]+)(\\((.*)\\))?");
+  private static Pattern JsniRefPattern
+      = Pattern.compile("@?([^:@\\[\\]]*)((?:\\[\\])*)::([^(]+)(\\((.*)\\))?");
 
   /**
    * Parse a Java reference from JSNI code. This parser is forgiving; it does

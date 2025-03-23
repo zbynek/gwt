@@ -183,7 +183,9 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
       throw new SerializationException(
           "Type '"
               + clazz.getName()
-              + "' was not included in the set of types which can be deserialized by this SerializationPolicy or its Class object could not be loaded. For security purposes, this type will not be deserialized.");
+              + "' was not included in the set of types which can be deserialized by this "
+              + "SerializationPolicy or its Class object could not be loaded. "
+              + "For security purposes, this type will not be deserialized.");
     }
   }
 
@@ -200,7 +202,9 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
       throw new SerializationException(
           "Type '"
               + clazz.getName()
-              + "' was not included in the set of types which can be serialized by this SerializationPolicy or its Class object could not be loaded. For security purposes, this type will not be serialized.");
+              + "' was not included in the set of types which can be serialized by this "
+              + "SerializationPolicy or its Class object could not be loaded. "
+              + "For security purposes, this type will not be serialized.");
     }
   }
 }

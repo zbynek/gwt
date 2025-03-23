@@ -126,7 +126,7 @@ function __gwt_displayGlassMessage(summary, details) {
     '<div style="font-size:15px;">' + details + '</div>' +
     '</div>' +
     '<div style="position:absolute;z-index:' + __gwt_glassMessageZIndex-- +
-    ';left:0px;top:0px;right:0px;bottom:0px;filter:alpha(opacity=60);opacity:0.6;background-color:#000;"></div>'
+    ';left:0px;top:0px;right:0px;bottom:0px;opacity:0.6;background-color:#000;"></div>'
   ;
   topDoc.body.appendChild(outer);
   var glass = outer.firstChild;

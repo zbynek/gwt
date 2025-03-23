@@ -54,6 +54,7 @@ public class D8ScriptLinker extends SelectionScriptLinker {
   }
 
   @Transferable
+  @SuppressWarnings("Checkstyle.EqualsHashCode")
   private static class Script extends Artifact<Script> {
     private final String strongName;
     private final String javaScript;

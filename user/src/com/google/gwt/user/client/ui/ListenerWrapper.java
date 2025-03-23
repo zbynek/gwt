@@ -432,7 +432,8 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
      * @deprecated will be removed in GWT 2.0 along with the listener classes
      */
     @Deprecated
-    public static <E extends HasMouseDownHandlers & HasMouseUpHandlers & HasMouseOutHandlers & HasMouseOverHandlers & HasMouseMoveHandlers> WrappedMouseListener add(
+    public static <E extends HasMouseDownHandlers & HasMouseUpHandlers & HasMouseOutHandlers
+        & HasMouseOverHandlers & HasMouseMoveHandlers> WrappedMouseListener add(
         E source, MouseListener listener) {
       WrappedMouseListener handlers = new WrappedMouseListener(listener);
       source.addMouseDownHandler(handlers);

@@ -15,7 +15,7 @@
  */
 package javaemul.internal;
 
-/** Defines utility static functions for long */
+/** Defines utility static functions for long. */
 public final class LongUtils {
 
   public static long fromBits(int lowBits, int highBits) {

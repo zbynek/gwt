@@ -1342,7 +1342,7 @@ public class ArraysTest extends EmulTestBase {
   }
 
   /**
-   * Tests sorting of doubles
+   * Tests sorting of doubles.
    */
   public void testDoubleSort() {
     double[] array = new double[] {
@@ -1366,7 +1366,7 @@ public class ArraysTest extends EmulTestBase {
   }
 
   /**
-   * Tests sorting of floats
+   * Tests sorting of floats.
    */
   public void testFloatSort() {
     float[] array = new float[] {
@@ -1388,8 +1388,6 @@ public class ArraysTest extends EmulTestBase {
     assertTrue(Float.isNaN(array[9]));
     assertTrue(Float.isNaN(array[10]));
   }
-
-
 
   /**
    * Tests sorting a subrange of a primitive array.

@@ -43,7 +43,8 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * <h3>Example</h3> {@example com.google.gwt.examples.ToggleButtonExample}
  * </p>
  */
-public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsEditor<LeafValueEditor<Boolean>> {
+public class ToggleButton extends CustomButton implements HasValue<Boolean>,
+    IsEditor<LeafValueEditor<Boolean>> {
   private static String STYLENAME_DEFAULT = "gwt-ToggleButton";
 
   private LeafValueEditor<Boolean> editor;

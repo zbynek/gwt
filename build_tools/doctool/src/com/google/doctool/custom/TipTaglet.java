@@ -17,10 +17,11 @@ package com.google.doctool.custom;
 
 import com.sun.source.doctree.DocTree;
 
-import javax.lang.model.element.Element;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.lang.model.element.Element;
 
 /**
  * A taglet for including GWT tip tags in javadoc output.

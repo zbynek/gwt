@@ -32,7 +32,8 @@ public class ArgHandlerWorkDirOptional extends ArgHandlerDir {
 
   @Override
   public String getPurpose() {
-    return "The compiler's working directory for internal use (must be writeable; defaults to a system temp dir)";
+    return "The compiler's working directory for internal use"
+        + " (must be writeable; defaults to a system temp dir)";
   }
 
   @Override

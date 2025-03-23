@@ -100,7 +100,7 @@ public class JEnumTypeTest extends TestCase {
   }
 
   /**
-   * Test method for {@link JEnumType#getConstructors()}
+   * Test method for {@link JEnumType#getConstructors()}.
    *
    * @throws NotFoundException
    * @throws NotFoundException
@@ -114,7 +114,7 @@ public class JEnumTypeTest extends TestCase {
   }
 
   /**
-   * Test method for {@link JEnumType#getMethods()}
+   * Test method for {@link JEnumType#getMethods()}.
    *
    * @throws NotFoundException
    */

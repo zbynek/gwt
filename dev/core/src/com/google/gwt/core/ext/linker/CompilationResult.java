@@ -25,6 +25,7 @@ import java.util.SortedSet;
  * Represents a unique compilation of the module. Multiple permutations may
  * result in identical JavaScript.
  */
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public abstract class CompilationResult extends Artifact<CompilationResult> {
 
   protected CompilationResult(Class<? extends Linker> linkerType) {

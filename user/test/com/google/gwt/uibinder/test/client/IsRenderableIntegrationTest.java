@@ -199,7 +199,6 @@ public class IsRenderableIntegrationTest extends GWTTestCase {
     }
   }
 
-
   public void testShallow() {
     Shallow shallow = new Shallow();
     assertTrue(PotentialElement.isPotential(shallow.widget.getElement()));

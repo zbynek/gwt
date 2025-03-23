@@ -15,7 +15,6 @@
  */
 package com.google.gwt.dev.js;
 
-
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.AccessModifier;
 import com.google.gwt.dev.jjs.ast.HasName;

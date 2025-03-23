@@ -92,7 +92,8 @@ public class DelegateMap implements Iterable<AbstractEditorDelegate<?, ?>> {
       public <T> void endVisit(EditorContext<T> ctx) {
         toReturn.put(ctx.getAbsolutePath(), ctx.getEditor());
         @SuppressWarnings("unchecked")
-        AbstractEditorDelegate<T, ?> delegate = (AbstractEditorDelegate<T, ?>) ctx.getEditorDelegate();
+        AbstractEditorDelegate<T, ?> delegate
+            = (AbstractEditorDelegate<T, ?>) ctx.getEditorDelegate();
         if (delegate != null) {
           toReturn.put(delegate.getObject(), delegate);
         }
@@ -101,8 +102,8 @@ public class DelegateMap implements Iterable<AbstractEditorDelegate<?, ?>> {
     return toReturn;
   }
 
-  private final Map<Object, List<AbstractEditorDelegate<?, ?>>> map = new HashMap<Object, List<AbstractEditorDelegate<?, ?>>>();
-  private final Map<String, List<AbstractEditorDelegate<?, ?>>> delegatesByPath = new HashMap<String, List<AbstractEditorDelegate<?, ?>>>();
+  private final Map<Object, List<AbstractEditorDelegate<?, ?>>> map = new HashMap<>();
+  private final Map<String, List<AbstractEditorDelegate<?, ?>>> delegatesByPath = new HashMap<>();
   private final Map<String, List<Editor<?>>> editorsByPath = new HashMap<String, List<Editor<?>>>();
 
   private final KeyMethod keyMethod;

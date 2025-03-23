@@ -27,7 +27,8 @@ function installScript(filename) {
       scriptFrag.appendChild(doc.createTextNode("eval(\""));
       for (var i = 0; i < code.length; i++) {
         // escape newlines, backslashes, and quotes with JSON.stringify
-        // rather than create multiple script tags which mess up line numbers, we use 1 tag, multiple text nodes
+        // rather than create multiple script tags which mess up line numbers,
+        // we use 1 tag, multiple text nodes
         var c = window.JSON.stringify(code[i]); 
         // trim beginning/end quotes
         scriptFrag.appendChild(doc.createTextNode(c.substring(1, c.length - 1)));

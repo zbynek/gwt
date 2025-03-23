@@ -25,7 +25,6 @@ import org.hibernate.jsr303.tck.util.client.NotSupported.Reason;
  */
 public class BuiltinValidatorOverrideGwtTest extends GWTTestCase {
 
-
   @Override
   public String getModuleName() {
     return "org.hibernate.jsr303.tck.tests.constraints.builtinconstraints.TckTest";

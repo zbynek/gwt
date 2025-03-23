@@ -18,16 +18,20 @@
   * <p>The "cellview" widget set.  The current widgets include:
   * 
   * <ul>
-  * <li>{@link com.google.gwt.user.cellview.client.CellList CellList} - a simple vertical list of items, rendered by a common
-  * {@link com.google.gwt.cell.client.Cell Cell}</li>
-  * <li>{@link com.google.gwt.user.cellview.client.CellTable CellTable} - a table in which each {@link com.google.gwt.user.cellview.client.Column Column} is rendered by a
+  * <li>{@link com.google.gwt.user.cellview.client.CellList CellList} - a simple vertical list of
+  * items, rendered by a common {@link com.google.gwt.cell.client.Cell Cell}</li>
+  * <li>{@link com.google.gwt.user.cellview.client.CellTable CellTable} - a table in which each
+  * {@link com.google.gwt.user.cellview.client.Column Column} is rendered by a
   * common Cell.  The table may have headers and footers defined by the
-  * {@link com.google.gwt.user.cellview.client.Header Header} class.  The {@link com.google.gwt.user.cellview.client.IdentityColumn IdentityColumn}, {@link com.google.gwt.user.cellview.client.TextColumn TextColumn}, and
-  * {@link com.google.gwt.user.cellview.client.TextHeader TextHeader} classes are provided for convenience.</li>  
-  * <li>{@link com.google.gwt.user.cellview.client.CellTree CellTree} - a tree in which all the children of a node are rendered
-  * by a common cell.</li>
-  * <li>{@link com.google.gwt.user.cellview.client.CellBrowser CellBrowser} - a tree in which tree levels are displayed
-  * horizontally, with only a single node per level open at a time.</li>
+  * {@link com.google.gwt.user.cellview.client.Header Header} class.
+  * The {@link com.google.gwt.user.cellview.client.IdentityColumn IdentityColumn},
+  * {@link com.google.gwt.user.cellview.client.TextColumn TextColumn}, and
+  * {@link com.google.gwt.user.cellview.client.TextHeader TextHeader} classes
+  * are provided for convenience.</li>
+  * <li>{@link com.google.gwt.user.cellview.client.CellTree CellTree} - a tree in which
+  * all the children of a node are rendered by a common cell.</li>
+  * <li>{@link com.google.gwt.user.cellview.client.CellBrowser CellBrowser} - a tree in which tree
+  * levels are displayed horizontally, with only a single node per level open at a time.</li>
   * </ul>
   * </p>
   * <p>

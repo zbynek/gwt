@@ -219,7 +219,8 @@ class SourceHandler {
         HtmlWriter out = new HtmlWriter(response.getWriter());
         out.startTag("html").nl();
         out.startTag("head").nl();
-        out.startTag("title").text(sourceFile.getName() + " (GWT Code Server)").endTag("title").nl();
+        out.startTag("title").text(sourceFile.getName()
+            + " (GWT Code Server)").endTag("title").nl();
         out.startTag("style").nl();
         out.text(".unused { color: grey; }").nl();
         out.text(".used { color: black; }").nl();

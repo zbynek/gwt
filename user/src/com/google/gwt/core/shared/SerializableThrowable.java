@@ -17,7 +17,6 @@ package com.google.gwt.core.shared;
 
 import com.google.gwt.core.shared.impl.ThrowableTypeResolver;
 
-
 /**
  * A serializable copy of a {@link Throwable}, including its causes and stack trace. It overrides
  * {@code #toString} to mimic original {@link Throwable#toString()} so that {@link #printStackTrace}

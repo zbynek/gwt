@@ -106,7 +106,6 @@ public class CustomMessageInterpolatorTest extends AbstractTest {
     @Digits(integer = 10, fraction = 0)
     private long personalNumber;
 
-
     public String getFirstName() {
       return firstName;
     }

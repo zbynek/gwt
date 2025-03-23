@@ -71,9 +71,9 @@ public class TableSectionElement extends Element {
    */
   public static boolean is(Element elem) {
     return elem != null && 
-        (  elem.getTagName().equalsIgnoreCase(TAG_THEAD)
-        || elem.getTagName().equalsIgnoreCase(TAG_TFOOT)
-        || elem.getTagName().equalsIgnoreCase(TAG_TBODY) );
+        (elem.getTagName().equalsIgnoreCase(TAG_THEAD)
+            || elem.getTagName().equalsIgnoreCase(TAG_TFOOT)
+            || elem.getTagName().equalsIgnoreCase(TAG_TBODY));
   }
   
   protected TableSectionElement() {

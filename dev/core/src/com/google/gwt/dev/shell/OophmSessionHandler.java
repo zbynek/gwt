@@ -37,9 +37,11 @@ public class OophmSessionHandler extends SessionHandlerServer {
 
   private BrowserWidgetHost host;
 
-  private Map<BrowserChannelServer, ModuleSpace> moduleMap = Collections.synchronizedMap(new HashMap<BrowserChannelServer, ModuleSpace>());
+  private Map<BrowserChannelServer, ModuleSpace> moduleMap
+      = Collections.synchronizedMap(new HashMap<>());
 
-  private Map<BrowserChannelServer, ModuleHandle> moduleHandleMap = Collections.synchronizedMap(new HashMap<BrowserChannelServer, ModuleHandle>());
+  private Map<BrowserChannelServer, ModuleHandle> moduleHandleMap
+      = Collections.synchronizedMap(new HashMap<>());
 
   private final TreeLogger topLogger;
 

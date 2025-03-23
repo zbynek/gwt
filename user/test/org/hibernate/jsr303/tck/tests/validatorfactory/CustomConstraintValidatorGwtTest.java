@@ -35,7 +35,6 @@ public class CustomConstraintValidatorGwtTest extends GWTTestCase {
     return "org.hibernate.jsr303.tck.tests.validatorfactory.TckTest";
   }
 
-
   public void testDefaultConstructorInValidatorCalled() {
     delegate.testDefaultConstructorInValidatorCalled();
   }

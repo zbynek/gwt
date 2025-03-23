@@ -468,7 +468,6 @@ public class CfgBuilderTest extends JJSTestBase {
             "4: END");
   }
 
-
   public void testWhileContinueWithLabel2() throws Exception {
     assertCfg("void",
         "nextLoop: while(b3)",
@@ -765,7 +764,7 @@ public class CfgBuilderTest extends JJSTestBase {
   }
 
   /**
-   * Test case for issue 8115 (http://code.google.com/p/google-web-toolkit/issues/detail?id=8115)
+   * Test case for issue 8115 (http://code.google.com/p/google-web-toolkit/issues/detail?id=8115).
    * @throws Exception
    */
   public void testCatchThrowExceptionFinally() throws Exception {
@@ -799,7 +798,6 @@ public class CfgBuilderTest extends JJSTestBase {
         "END"
     );
   }
-
 
   public void testCatchThrowUncaughtException() throws Exception {
     assertCfg("void",
@@ -1146,7 +1144,6 @@ public class CfgBuilderTest extends JJSTestBase {
             "END"
         );
   }
-
 
   public void testFinallyContinue() throws Exception {
     assertCfg("void",

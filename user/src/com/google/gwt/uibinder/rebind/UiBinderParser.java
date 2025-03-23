@@ -349,7 +349,8 @@ public class UiBinderParser {
       }
       attributesChildFound = true;
 
-      if (!elem.getNamespaceUri().equals(child.getNamespaceUri()) || !"attributes".equals(child.getLocalName())) {
+      if (!elem.getNamespaceUri().equals(child.getNamespaceUri())
+          || !"attributes".equals(child.getLocalName())) {
         writer.die(child, "Found unknown child element.");
       }
 
@@ -357,8 +358,8 @@ public class UiBinderParser {
     }
   }
 
-  private void createResourceUiFactory(XMLElement elem, String resourceName, JClassType resourceType)
-      throws UnableToCompleteException {
+  private void createResourceUiFactory(XMLElement elem, String resourceName,
+      JClassType resourceType) throws UnableToCompleteException {
     FieldWriter fieldWriter;
     JMethod factoryMethod = writer.getOwnerClass().getUiFactoryMethod(resourceType);
     JClassType methodReturnType = factoryMethod.getReturnType().getErasedType()

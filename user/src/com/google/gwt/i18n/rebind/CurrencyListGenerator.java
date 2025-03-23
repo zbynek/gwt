@@ -729,7 +729,8 @@ public class CurrencyListGenerator extends Generator {
         writer.println("@Override");
         writer.println("protected JavaScriptObject loadCurrencyMapNative() {");
         writer.indent();
-        writer.println("return overrideMap(super.loadCurrencyMapNative(), loadMyCurrencyMapOverridesNative());");
+        writer.println("return overrideMap(super.loadCurrencyMapNative(),"
+            + " loadMyCurrencyMapOverridesNative());");
         writer.outdent();
         writer.println("}");
         writer.println();
@@ -817,7 +818,8 @@ public class CurrencyListGenerator extends Generator {
           writer.println("@Override");
           writer.println("protected JavaScriptObject loadNamesMapNative() {");
           writer.indent();
-          writer.println("return overrideMap(super.loadNamesMapNative(), loadMyNamesMapOverridesNative());");
+          writer.println("return overrideMap(super.loadNamesMapNative(),"
+              + " loadMyNamesMapOverridesNative());");
           writer.outdent();
           writer.println("}");
           writer.println();

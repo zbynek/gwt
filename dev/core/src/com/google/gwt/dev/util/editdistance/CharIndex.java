@@ -226,10 +226,14 @@ public abstract class CharIndex {
     }
 
     @Override
-    public int nullElement() { return NULL_ELEMENT; }
+    public int nullElement() {
+      return NULL_ELEMENT;
+    }
 
     @Override
-    public int size() { return NULL_ELEMENT + 1; }
+    public int size() {
+      return NULL_ELEMENT + 1;
+    }
   }
 
   /**

@@ -16,7 +16,7 @@
 package com.google.gwt.sample.validation.shared;
 
 /**
- * Client Validation Group
+ * Client Validation Group.
  */
 public interface ClientGroup {
 }

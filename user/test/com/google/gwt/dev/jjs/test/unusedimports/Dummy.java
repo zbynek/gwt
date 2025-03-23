@@ -15,9 +15,8 @@
  */
 package com.google.gwt.dev.jjs.test.unusedimports;
 
-
 /**
- * An emplty class to trigger the inclusion of this package
+ * An empty class to trigger the inclusion of this package.
  */
 public class Dummy {
 }

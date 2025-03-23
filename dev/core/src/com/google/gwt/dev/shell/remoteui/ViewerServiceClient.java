@@ -79,7 +79,8 @@ public class ViewerServiceClient {
     LogData.Builder logDataBuilder = generateLogData(type, msg, caught,
         helpInfo);
 
-    ViewerRequest.AddLogBranch.Builder addlogBranchBuilder = ViewerRequest.AddLogBranch.newBuilder();
+    ViewerRequest.AddLogBranch.Builder addlogBranchBuilder
+        = ViewerRequest.AddLogBranch.newBuilder();
     addlogBranchBuilder.setParentLogHandle(parentLogHandle);
     addlogBranchBuilder.setIndexInParent(indexInParent);
     addlogBranchBuilder.setLogData(logDataBuilder);
@@ -164,7 +165,8 @@ public class ViewerServiceClient {
    */
   public int addModuleLog(String remoteSocket, String url, String tabKey,
       String moduleName, String sessionKey, String agentTag, byte[] agentIcon) {
-    ViewerRequest.AddLog.ModuleLog.Builder moduleLogBuilder = ViewerRequest.AddLog.ModuleLog.newBuilder();
+    ViewerRequest.AddLog.ModuleLog.Builder moduleLogBuilder
+        = ViewerRequest.AddLog.ModuleLog.newBuilder();
     moduleLogBuilder.setName(moduleName);
     moduleLogBuilder.setUserAgent(agentTag);
 
@@ -201,7 +203,8 @@ public class ViewerServiceClient {
    * the addition of any types of logs that we throw at them.
    */
   public void checkCapabilities() {
-    ViewerRequest.CapabilityExchange.Builder capabilityExchangeBuilder = ViewerRequest.CapabilityExchange.newBuilder();
+    ViewerRequest.CapabilityExchange.Builder capabilityExchangeBuilder
+        = ViewerRequest.CapabilityExchange.newBuilder();
     ViewerRequest.Builder viewerRequestBuilder = ViewerRequest.newBuilder();
     viewerRequestBuilder.setRequestType(ViewerRequest.RequestType.CAPABILITY_EXCHANGE);
     viewerRequestBuilder.setCapabilityExchange(capabilityExchangeBuilder);
@@ -211,7 +214,8 @@ public class ViewerServiceClient {
     Future<Response> responseFuture = transport.executeRequestAsync(request.build());
     Response response = waitForResponseOrThrowUncheckedException(responseFuture);
 
-    ViewerResponse.CapabilityExchange capabilityExchangeResponse = response.getViewerResponse().getCapabilityExchange();
+    ViewerResponse.CapabilityExchange capabilityExchangeResponse
+        = response.getViewerResponse().getCapabilityExchange();
     List<Capability> capabilityList = capabilityExchangeResponse.getCapabilitiesList();
 
     // Check for the add log ability
@@ -236,7 +240,8 @@ public class ViewerServiceClient {
    * @param logHandle the handle of the top-level log to disconnect
    */
   public void disconnectLog(int logHandle) {
-    ViewerRequest.DisconnectLog.Builder disconnectLogbuilder = ViewerRequest.DisconnectLog.newBuilder();
+    ViewerRequest.DisconnectLog.Builder disconnectLogbuilder
+        = ViewerRequest.DisconnectLog.newBuilder();
     disconnectLogbuilder.setLogHandle(logHandle);
 
     ViewerRequest.Builder viewerRequestBuilder = ViewerRequest.newBuilder();
@@ -288,7 +293,8 @@ public class ViewerServiceClient {
     Request.Builder request = buildRequestMessageFromViewerRequest(viewerRequestBuilder);
 
     Future<Response> responseFuture = transport.executeRequestAsync(request.build());
-    return waitForResponseOrThrowUncheckedException(responseFuture).getViewerResponse().getAddLog().getLogHandle();
+    return waitForResponseOrThrowUncheckedException(responseFuture)
+        .getViewerResponse().getAddLog().getLogHandle();
   }
 
   private LogData.Builder generateLogData(Type type, String msg,

@@ -47,7 +47,6 @@ public class DuplicateConfigurationGwtTest extends
     fail("XML configuration is not supported");
   }
 
-
   @NonTckTest
   public void testThereMustBeOnePassingTest() {
   }

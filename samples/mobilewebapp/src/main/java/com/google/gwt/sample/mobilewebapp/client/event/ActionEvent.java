@@ -20,7 +20,6 @@ import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
-
 /**
  * Fired when the user wants the app to do something. Action events are fired
  * with a string name, and handlers monitor the event bus for them based on that
@@ -44,7 +43,8 @@ public class ActionEvent extends Event<ActionEvent.Handler> {
     eventBus.fireEventFromSource(new ActionEvent(), sourceName);
   }
 
-  public static HandlerRegistration register(EventBus eventBus, String sourceName, Handler handler) {
+  public static HandlerRegistration register(EventBus eventBus, String sourceName,
+                                             Handler handler) {
     return eventBus.addHandlerToSource(TYPE, sourceName, handler);
   }
 

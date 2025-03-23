@@ -138,7 +138,6 @@ import junit.framework.TestSuite;
  */
 public class BulkTest extends TestCase implements Cloneable {
 
-
     // Note:  BulkTest is Cloneable to make it easier to construct
     // BulkTest instances for simple test methods that are defined in
     // anonymous inner classes.  Basically we don't have to worry about
@@ -147,7 +146,6 @@ public class BulkTest extends TestCase implements Cloneable {
     // Given one BulkTest instance, we can just clone it and reset the
     // method name for every simple test it defines.
 
-
     /**
      *  The full name of this bulk test instance.  This is the full name
      *  that is compared to {@link #ignoredTests} to see if this
@@ -155,7 +153,6 @@ public class BulkTest extends TestCase implements Cloneable {
      *  to ease debugging.
      */
     String verboseName;
-
 
     /**
      *  Constructs a new <code>BulkTest</code> instance that will run the
@@ -167,7 +164,6 @@ public class BulkTest extends TestCase implements Cloneable {
         super(name);
         this.verboseName = getClass().getName();
     }
-
 
     /**
      *  Creates a clone of this <code>BulkTest</code>.<P>
@@ -182,7 +178,6 @@ public class BulkTest extends TestCase implements Cloneable {
             throw new Error(); // should never happen
         }
     }
-
 
     /**
      *  Returns an array of test names to ignore.<P>
@@ -221,7 +216,6 @@ public class BulkTest extends TestCase implements Cloneable {
         return null;
     }
 
-
     /**
      *  Returns the display name of this <code>BulkTest</code>.
      *
@@ -231,7 +225,6 @@ public class BulkTest extends TestCase implements Cloneable {
     public String toString() {
         return getName() + "(" + verboseName + ") ";
     }
-
 
     /**
      *  Returns a {@link TestSuite} for testing all of the simple tests
@@ -259,7 +252,6 @@ public class BulkTest extends TestCase implements Cloneable {
     }
 
 }
-
 
 // It was easier to use a separate class to do all the reflection stuff
 // for making the TestSuite instances.  Having permanent state around makes
@@ -321,8 +313,12 @@ class BulkTestSuiteMaker {
         Class c = bulk.getClass();
         Method[] all = c.getMethods();
         for (int i = 0; i < all.length; i++) {
-            if (isTest(all[i])) addTest(bulk, all[i]);
-            if (isBulk(all[i])) addBulk(bulk, all[i]);
+            if (isTest(all[i])) {
+                addTest(bulk, all[i]);
+            }
+            if (isBulk(all[i])) {
+                addBulk(bulk, all[i]);
+            }
         }
     }
 
@@ -398,7 +394,6 @@ class BulkTestSuiteMaker {
         }
         return name;
     }
-
 
     // These three methods are used to create a valid BulkTest instance
     // from a class.

@@ -76,6 +76,7 @@ public class SymbolMapsLinker extends AbstractLinker {
   /**
    * Artifact to record insertions or deletions made to Javascript fragments.
    */
+  @SuppressWarnings("Checkstyle.EqualsHashCode")
   public static class ScriptFragmentEditsArtifact extends Artifact<ScriptFragmentEditsArtifact> {
 
     /**

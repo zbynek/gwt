@@ -21,7 +21,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Domain object for MapValueProxy used to test entities as map values
+ * Domain object for MapValueProxy used to test entities as map values.
  */
 public class MapValue {
   /**

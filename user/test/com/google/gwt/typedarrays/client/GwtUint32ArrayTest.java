@@ -62,7 +62,7 @@ public class GwtUint32ArrayTest extends Uint32ArrayTest {
   }
 
   /**
-   * Initialize from a JSO rather than a Java array
+   * Initialize from a JSO rather than a Java array.
    */
   protected void setFromJsArray(Uint32Array array, int offset) {
     JsUtils.set(array, getJsoArray(), offset);

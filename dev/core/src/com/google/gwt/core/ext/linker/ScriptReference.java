@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.Linker;
  * An external script file referenced in the module manifest. The index is
  * important because output order must match module declaration order.
  */
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public abstract class ScriptReference extends Artifact<ScriptReference> {
   private final int index;
   private final String src;

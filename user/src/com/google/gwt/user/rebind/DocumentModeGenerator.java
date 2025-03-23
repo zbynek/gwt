@@ -57,7 +57,8 @@ public class DocumentModeGenerator extends Generator {
     className = className.replace('.', '_');
 
     if (userType.isInterface() == null) {
-      logger.log(TreeLogger.ERROR, userType.getQualifiedSourceName() + " is not an interface", null);
+      logger.log(TreeLogger.ERROR,
+          userType.getQualifiedSourceName() + " is not an interface", null);
       throw new UnableToCompleteException();
     }
 
@@ -65,7 +66,8 @@ public class DocumentModeGenerator extends Generator {
 
     String severityText;
     try {
-      ConfigurationProperty property = propertyOracle.getConfigurationProperty(DocumentModeAsserter.PROPERTY_DOCUMENT_COMPATMODE_SEVERITY);
+      ConfigurationProperty property = propertyOracle.getConfigurationProperty(
+          DocumentModeAsserter.PROPERTY_DOCUMENT_COMPATMODE_SEVERITY);
       severityText = property.getValues().get(0);
     } catch (BadPropertyValueException e) {
       logger.log(TreeLogger.ERROR, "Unable to find value for '"
@@ -84,7 +86,8 @@ public class DocumentModeGenerator extends Generator {
 
     List<String> documentModes;
     try {
-      ConfigurationProperty property = propertyOracle.getConfigurationProperty(DocumentModeAsserter.PROPERTY_DOCUMENT_COMPATMODE);
+      ConfigurationProperty property = propertyOracle.getConfigurationProperty(
+          DocumentModeAsserter.PROPERTY_DOCUMENT_COMPATMODE);
       documentModes = property.getValues();
     } catch (BadPropertyValueException e) {
       logger.log(TreeLogger.ERROR, "Unable to find value for '"

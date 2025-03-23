@@ -112,9 +112,8 @@ public class InnerClassTest extends GWTTestCase {
     }
   }
 
-
   /**
-   * Used in test {@link #testExtendsNested()}
+   * Used in test {@link #testExtendsNested()}.
    */
   private static class ESOuter {
     class ESInner {
@@ -143,7 +142,7 @@ public class InnerClassTest extends GWTTestCase {
   }
 
   /**
-   * Used in test {@link #testExtendsNestedWithGenerics()}
+   * Used in test {@link #testExtendsNestedWithGenerics()}.
    */
   private static class ESWGOuter<T> {
     class ESWGInner {
@@ -187,7 +186,7 @@ public class InnerClassTest extends GWTTestCase {
   }
 
   /**
-   * Test for Issue 7789
+   * Test for Issue 7789.
    */
   public void testExtendsNestedWithGenerics() {
     ESWGOuter<String> o = new ESWGOuter<String>();

@@ -37,6 +37,7 @@ public class JsonUtils {
     return JSON.stringify(obj, null, space);
   }-*/;
 
+  // CHECKSTYLE_OFF
   /**
    * Escapes characters within a JSON string than cannot be passed directly to
    * eval(). Control characters, quotes and backslashes are not affected.
@@ -59,6 +60,7 @@ public class JsonUtils {
     });
     return "\"" + s + "\"";
   }-*/;
+ // CHECKSTYLE_ON
 
   /**
    * Evaluates a JSON expression safely. The payload must evaluate to an Object

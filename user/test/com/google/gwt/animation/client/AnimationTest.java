@@ -227,7 +227,6 @@ public class AnimationTest extends GWTTestCase {
     anim.assertCancelled(false);
     anim.reset();
 
-
     // Update the animation.
     executeLastCallbackAt(curTime + DELAY_MULTIPLIER);
     assertTrue(anim.isRunning());

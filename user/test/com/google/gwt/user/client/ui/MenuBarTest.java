@@ -550,7 +550,6 @@ public class MenuBarTest extends WidgetTestBase {
     MenuItem item1 = bar.addItem("item1", BLANK_COMMAND);
     RootPanel.get().add(bar);
 
-
     bar.itemOver(item1, true);
     assertNotNull(bar.getSelectedItem());
 

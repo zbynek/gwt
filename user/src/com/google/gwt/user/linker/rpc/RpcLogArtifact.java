@@ -26,6 +26,7 @@ import java.io.ObjectOutputStream;
  * This artifact holds a log of the reasoning for which types are considered
  * serializable for a particular RPC interface.
  */
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class RpcLogArtifact extends Artifact<RpcLogArtifact> {
   /**
    * This strong name indicates that the artifact doesn't really have its own

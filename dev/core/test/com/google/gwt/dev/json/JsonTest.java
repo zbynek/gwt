@@ -146,7 +146,6 @@ public class JsonTest extends TestCase {
     assertEquals(0, be.getLength());
     assertNotSame(ae, be);
 
-
     // Test interned types.
     // Boolean
     assertTrue(bf.getBoolean());

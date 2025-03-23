@@ -23,7 +23,7 @@ import com.google.gwt.dev.js.ast.JsObjectLiteral;
 import junit.framework.TestCase;
 
 /**
- * Unit test for JS AST nodes
+ * Unit test for JS AST nodes.
  */
 public class JsAstTest extends TestCase {
 

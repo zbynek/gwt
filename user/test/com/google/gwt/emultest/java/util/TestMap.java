@@ -487,7 +487,7 @@ abstract class TestMap extends TestObject {
         "failure in test: makeFullMap must return a new map " + "with each invocation.", fm != fm2);
   }
 
-  /** Tests Map.isEmpty() */
+  /** Tests Map.isEmpty(). */
   public void testMapIsEmpty() {
 
     resetEmpty();
@@ -499,7 +499,7 @@ abstract class TestMap extends TestObject {
     verify();
   }
 
-  /** Tests Map.size() */
+  /** Tests Map.size(). */
   public void testMapSize() {
     resetEmpty();
     assertEquals("Map.size() should be 0 with an empty map", 0, map.size());
@@ -577,7 +577,7 @@ abstract class TestMap extends TestObject {
     verify();
   }
 
-  /** Tests Map.equals(Object) */
+  /** Tests Map.equals(Object). */
   public void testMapEquals() {
     resetEmpty();
     assertTrue("Empty maps unequal.", map.equals(confirmed));
@@ -601,7 +601,7 @@ abstract class TestMap extends TestObject {
     verify();
   }
 
-  /** Tests Map.get(Object) */
+  /** Tests Map.get(Object). */
   public void testMapGet() {
     resetEmpty();
 
@@ -619,7 +619,7 @@ abstract class TestMap extends TestObject {
     }
   }
 
-  /** Tests Map.hashCode() */
+  /** Tests Map.hashCode(). */
   public void testMapHashCode() {
     resetEmpty();
     assertTrue("Empty maps have different hashCodes.", map.hashCode() == confirmed.hashCode());
@@ -645,7 +645,7 @@ abstract class TestMap extends TestObject {
     verify();
   }
 
-  /** Tests Map.put(Object, Object) */
+  /** Tests Map.put(Object, Object). */
   public void testMapPut() {
     if (!isAddRemoveModifiable()) {
       return;
@@ -683,7 +683,7 @@ abstract class TestMap extends TestObject {
     }
   }
 
-  /** Tests Map.putAll(Collection) */
+  /** Tests Map.putAll(Collection). */
   public void testMapPutAll() {
     if (!isAddRemoveModifiable()) {
       return;
@@ -711,7 +711,7 @@ abstract class TestMap extends TestObject {
     verify();
   }
 
-  /** Tests Map.remove(Object) */
+  /** Tests Map.remove(Object). */
   public void testMapRemove() {
     if (!isAddRemoveModifiable()) {
       return;

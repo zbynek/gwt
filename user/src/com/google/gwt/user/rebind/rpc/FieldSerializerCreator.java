@@ -335,7 +335,8 @@ public class FieldSerializerCreator {
     String qualifiedSourceName = serializableClass.getQualifiedSourceName();
     sourceWriter.print(qualifiedSourceName);
     sourceWriter
-        .println(" instantiate(SerializationStreamReader streamReader) throws SerializationException "
+        .println(" instantiate(SerializationStreamReader streamReader)"
+            + " throws SerializationException "
             + (useViolator ? "/*-{" : "{"));
     sourceWriter.indent();
 
@@ -392,8 +393,8 @@ public class FieldSerializerCreator {
     }
 
     // Create method
-    sourceWriter
-        .println("public Object create(SerializationStreamReader reader) throws SerializationException {");
+    sourceWriter.println("public Object create(SerializationStreamReader reader)"
+        + " throws SerializationException {");
     sourceWriter.indent();
     if (serializableClass.isEnum() != null || serializableClass.isDefaultInstantiable()
         || customFieldSerializerHasInstantiate) {
@@ -419,8 +420,8 @@ public class FieldSerializerCreator {
     sourceWriter.println();
 
     // Deserial method
-    sourceWriter
-        .println("public void deserial(SerializationStreamReader reader, Object object) throws SerializationException {");
+    sourceWriter.println("public void deserial(SerializationStreamReader reader,"
+        + " Object object) throws SerializationException {");
     if (customFieldSerializer != null) {
       JMethod deserializationMethod =
           CustomFieldSerializerValidator.getDeserializationMethod(customFieldSerializer,
@@ -437,8 +438,8 @@ public class FieldSerializerCreator {
     sourceWriter.println();
 
     // Serial method
-    sourceWriter
-        .println("public void serial(SerializationStreamWriter writer, Object object) throws SerializationException {");
+    sourceWriter.println("public void serial(SerializationStreamWriter writer, Object object)"
+            + " throws SerializationException {");
     if (customFieldSerializer != null) {
       JMethod serializationMethod =
           CustomFieldSerializerValidator.getSerializationMethod(customFieldSerializer,

@@ -123,7 +123,8 @@ public class ConditionWhenTypeAssignableTo extends Condition {
       if (!warnedMissingValidationJar) {
         warnedMissingValidationJar = true;
         logger.log(TreeLogger.WARN, "Detected warnings related to '" + typeName + "'. "
-            + "  Are validation-api-<version>.jar and validation-api-<version>-sources.jar on the classpath?");
+            + "  Are validation-api-<version>.jar"
+            + " and validation-api-<version>-sources.jar on the classpath?");
         logger.log(TreeLogger.INFO, "Specify -logLevel DEBUG to see all errors.");
         // Show the first error that matches
         return false;

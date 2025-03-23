@@ -21,7 +21,8 @@ import com.google.gwt.dom.client.ParamElement;
 /**
  * DOM-based implementation of {@link ParamBuilder}.
  */
-public class DomParamBuilder extends DomElementBuilderBase<ParamBuilder, ParamElement> implements ParamBuilder {
+public class DomParamBuilder extends DomElementBuilderBase<ParamBuilder, ParamElement>
+    implements ParamBuilder {
 
   DomParamBuilder(DomBuilderImpl delegate) {
     super(delegate, true);

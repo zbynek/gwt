@@ -137,7 +137,7 @@ public class ValueListBox<T> extends Composite implements
   }
 
   @Override
-  public void setTabIndex (int index) {
+  public void setTabIndex(int index) {
     getListBox().setTabIndex(index);
   }
 

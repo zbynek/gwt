@@ -24,7 +24,8 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
  * compatibility.
  */
 public class ResettableEventBus extends EventBus {
-  private static class TestableResettableEventBus extends com.google.web.bindery.event.shared.ResettableEventBus {
+  private static class TestableResettableEventBus
+      extends com.google.web.bindery.event.shared.ResettableEventBus {
     private TestableResettableEventBus(com.google.web.bindery.event.shared.EventBus wrappedBus) {
       super(wrappedBus);
     }
@@ -51,10 +52,12 @@ public class ResettableEventBus extends EventBus {
     return real.addHandler(type, handler);
   }
 
+  // CHECKSTYLE_OFF
   public <H extends EventHandler> com.google.gwt.event.shared.HandlerRegistration addHandlerToSource(
       GwtEvent.Type<H> type, Object source, H handler) {
     return wrap(addHandlerToSource((Event.Type<H>) type, source, handler));
   }
+  // CHECKSTYLE_ON
 
   @Override
   public <H> HandlerRegistration addHandlerToSource(Type<H> type, Object source, H handler) {

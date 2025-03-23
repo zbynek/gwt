@@ -22,7 +22,7 @@ import junit.framework.TestCase;
  */
 public class PatternBitmapTest extends TestCase {
 
-  /** Reverses a string */
+  /** Reverses a string. */
   public static String reverse(String s) {
     StringBuilder b = new StringBuilder();
     for (int i = s.length(); --i >= 0;) {
@@ -48,7 +48,7 @@ public class PatternBitmapTest extends TestCase {
 
     /* Check all others for zero/non-zero */
     for (int i = 0; i < 0xffff; i++) {
-      char c = (char)i;
+      char c = (char) i;
       int where = string.indexOf(c);
       if (where >= 0) {
         assertTrue("Map for pattern character '" + c + "' should be non-zero",
@@ -82,7 +82,7 @@ public class PatternBitmapTest extends TestCase {
     /* Check all others for null element/not */
     int[] notThere = map[idx.lookup('\u0000')];
     for (int i = 0; i < 0xffff; i++) {
-      char c = (char)i;
+      char c = (char) i;
       int where = string.indexOf(c);
       if (where >= 0) {
         assertTrue("Map for pattern character '" + c + "'"
@@ -120,7 +120,7 @@ public class PatternBitmapTest extends TestCase {
 
     /* Check all others for zero/non-zero */
     for (int i = 0; i < 0xffff; i++) {
-      char c = (char)i;
+      char c = (char) i;
       int where = string.indexOf(c);
       if (where >= 0) {
         assertTrue("Map for pattern character '" + c + "' should be non-zero",

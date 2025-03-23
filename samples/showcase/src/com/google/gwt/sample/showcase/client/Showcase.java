@@ -106,7 +106,7 @@ public class Showcase implements EntryPoint {
     ShowcaseConstants constants = GWT.create(ShowcaseConstants.class);
 
     // Create the application shell.
-    final SingleSelectionModel<ContentWidget> selectionModel = new SingleSelectionModel<ContentWidget>();
+    final SingleSelectionModel<ContentWidget> selectionModel = new SingleSelectionModel<>();
     final MainMenuTreeViewModel treeModel = new MainMenuTreeViewModel(
         constants, selectionModel);
     Set<ContentWidget> contentWidgets = treeModel.getAllContentWidgets();

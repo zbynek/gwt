@@ -339,7 +339,7 @@
                classpath="${gwt.tools.antlib}/checkstyle-10.13.0-all.jar"/>
       <mkdir dir="@{outputdirectory}"/>
       <checkstyle config="${gwt.root}/eclipse/settings/code-style/gwt-checkstyle.xml" maxErrors="0"
-                  failOnViolation="false" failureProperty="gwt.checkstyle.failed">
+                  failureProperty="gwt.checkstyle.failed">
         <formatter type="xml" toFile="@{outputdirectory}/checkstyle_log.xml"/>
         <property key="checkstyle.header.file"
                   file="${gwt.root}/eclipse/settings/code-style/google.header"/>
@@ -359,7 +359,7 @@
                classpath="${gwt.tools.antlib}/checkstyle-10.13.0-all.jar"/>
       <mkdir dir="@{outputdirectory}"/>
       <checkstyle config="${gwt.root}/eclipse/settings/code-style/gwt-checkstyle-tests.xml"
-                  maxErrors="0" failOnViolation="false"
+                  maxErrors="0"
                   failureProperty="gwt.checkstyle-tests.failed">
         <formatter type="xml" toFile="@{outputdirectory}/checkstyle_tests_log.xml"/>
         <property key="checkstyle.header.file"

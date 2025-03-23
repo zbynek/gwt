@@ -66,7 +66,8 @@ public class TaskActivity extends AbstractActivity {
     presenter.stop();
   }
 
-  public void start(final AcceptsOneWidget container, com.google.gwt.event.shared.EventBus eventBus) {
+  public void start(final AcceptsOneWidget container,
+                    com.google.gwt.event.shared.EventBus eventBus) {
     this.childEventBus = new ResettableEventBus(eventBus);
     eventBus.addHandler(TaskEditEvent.TYPE, new TaskEditEvent.Handler() {
       @Override

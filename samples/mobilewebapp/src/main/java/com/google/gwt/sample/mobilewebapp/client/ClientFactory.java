@@ -38,7 +38,7 @@ public interface ClientFactory {
   App getApp();
 
   /**
-   * Get the {@link EventBus}
+   * Get the {@link EventBus}.
    * 
    * @return the event bus used through the app
    */

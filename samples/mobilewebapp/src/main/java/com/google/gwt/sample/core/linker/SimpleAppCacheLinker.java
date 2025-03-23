@@ -89,8 +89,8 @@ public class SimpleAppCacheLinker extends AbstractLinker {
     }
 
     if (toReturn.find(SelectionInformation.class).isEmpty()) {
-      logger.log(TreeLogger.INFO, "DevMode warning: Clobbering " + MANIFEST + " to allow debugging. "
-          + "Recompile before deploying your app!");
+      logger.log(TreeLogger.INFO, "DevMode warning: Clobbering " + MANIFEST
+          + " to allow debugging. Recompile before deploying your app!");
       artifacts = null;
     }
     

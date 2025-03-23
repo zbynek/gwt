@@ -302,7 +302,8 @@ final class ApiClassDiffGenerator implements Comparable<ApiClassDiffGenerator> {
             for (ApiChange.Status status : methodInExisting.getModifierChanges(methodInNew)) {
               currentApiChange.add(new ApiChange(methodInExisting, status));
             }
-            if (methodInNew.getInternalSignature().equals(methodInExisting.getInternalSignature())) {
+            if (methodInNew.getInternalSignature().equals(
+                methodInExisting.getInternalSignature())) {
               currentApiChange.add(new ApiChange(methodInExisting, ApiChange.Status.COMPATIBLE));
               hasSameSignature = true;
             } else {

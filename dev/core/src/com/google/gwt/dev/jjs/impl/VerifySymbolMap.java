@@ -38,7 +38,7 @@ import java.util.Set;
 public class VerifySymbolMap extends JsVisitor {
 
   public static void exec(JsProgram jsProgram, JavaToJavaScriptMap jjsmap,
-      Map<StandardSymbolData, JsName> symbolTable ) {
+      Map<StandardSymbolData, JsName> symbolTable) {
     new VerifySymbolMap(jjsmap, symbolTable).accept(jsProgram);
   }
 

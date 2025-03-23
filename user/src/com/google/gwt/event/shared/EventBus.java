@@ -25,24 +25,26 @@ public abstract class EventBus extends com.google.web.bindery.event.shared.Event
     HasHandlers {
 
   @Override
-  public <H> com.google.web.bindery.event.shared.HandlerRegistration addHandler(Event.Type<H> type, H handler) {
+  public <H> com.google.web.bindery.event.shared.HandlerRegistration addHandler(
+      Event.Type<H> type, H handler) {
     throw new UnsupportedOperationException("Subclass responsibility. "
         + "This class is a legacy wrapper for com.google.web.bindery.event.shared.EventBus. "
         + "Use that directly, or try com.google.gwt.event.shared.SimpleEventBus");
   }
   
-  public abstract <H extends EventHandler> HandlerRegistration addHandler(GwtEvent.Type<H> type, H handler);
+  public abstract <H extends EventHandler> HandlerRegistration addHandler(
+      GwtEvent.Type<H> type, H handler);
 
   @Override
-  public <H> com.google.web.bindery.event.shared.HandlerRegistration addHandlerToSource(Event.Type<H> type,
-      Object source, H handler) {
+  public <H> com.google.web.bindery.event.shared.HandlerRegistration addHandlerToSource(
+      Event.Type<H> type, Object source, H handler) {
     throw new UnsupportedOperationException("Subclass responsibility. "
         + "This class is a legacy wrapper for com.google.web.bindery.event.shared.EventBus. "
         + "Use that directly, or try com.google.gwt.event.shared.SimpleEventBus");
   }
 
-  public abstract <H extends EventHandler> HandlerRegistration addHandlerToSource(GwtEvent.Type<H> type,
-      Object source, H handler);
+  public abstract <H extends EventHandler> HandlerRegistration addHandlerToSource(
+      GwtEvent.Type<H> type, Object source, H handler);
 
   @Override
   public void fireEvent(Event<?> event) {

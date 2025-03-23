@@ -18,7 +18,6 @@ package org.hibernate.jsr303.tck.util;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-
 /**
  * Test Suite for non GWT tests.
  */

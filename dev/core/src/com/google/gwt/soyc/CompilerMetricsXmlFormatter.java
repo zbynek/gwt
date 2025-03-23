@@ -85,7 +85,8 @@ public class CompilerMetricsXmlFormatter {
 
       writeModuleMetricsAsXml(moduleMetrics, pw);
 
-      Set<PrecompilationMetricsArtifact> precompilationMetrics = artifacts.find(PrecompilationMetricsArtifact.class);
+      Set<PrecompilationMetricsArtifact> precompilationMetrics = artifacts.find(
+          PrecompilationMetricsArtifact.class);
       if (!precompilationMetrics.isEmpty()) {
         pw.append(" <precompilations>\n");
         for (PrecompilationMetricsArtifact metrics : precompilationMetrics) {
@@ -94,7 +95,8 @@ public class CompilerMetricsXmlFormatter {
         pw.append(" </precompilations>\n");
       }
 
-      Set<CompilationMetricsArtifact> compilationMetrics = artifacts.find(CompilationMetricsArtifact.class);
+      Set<CompilationMetricsArtifact> compilationMetrics = artifacts.find(
+          CompilationMetricsArtifact.class);
       if (!compilationMetrics.isEmpty()) {
         pw.append(" <compilations>\n");
         for (CompilationMetricsArtifact metrics : compilationMetrics) {

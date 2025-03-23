@@ -52,6 +52,7 @@ public class SoycReportLinker extends Linker {
    * its deferred bindings.
    */
   @Transferable
+  @SuppressWarnings("Checkstyle.EqualsHashCode")
   private static class PermDescriptionArtifact extends
       Artifact<PermDescriptionArtifact> {
 

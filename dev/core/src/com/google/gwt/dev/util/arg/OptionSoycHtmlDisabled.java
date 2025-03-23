@@ -16,7 +16,7 @@
 package com.google.gwt.dev.util.arg;
 
 /**
- * Option for disabling SOYC HTML report generation
+ * Option for disabling SOYC HTML report generation.
  */
 public interface OptionSoycHtmlDisabled extends OptionCompilerMetricsEnabled {
 

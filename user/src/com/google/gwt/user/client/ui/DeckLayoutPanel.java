@@ -321,7 +321,8 @@ public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
    * @param widget the widget to check
    */
   void assertIsChild(Widget widget) {
-    assert (widget == null) || (widget.getParent() == this) : "The specified widget is not a child of this panel";
+    assert (widget == null) || (widget.getParent() == this)
+        : "The specified widget is not a child of this panel";
   }
 
   /**

@@ -31,17 +31,6 @@ public class Derived<T> extends Base<T> {
   } // new Overload
 
   /**
-   * Overrides Base<T>.m(T)
-   *
-   * NOTE: this is commented out because JDT 3.1 will report it as an error,
-   * even though javac 1.5 allows this.
-   */
-  // @Override
-  // public void m(Object t) {
-  // System.out.println("Derived<T>.m(Object)");
-  // } //
-
-  /**
    * Overrides Base<T>.<N extends Number>.m(N)
    */
   @Override
@@ -50,7 +39,7 @@ public class Derived<T> extends Base<T> {
   } // overrides m(N)
 
   /**
-   * Overloads m
+   * Overloads m.
    *
    * @param <T>
    * @param t

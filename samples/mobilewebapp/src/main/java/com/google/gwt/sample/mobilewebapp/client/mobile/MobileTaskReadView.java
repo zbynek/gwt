@@ -51,7 +51,6 @@ public class MobileTaskReadView extends Composite implements TaskReadView {
    */
   private static MobileTaskReadViewUiBinder uiBinder = GWT.create(MobileTaskReadViewUiBinder.class);
 
-
   @UiField
   DateLabel dueDateEditor;
   @UiField

@@ -46,7 +46,7 @@ import com.google.gwt.view.client.Range;
  */
 public class SimplePager extends AbstractPager {
   /**
-   * Constant for labeling the simple pager navigational {@link ImageButton}s
+   * Constant for labeling the simple pager navigational {@link ImageButton}s.
    */
   @DefaultLocale("en_US")
   public interface ImageButtonsConstants extends Constants {

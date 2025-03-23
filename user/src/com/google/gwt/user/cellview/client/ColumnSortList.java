@@ -179,7 +179,7 @@ public class ColumnSortList {
   }
 
   /**
-   * Get the actual limit value
+   * Get the actual limit value.
    * 
    * @return the actual limit value
    */

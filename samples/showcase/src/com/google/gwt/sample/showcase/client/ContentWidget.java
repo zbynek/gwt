@@ -133,7 +133,8 @@ public abstract class ContentWidget extends SimpleLayoutPanel implements
    * @param hasStyle true if the example has associated styles
    * @param rawSourceFiles the list of raw source files to include
    */
-  public ContentWidget(String name, String description, boolean hasStyle, String... rawSourceFiles) {
+  public ContentWidget(String name, String description, boolean hasStyle,
+                       String... rawSourceFiles) {
     this(name, SafeHtmlUtils.fromString(description), hasStyle, rawSourceFiles);
   }
 

@@ -284,7 +284,8 @@ public class CwCellValidation extends ContentWidget {
               ContactDatabase.get().refreshDisplays();
             } else {
               // Update the view data to mark the pending value as invalid.
-              ValidationData viewData = addressCell.getViewData(ContactInfo.KEY_PROVIDER.getKey(object));
+              ValidationData viewData = addressCell.getViewData(
+                  ContactInfo.KEY_PROVIDER.getKey(object));
               viewData.setInvalid(true);
 
               // We only modified the cell, so do a local redraw.

@@ -62,7 +62,8 @@ public class I18NSync extends ToolBase {
 
     @Override
     public String getPurpose() {
-      return "Identifies the Constants/Messages class to be created.  For example com.google.sample.i18n.client.Colors";
+      return "Identifies the Constants/Messages class to be created." +
+          " For example com.google.sample.i18n.client.Colors";
     }
 
     @Override
@@ -315,7 +316,8 @@ public class I18NSync extends ToolBase {
       throw new IllegalArgumentException(
           "class '"
               + className
-              + "'should not contain an extension. \"com.google.gwt.SomeClass\" is an example of a correctly formed class string");
+              + "'should not contain an extension. \"com.google.gwt.SomeClass\" is an example"
+              + " of a correctly formed class string");
     }
     String resourcePath = className.replace('.', '/') + ".properties";
     ClassLoader cl = Thread.currentThread().getContextClassLoader();

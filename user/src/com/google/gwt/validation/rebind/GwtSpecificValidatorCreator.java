@@ -686,11 +686,9 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
       if (group.getName().equals(beanClazz.getName())) {
         sw.print(asLiteral(Default.class));
         groupSequenceContainsDefault = true;
-      }
-      else if (group.getName().equals(Default.class.getName())) {
+      } else if (group.getName().equals(Default.class.getName())) {
         throw error(logger, "'Default.class' cannot appear in default group sequence list.");
-      }
-      else {
+      } else {
         sw.print(asLiteral(group));
       }
     }
@@ -804,7 +802,7 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
       sw.print(", ");
       Object value = entry.getValue();
       // Add the Default group if it is not already present
-      if ("groups".equals(key) && value instanceof Class[] && ((Class[])value).length == 0) {
+      if ("groups".equals(key) && value instanceof Class[] && ((Class[]) value).length == 0) {
         value = new Class[] { Default.class };
       }
       sw.print(asLiteral(value));

@@ -31,209 +31,209 @@ package com.google.gwt.event.dom.client;
 public class KeyCodes {
 
   /**
-   * Key code for A
+   * Key code for A.
    */
   public static final int KEY_A = 65;
   /**
-   * Key code for B
+   * Key code for B.
    */
   public static final int KEY_B = 66;
   /**
-   * Key code for C
+   * Key code for C.
    */
   public static final int KEY_C = 67;
   /**
-   * Key code for D
+   * Key code for D.
    */
   public static final int KEY_D = 68;
   /**
-   * Key code for E
+   * Key code for E.
    */
   public static final int KEY_E = 69;
   /**
-   * Key code for F
+   * Key code for F.
    */
   public static final int KEY_F = 70;
   /**
-   * Key code for G
+   * Key code for G.
    */
   public static final int KEY_G = 71;
   /**
-   * Key code for H
+   * Key code for H.
    */
   public static final int KEY_H = 72;
   /**
-   * Key code for I
+   * Key code for I.
    */
   public static final int KEY_I = 73;
   /**
-   * Key code for J
+   * Key code for J.
    */
   public static final int KEY_J = 74;
   /**
-   * Key code for K
+   * Key code for K.
    */
   public static final int KEY_K = 75;
   /**
-   * Key code for L
+   * Key code for L.
    */
   public static final int KEY_L = 76;
   /**
-   * Key code for M
+   * Key code for M.
    */
   public static final int KEY_M = 77;
   /**
-   * Key code for N
+   * Key code for N.
    */
   public static final int KEY_N = 78;
   /**
-   * Key code for O
+   * Key code for O.
    */
   public static final int KEY_O = 79;
   /**
-   * Key code for P
+   * Key code for P.
    */
   public static final int KEY_P = 80;
   /**
-   * Key code for Q
+   * Key code for Q.
    */
   public static final int KEY_Q = 81;
   /**
-   * Key code for R
+   * Key code for R.
    */
   public static final int KEY_R = 82;
   /**
-   * Key code for S
+   * Key code for S.
    */
   public static final int KEY_S = 83;
   /**
-   * Key code for T
+   * Key code for T.
    */
   public static final int KEY_T = 84;
   /**
-   * Key code for U
+   * Key code for U.
    */
   public static final int KEY_U = 85;
   /**
-   * Key code for V
+   * Key code for V.
    */
   public static final int KEY_V = 86;
   /**
-   * Key code for W
+   * Key code for W.
    */
   public static final int KEY_W = 87;
   /**
-   * Key code for X
+   * Key code for X.
    */
   public static final int KEY_X = 88;
   /**
-   * Key code for Y
+   * Key code for Y.
    */
   public static final int KEY_Y = 89;
   /**
-   * Key code for Z
+   * Key code for Z.
    */
   public static final int KEY_Z = 90;
 
   /**
-   * Key code number 0
+   * Key code for number 0.
    */
   public static final int KEY_ZERO = 48;
   /**
-   * Key code number 1
+   * Key code for number 1.
    */
   public static final int KEY_ONE = 49;
   /**
-   * Key code number 2
+   * Key code for number 2.
    */
   public static final int KEY_TWO = 50;
   /**
-   * Key code number 3
+   * Key code for number 3.
    */
   public static final int KEY_THREE = 51;
   /**
-   * Key code number 4
+   * Key code for number 4.
    */
   public static final int KEY_FOUR = 52;
   /**
-   * Key code number 5
+   * Key code for number 5.
    */
   public static final int KEY_FIVE = 53;
   /**
-   * Key code number 6
+   * Key code for number 6.
    */
   public static final int KEY_SIX = 54;
   /**
-   * Key code number 7
+   * Key code for number 7.
    */
   public static final int KEY_SEVEN = 55;
   /**
-   * Key code number 8
+   * Key code for number 8.
    */
   public static final int KEY_EIGHT = 56;
   /**
-   * Key code number 9
+   * Key code for number 9.
    */
   public static final int KEY_NINE = 57;
 
   /**
-   * Key code for number 0 on numeric keyboard
+   * Key code for number 0 on numeric keyboard.
    */
   public static final int KEY_NUM_ZERO = 96;
   /**
-   * Key code for number 1 on numeric keyboard
+   * Key code for number 1 on numeric keyboard.
    */
   public static final int KEY_NUM_ONE = 97;
   /**
-   * Key code for number 2 on numeric keyboard
+   * Key code for number 2 on numeric keyboard.
    */
   public static final int KEY_NUM_TWO = 98;
   /**
-   * Key code for number 3 on numeric keyboard
+   * Key code for number 3 on numeric keyboard.
    */
   public static final int KEY_NUM_THREE = 99;
   /**
-   * Key code for number 4 on numeric keyboard
+   * Key code for number 4 on numeric keyboard.
    */
   public static final int KEY_NUM_FOUR = 100;
   /**
-   * Key code for number 5 on numeric keyboard
+   * Key code for number 5 on numeric keyboard.
    */
   public static final int KEY_NUM_FIVE = 101;
   /**
-   * Key code for number 6 on numeric keyboard
+   * Key code for number 6 on numeric keyboard.
    */
   public static final int KEY_NUM_SIX = 102;
   /**
-   * Key code for number 7 on numeric keyboard
+   * Key code for number 7 on numeric keyboard.
    */
   public static final int KEY_NUM_SEVEN = 103;
   /**
-   * Key code for number 8 on numeric keyboard
+   * Key code for number 8 on numeric keyboard.
    */
   public static final int KEY_NUM_EIGHT = 104;
   /**
-   * Key code for number 9 on numeric keyboard
+   * Key code for number 9 on numeric keyboard.
    */
   public static final int KEY_NUM_NINE = 105;
   /**
-   * Key code for multiply on numeric keyboard
+   * Key code for multiply on numeric keyboard.
    */
   public static final int KEY_NUM_MULTIPLY = 106;
   /**
-   * Key code for plus on numeric keyboard
+   * Key code for plus on numeric keyboard.
    */
   public static final int KEY_NUM_PLUS = 107;
   /**
-   * Key code for minus on numeric keyboard
+   * Key code for minus on numeric keyboard.
    */
   public static final int KEY_NUM_MINUS = 109;
   /**
-   * Key code for period on numeric keyboard
+   * Key code for period on numeric keyboard.
    */
   public static final int KEY_NUM_PERIOD = 110;
   /**
-   * Key code for division on numeric keyboard
+   * Key code for division on numeric keyboard.
    */
   public static final int KEY_NUM_DIVISION = 111;
   /**
@@ -308,141 +308,141 @@ public class KeyCodes {
   public static final int KEY_UP = 38;
 
   /**
-   * Key code for F1
+   * Key code for F1.
    */
   public static final int KEY_F1 = 112;
   /**
-   * Key code for F2
+   * Key code for F2.
    */
   public static final int KEY_F2 = 113;
   /**
-   * Key code for F3
+   * Key code for F3.
    */
   public static final int KEY_F3 = 114;
   /**
-   * Key code for F4
+   * Key code for F4.
    */
   public static final int KEY_F4 = 115;
   /**
-   * Key code for F5
+   * Key code for F5.
    */
   public static final int KEY_F5 = 116;
   /**
-   * Key code for F6
+   * Key code for F6.
    */
   public static final int KEY_F6 = 117;
   /**
-   * Key code for F7
+   * Key code for F7.
    */
   public static final int KEY_F7 = 118;
   /**
-   * Key code for F8
+   * Key code for F8.
    */
   public static final int KEY_F8 = 119;
   /**
-   * Key code for F9
+   * Key code for F9.
    */
   public static final int KEY_F9 = 120;
   /**
-   * Key code for F10
+   * Key code for F10.
    */
   public static final int KEY_F10 = 121;
   /**
-   * Key code for F11
+   * Key code for F11.
    */
   public static final int KEY_F11 = 122;
   /**
-   * Key code for F12
+   * Key code for F12.
    */
   public static final int KEY_F12 = 123;
   /**
-   * Key code for Windows key on Firefox Linux
+   * Key code for Windows key on Firefox Linux.
    */
   public static final int KEY_WIN_KEY_FF_LINUX =  0;
   /**
-   * Key code for Mac enter key
+   * Key code for Mac enter key.
    */
   public static final int KEY_MAC_ENTER = 3;
   /**
-   * Key code for pause key
+   * Key code for pause key.
    */
   public static final int KEY_PAUSE = 19;
   /**
-   * Key code for caps lock key
+   * Key code for caps lock key.
    */
   public static final int KEY_CAPS_LOCK = 20;
   /**
-   * Key code for space
+   * Key code for space.
    */
   public static final int KEY_SPACE = 32;
 
   /**
-   * Key code for print key
+   * Key code for print key.
    */
   public static final int KEY_PRINT_SCREEN = 44;
   /**
-   * Key code for insert key (Also numeric keyboard insert).
+   * Key code for insert key (Also numeric keyboard insert)..
    */
   public static final int KEY_INSERT = 45;      // also NUM_INSERT
 
   /**
-   * Key code for insert key (Also num lock on FF,Safari Mac).
+   * Key code for insert key (Also num lock on FF,Safari Mac)..
    */
   public static final int KEY_NUM_CENTER = 12;
 
   /**
-   * Key code for left windows key.
+   * Key code for left windows key..
    */
   public static final int KEY_WIN_KEY = 224;
 
   /**
-   * Key code for left windows key or meta.
+   * Key code for left windows key or meta..
    */
   public static final int KEY_WIN_KEY_LEFT_META = 91;
 
   /**
-   * Key code for right windows key.
+   * Key code for right windows key..
    */
   public static final int KEY_WIN_KEY_RIGHT = 92;
   /**
-   * Key code for context menu key.
+   * Key code for context menu key..
    */
   public static final int KEY_CONTEXT_MENU = 93;
   /**
-   * Key code for {@link KeyCodes#KEY_WIN_KEY_LEFT_META} that Firefox fires
+   * Key code for {@link KeyCodes#KEY_WIN_KEY_LEFT_META} that Firefox fires.
    * for the meta key.
    */
   public static final int KEY_MAC_FF_META = 224; // Firefox (Gecko) fires this for the meta key instead of 91
 
   /**
-   * Key code for num lock.
+   * Key code for num lock..
    */
   public static final int KEY_NUMLOCK = 144;
   /**
-   * Key code for scroll lock.
+   * Key code for scroll lock..
    */
   public static final int KEY_SCROLL_LOCK = 145;
 
   /**
-   * Key code for first OS specific media key (like volume).
+   * Key code for first OS specific media key (like volume)..
    */
   public static final int KEY_FIRST_MEDIA_KEY = 166;
   /**
-   * Key code for last OS specific media key (like volume).
+   * Key code for last OS specific media key (like volume)..
    */
   public static final int KEY_LAST_MEDIA_KEY = 183;
   /**
-   * Key code for IME.
+   * Key code for IME..
    */
   public static final int KEY_WIN_IME = 229;
 
   /**
-   * Key code for open square bracket, [.
+   * Key code for open square bracket, [..
    */
   public static final int KEY_OPEN_BRACKET = 219;
 
   /**
-   * Key code for close square bracket, ].
+   * Key code for close square bracket, ]..
    */
   public static final int KEY_CLOSE_BRACKET = 221;
 

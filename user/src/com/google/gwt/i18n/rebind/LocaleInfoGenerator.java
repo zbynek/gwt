@@ -58,19 +58,22 @@ public class LocaleInfoGenerator extends Generator {
    * Properties file containing machine-generated locale display names, in their
    * native locales (if possible).
    */
-  private static final String GENERATED_LOCALE_NATIVE_DISPLAY_NAMES = "com/google/gwt/i18n/client/impl/cldr/LocaleNativeDisplayNames-generated.properties";
+  private static final String GENERATED_LOCALE_NATIVE_DISPLAY_NAMES
+      = "com/google/gwt/i18n/client/impl/cldr/LocaleNativeDisplayNames-generated.properties";
 
   /**
    * Properties file containing hand-made corrections to the machine-generated
    * locale display names above.
    */
-  private static final String MANUAL_LOCALE_NATIVE_DISPLAY_NAMES = "com/google/gwt/i18n/client/impl/cldr/LocaleNativeDisplayNames-manual.properties";
+  private static final String MANUAL_LOCALE_NATIVE_DISPLAY_NAMES
+      = "com/google/gwt/i18n/client/impl/cldr/LocaleNativeDisplayNames-manual.properties";
 
   /**
    * Properties file containing hand-made overrides of locale display names, in
    * their native locales (if possible).
    */
-  private static final String OVERRIDE_LOCALE_NATIVE_DISPLAY_NAMES = "com/google/gwt/i18n/client/impl/cldr/LocaleNativeDisplayNames-override.properties";
+  private static final String OVERRIDE_LOCALE_NATIVE_DISPLAY_NAMES
+      = "com/google/gwt/i18n/client/impl/cldr/LocaleNativeDisplayNames-override.properties";
 
   /**
    * Set of canonical language codes which are RTL.
@@ -188,7 +191,8 @@ public class LocaleInfoGenerator extends Generator {
       writer.println("    if (nativeDisplayNamesNative == null) {");
       writer.println("      nativeDisplayNamesNative = loadNativeDisplayNamesNative();");
       writer.println("    }");
-      writer.println("    return getLocaleNativeDisplayName(nativeDisplayNamesNative, localeName);");
+      writer.println("    return getLocaleNativeDisplayName(nativeDisplayNamesNative," +
+          " localeName);");
       writer.println("  } else {");
       writer.println("    if (nativeDisplayNamesJava == null) {");
       writer.println("      nativeDisplayNamesJava = new HashMap<String, String>();");

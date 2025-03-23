@@ -258,7 +258,6 @@ public class DuplicateClinitRemover extends JsModVisitor {
     return stats;
   }
 
-
   private static OptimizerStats execImpl(JsProgram program) {
     OptimizerStats stats = new OptimizerStats(NAME);
     DuplicateClinitRemover r = new DuplicateClinitRemover(program);

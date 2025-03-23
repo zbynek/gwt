@@ -42,7 +42,7 @@ public class TimeUnitTest extends EmulTestBase {
 
   // (loops to 88888 check increments at all time divisions.)
 
-  /** convert correctly converts sample values across the units */
+  /** convert correctly converts sample values across the units. */
   public void testConvert() {
     for (long t = 0; t < 88888; t += 500) {
       assertEquals(t * SECS_IN_DAY, TimeUnit.SECONDS.convert(t, TimeUnit.DAYS));
@@ -79,7 +79,7 @@ public class TimeUnitTest extends EmulTestBase {
     }
   }
 
-  /** toNanos correctly converts sample values in different units to nanoseconds */
+  /** toNanos correctly converts sample values in different units to nanoseconds. */
   public void testToNanos() {
     for (long t = 0; t < 88888; t += 100) {
       assertEquals(t * NANOS_IN_DAY, TimeUnit.DAYS.toNanos(t));
@@ -92,7 +92,7 @@ public class TimeUnitTest extends EmulTestBase {
     }
   }
 
-  /** toMicros correctly converts sample values in different units to microseconds */
+  /** toMicros correctly converts sample values in different units to microseconds. */
   public void testToMicros() {
     for (long t = 0; t < 88888; t += 100) {
       assertEquals(t * MICROS_IN_DAY, TimeUnit.DAYS.toMicros(t));
@@ -105,7 +105,7 @@ public class TimeUnitTest extends EmulTestBase {
     }
   }
 
-  /** toMillis correctly converts sample values in different units to milliseconds */
+  /** toMillis correctly converts sample values in different units to milliseconds. */
   public void testToMillis() {
     for (long t = 0; t < 88888; t += 100) {
       assertEquals(t * MILLIS_IN_DAY, TimeUnit.DAYS.toMillis(t));
@@ -118,7 +118,7 @@ public class TimeUnitTest extends EmulTestBase {
     }
   }
 
-  /** toSeconds correctly converts sample values in different units to seconds */
+  /** toSeconds correctly converts sample values in different units to seconds. */
   public void testToSeconds() {
     for (long t = 0; t < 88888; t += 100) {
       assertEquals(t * SECS_IN_DAY, TimeUnit.DAYS.toSeconds(t));
@@ -131,7 +131,7 @@ public class TimeUnitTest extends EmulTestBase {
     }
   }
 
-  /** toMinutes correctly converts sample values in different units to minutes */
+  /** toMinutes correctly converts sample values in different units to minutes. */
   public void testToMinutes() {
     for (long t = 0; t < 88888; t += 100) {
       assertEquals(t * SECS_IN_MIN * 24, TimeUnit.DAYS.toMinutes(t));
@@ -144,7 +144,7 @@ public class TimeUnitTest extends EmulTestBase {
     }
   }
 
-  /** toHours correctly converts sample values in different units to hours */
+  /** toHours correctly converts sample values in different units to hours. */
   public void testToHours() {
     for (long t = 0; t < 88888; t += 100) {
       assertEquals(t * 24, TimeUnit.DAYS.toHours(t));
@@ -157,7 +157,7 @@ public class TimeUnitTest extends EmulTestBase {
     }
   }
 
-  /** toDays correctly converts sample values in different units to days */
+  /** toDays correctly converts sample values in different units to days. */
   public void testToDays() {
     for (long t = 0; t < 88888; t += 100) {
       assertEquals(t, TimeUnit.DAYS.toDays(t));
@@ -171,7 +171,7 @@ public class TimeUnitTest extends EmulTestBase {
   }
 
   /**
-   * convert saturates positive too-large values to Long.MAX_VALUE and negative to LONG.MIN_VALUE
+   * convert saturates positive too-large values to Long.MAX_VALUE and negative to LONG.MIN_VALUE.
    */
   public void testConvertSaturate() {
     assertEquals(
@@ -189,14 +189,14 @@ public class TimeUnitTest extends EmulTestBase {
   }
 
   /**
-   * toNanos saturates positive too-large values to Long.MAX_VALUE and negative to LONG.MIN_VALUE
+   * toNanos saturates positive too-large values to Long.MAX_VALUE and negative to LONG.MIN_VALUE.
    */
   public void testToNanosSaturate() {
     assertEquals(Long.MAX_VALUE, TimeUnit.MILLISECONDS.toNanos(Long.MAX_VALUE / 2));
     assertEquals(Long.MIN_VALUE, TimeUnit.MILLISECONDS.toNanos(-Long.MAX_VALUE / 3));
   }
 
-  /** toString returns string containing common name of unit */
+  /** toString returns string containing common name of unit. */
   public void testToString() {
     String s = TimeUnit.SECONDS.toString();
     assertTrue(s.indexOf("ECOND") >= 0);

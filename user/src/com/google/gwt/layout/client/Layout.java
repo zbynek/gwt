@@ -349,7 +349,8 @@ public class Layout {
    * @param elem the element to be tested
    */
   public void assertIsChild(Element elem) {
-    assert elem.getParentElement().getParentElement() == this.parentElem : "Element is not a child of this layout";
+    assert elem.getParentElement().getParentElement() == this.parentElem
+        : "Element is not a child of this layout";
   }
 
   /**

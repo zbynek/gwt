@@ -58,12 +58,16 @@ class ConcreteJsType {
 
   public static class AImpl1 implements A {
     @Override
-    public int x() { return 42; }
+    public int x() {
+      return 42;
+    }
   }
 
   public static class AImpl2 implements A {
     @Override
-    public int x() { return 101; }
+    public int x() {
+      return 101;
+    }
   }
 
   @SuppressWarnings("unusable-by-js")

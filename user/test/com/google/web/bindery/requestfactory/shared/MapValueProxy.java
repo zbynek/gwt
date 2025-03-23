@@ -16,7 +16,7 @@
 package com.google.web.bindery.requestfactory.shared;
 
 /**
- * Used to test entity proxies as map values
+ * Used to test entity proxies as map values.
  */
 @ProxyForName("com.google.web.bindery.requestfactory.server.MapValue")
 public interface MapValueProxy extends EntityProxy {

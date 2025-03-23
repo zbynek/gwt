@@ -39,7 +39,6 @@ class BigLongLibBase {
     int l, m, h;
   }
 
-
   // Note that the {@link LonghLib#mul} method implicitly depends on the
   // specific value BITS == 22
   protected static final int BITS = 22;
@@ -225,7 +224,7 @@ class BigLongLibBase {
   }
 
   /**
-   * a = -a
+   * Flips the sign (a -> -a).
    */
   protected static void negate(BigLong a) {
     int neg0 = (~getL(a) + 1) & MASK;
@@ -386,7 +385,7 @@ class BigLongLibBase {
   }-*/;
 
   /**
-   * a &= ((1L << bits) - 1)
+   * Returns a & ((1L << bits) - 1).
    */
   private static BigLong maskRight(BigLong a, int bits) {
     int b0, b1, b2;
@@ -407,7 +406,7 @@ class BigLongLibBase {
   }
 
   /**
-   * Return the exact log base 2 of a, or -1 if a is not a power of two:
+   * Return the exact log base 2 of a, or -1 if a is not a power of two. Pseudocode:
    *
    * <pre>
    * if (x == 2^n) {
@@ -511,7 +510,7 @@ class BigLongLibBase {
   }
 
   /**
-   * Attempt to subtract b from a if a >= b:
+   * Attempt to subtract b from a if a >= b. Pseudocode:
    *
    * <pre>
    * if (a >= b) {

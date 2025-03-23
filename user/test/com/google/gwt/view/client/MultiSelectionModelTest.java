@@ -15,7 +15,6 @@
  */
 package com.google.gwt.view.client;
 
-
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;

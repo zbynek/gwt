@@ -27,6 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * step.
  */
 @Transferable
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class ModuleMetricsArtifact extends Artifact<ModuleMetricsArtifact> {
   /*
    * In an ideal world, there should be only one of these module instances, but

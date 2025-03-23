@@ -19,7 +19,7 @@ package com.google.gwt.emultest.java.util;
 
 import java.util.Map;
 
-/** A default implementation of {@link java.util.Map.Entry} */
+/** A default implementation of {@link java.util.Map.Entry}. */
 @SuppressWarnings("rawtypes")
 class DefaultMapEntry implements Map.Entry {
 
@@ -40,7 +40,7 @@ class DefaultMapEntry implements Map.Entry {
     this.value = value;
   }
 
-  /** Implemented per API documentation of {@link java.util.Map.Entry#equals(Object)} */
+  /** Implemented per API documentation of {@link java.util.Map.Entry#equals(Object)}. */
   @Override
   public boolean equals(Object o) {
     if (o == null) {
@@ -58,7 +58,7 @@ class DefaultMapEntry implements Map.Entry {
         && (getValue() == null ? e2.getValue() == null : getValue().equals(e2.getValue())));
   }
 
-  /** Implemented per API documentation of {@link java.util.Map.Entry#hashCode()} */
+  /** Implemented per API documentation of {@link java.util.Map.Entry#hashCode()}. */
   @Override
   public int hashCode() {
     return ((getKey() == null ? 0 : getKey().hashCode())

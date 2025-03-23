@@ -17,7 +17,7 @@
 package com.google.gwt.dev.jjs.test.compilertests;
 
 /**
- * Test for issue 7824
+ * Test for issue 7824.
  */
 public class MethodNamedSameAsClass {
   public void MethodNamedSameAsClass() { }

@@ -21,7 +21,7 @@ import com.google.gwt.core.client.ScriptInjector.FromString;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Tests for {@link ScriptInjector}
+ * Tests for {@link ScriptInjector}.
  */
 public class ScriptInjectorTest extends GWTTestCase {
   private static boolean browserChecked = false;
@@ -160,7 +160,7 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   /**
-   * Install a script in the same window as GWT by URL
+   * Install a script in the same window as GWT by URL.
    */
   public void testInjectUrlThisWindow() {
     this.delayTestFinish(TEST_DELAY);
@@ -202,7 +202,7 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   /**
-   * Install a script in the same window as GWT by URL
+   * Install a script in the same window as GWT by URL.
    */
   public void testInjectUrlThisWindowCallback() {
     delayTestFinish(TEST_DELAY);
@@ -237,7 +237,7 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   /**
-   * Install a script in the top window by URL
+   * Install a script in the top window by URL.
    */
   public void testInjectUrlTopWindow() {
     final String scriptUrl = "script_injector_test6.js";
@@ -275,7 +275,7 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   /**
-   * Install a script in the top window by URL
+   * Install a script in the top window by URL.
    */
   public void testInjectUrlTopWindowCallback() {
     delayTestFinish(TEST_DELAY);
@@ -311,7 +311,7 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   /**
-   * Tests encoding of the injected script (UTF-8)
+   * Tests encoding of the injected script (UTF-8).
    */
   public void testInjectUrlUtf8() {
     delayTestFinish(TEST_DELAY);
@@ -487,7 +487,7 @@ public class ScriptInjectorTest extends GWTTestCase {
   }-*/;
 
   /**
-   * Won't work for all urls, uses a regular expression match
+   * Won't work for all urls, uses a regular expression match.
    */
   private native JavaScriptObject nativeFindScriptUrl(JavaScriptObject wnd, String url) /*-{
     var scripts = wnd.document.getElementsByTagName("script");

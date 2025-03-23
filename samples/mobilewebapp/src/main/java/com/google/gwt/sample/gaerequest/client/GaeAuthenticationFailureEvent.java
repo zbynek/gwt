@@ -19,7 +19,6 @@ import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
-
 /**
  * An event posted when an authentication failure is detected.
  */

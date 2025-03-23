@@ -46,17 +46,23 @@
 
   <g:StackLayoutPanel styleName='{style.shortcuts}' unit='EM'>
     <g:stack>
-      <g:header size='3'><div class='{style.stackHeader}'><div class='{style.mailboxesIcon}'/> Mailboxes</div></g:header>
+      <g:header size='3'>
+        <div class='{style.stackHeader}'><div class='{style.mailboxesIcon}'/> Mailboxes</div>
+      </g:header>
       <mail:Mailboxes ui:field='mailboxes'/>
     </g:stack>
 
     <g:stack>
-      <g:header size='3'><div class='{style.stackHeader}'><div class='{style.tasksIcon}'/> Tasks</div></g:header>
+      <g:header size='3'>
+        <div class='{style.stackHeader}'><div class='{style.tasksIcon}'/> Tasks</div>
+      </g:header>
       <mail:Tasks ui:field='tasks'/>
     </g:stack>
 
     <g:stack>
-      <g:header size='3'><div class='{style.stackHeader}'><div class='{style.contactsIcon}'/> Contacts</div></g:header>
+      <g:header size='3'>
+        <div class='{style.stackHeader}'><div class='{style.contactsIcon}'/> Contacts</div>
+      </g:header>
       <mail:Contacts ui:field='contacts'/>
     </g:stack>
   </g:StackLayoutPanel>

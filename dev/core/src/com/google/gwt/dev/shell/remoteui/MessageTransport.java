@@ -128,7 +128,7 @@ public class MessageTransport {
   static class PendingRequestMap {
     private final Lock mapLock = new ReentrantLock();
     private boolean noMoreAdds;
-    private final Map<Integer, PendingRequest> requestIdToPendingServerRequest = new HashMap<Integer, PendingRequest>();
+    private final Map<Integer, PendingRequest> requestIdToPendingServerRequest = new HashMap<>();
 
     public void blockAdds(Exception e) {
       mapLock.lock();

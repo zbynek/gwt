@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /** Tests <code>LinkedHashMap</code>. */
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class LinkedHashMapTest extends TestMap {
   // should be a method-level class, however to avoid serialization warning made
   // static instead.

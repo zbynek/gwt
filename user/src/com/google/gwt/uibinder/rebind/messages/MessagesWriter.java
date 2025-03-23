@@ -63,8 +63,8 @@ public class MessagesWriter {
 
   private TypeOracle oracle;
 
-  public MessagesWriter(TypeOracle oracle, String nameSpaceUri, MortalLogger mortalLogger, String generatedFrom,
-      String packageName, String uiBinderImplClassName) {
+  public MessagesWriter(TypeOracle oracle, String nameSpaceUri, MortalLogger mortalLogger,
+      String generatedFrom, String packageName, String uiBinderImplClassName) {
     this.messagesNamespaceURI = nameSpaceUri;
     this.generatedFrom = generatedFrom;
     this.packageName = packageName;
@@ -131,7 +131,8 @@ public class MessagesWriter {
             attributeName, child);
       }
 
-      String defaultMessage = MessageWriter.escapeMessageFormat(elem.consumeRawAttribute(attributeName));
+      String defaultMessage = MessageWriter.escapeMessageFormat(
+          elem.consumeRawAttribute(attributeName));
       defaultMessage = UiBinderWriter.escapeTextForJavaStringLiteral(defaultMessage);
       attributeMessages.add(new AttributeMessage(attributeName, declareMessage(
           child, defaultMessage)));

@@ -15,7 +15,6 @@
  */
 package com.google.gwt.junit.client;
 
-
 import static java.util.Arrays.asList;
 
 /**

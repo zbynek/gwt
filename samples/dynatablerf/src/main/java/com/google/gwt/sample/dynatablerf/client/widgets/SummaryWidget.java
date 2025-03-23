@@ -120,7 +120,7 @@ public class SummaryWidget extends Composite {
   private final int numRows;
   private boolean pending;
   private final DynaTableRequestFactory requestFactory;
-  private final SingleSelectionModel<PersonProxy> selectionModel = new SingleSelectionModel<PersonProxy>();
+  private final SingleSelectionModel<PersonProxy> selectionModel = new SingleSelectionModel<>();
 
   public SummaryWidget(EventBus eventBus,
       DynaTableRequestFactory requestFactory, int numRows) {

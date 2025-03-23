@@ -227,7 +227,7 @@ public class HasDataEditorTest extends GWTTestCase {
   }
   
   /**
-   * See <a href="http://code.google.com/p/google-web-toolkit/issues/detail?id=6959">issue 6959</a>
+   * See <a href="http://code.google.com/p/google-web-toolkit/issues/detail?id=6959">issue 6959</a>.
    */
   public void testTraverseSyntheticCompositeEditor() {
     List<Integer> expectedValue = Arrays.asList(1, 2, 3, 4, 5);

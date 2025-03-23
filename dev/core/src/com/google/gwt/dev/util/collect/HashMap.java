@@ -139,6 +139,11 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     @Override
+    public boolean equals(Object other) {
+      return super.equals(other);
+    }
+
+    @Override
     public Iterator<java.util.Map.Entry<K, V>> iterator() {
       return new EntryIterator();
     }
@@ -254,6 +259,11 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
     }
 
     @Override
+    public boolean equals(Object other) {
+      return super.equals(other);
+    }
+
+    @Override
     public Iterator<K> iterator() {
       return new KeyIterator();
     }
@@ -311,6 +321,11 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
         }
       }
       return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      return super.equals(obj);
     }
 
     @Override
@@ -390,7 +405,6 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
    * key must a Comparable.
    */
   final boolean stableWriteObject;
-
 
   public HashMap() {
     this(false);
@@ -594,8 +608,8 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
       Arrays.sort(idx, new Comparator<Integer>() {
           @SuppressWarnings({"rawtypes", "unchecked"})
           @Override public int compare(final Integer o1, final Integer o2) {
-              Comparable c1 = (Comparable)(keys[o1]);
-              Comparable c2 = (Comparable)(keys[o2]);
+              Comparable c1 = (Comparable) (keys[o1]);
+              Comparable c2 = (Comparable) (keys[o2]);
               if (c1 == null) {
                 // null < anything else
                 return (c2 == null) ? 0 : 1;

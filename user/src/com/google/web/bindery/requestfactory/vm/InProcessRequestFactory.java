@@ -66,7 +66,8 @@ class InProcessRequestFactory extends AbstractRequestFactory {
           method.getReturnType().isAnnotationPresent(JsonRpcService.class) ? Dialect.JSON_RPC
               : Dialect.STANDARD;
       RequestContextHandler handler =
-          new InProcessRequestContext(InProcessRequestFactory.this, dialect, context).new RequestContextHandler();
+          new InProcessRequestContext(InProcessRequestFactory.this, dialect, context)
+              .new RequestContextHandler();
       return context.cast(Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
           new Class<?>[] {context}, handler));
     }

@@ -2155,7 +2155,6 @@ public class UiBinderWriter implements Statements {
       w.write("%s.getType();", eventType);
     }
 
-
     w.outdent();
     w.write("}");
     w.newline();

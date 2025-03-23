@@ -117,7 +117,7 @@ public class EntityCodex {
   }
 
   /**
-   * Map decoding follows behaviour of AutoBeanCodexImpl.MapCoder
+   * Map decoding follows behaviour of AutoBeanCodexImpl.MapCoder.
    */
   public static Object decode(EntitySource source,
       Class<?> type, Class<?> keyType, Class<?> valueType, Splittable split) {
@@ -206,7 +206,8 @@ public class EntityCodex {
         throw new IllegalArgumentException("null Map keys are not supported");
       }
 
-      boolean isSimpleMap = (map.isEmpty() || ValueCodex.canDecode(map.keySet().iterator().next().getClass()));
+      boolean isSimpleMap = (map.isEmpty()
+          || ValueCodex.canDecode(map.keySet().iterator().next().getClass()));
       if (isSimpleMap) {
         boolean first = true;
         sb.append("{");

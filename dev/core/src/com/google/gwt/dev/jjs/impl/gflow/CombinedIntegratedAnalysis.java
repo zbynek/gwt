@@ -197,7 +197,7 @@ public class CombinedIntegratedAnalysis<N, E, T, G extends Graph<N, E, T>>
     public Transformation interpretOrReplace(final N node, final G graph,
         final AssumptionMap<E, CombinedAssumption> assumptionMap) {
 
-      final Map<E, CombinedAssumption.CopyOnWrite> newAssumptions = new IdentityHashMap<E, CombinedAssumption.CopyOnWrite>();
+      final Map<E, CombinedAssumption.CopyOnWrite> newAssumptions = new IdentityHashMap<>();
 
       final int size = functions.size();
       for (int i = 0; i < size; ++i) {
@@ -220,7 +220,8 @@ public class CombinedIntegratedAnalysis<N, E, T, G extends Graph<N, E, T>>
                 public void setAssumption(Object edge, Assumption assumption) {
                   CombinedAssumption.CopyOnWrite newAssumption = newAssumptions.get(edge);
                   if (newAssumption == null) {
-                    newAssumption = new CombinedAssumption.CopyOnWrite(assumptionMap.getAssumption((E) edge), size);
+                    newAssumption = new CombinedAssumption.CopyOnWrite(
+                        assumptionMap.getAssumption((E) edge), size);
                     newAssumptions.put((E) edge, newAssumption);
                   }
                   newAssumption.set(slice, assumption);

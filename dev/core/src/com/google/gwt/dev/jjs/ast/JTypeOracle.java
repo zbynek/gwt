@@ -545,7 +545,6 @@ public class JTypeOracle implements Serializable {
       return castSucceedsTrivially((JArrayType) fromType, toType);
     }
 
-
     return isSuperClassOrInterface(fromType, toType);
   }
 

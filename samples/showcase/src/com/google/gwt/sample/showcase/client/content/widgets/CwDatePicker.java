@@ -59,7 +59,7 @@ public class CwDatePicker extends ContentWidget {
   }
 
   /**
-   * {@link ValueChangeHandler} used to set the value in the text box when the user selects a date
+   * {@link ValueChangeHandler} used to set the value in the text box when the user selects a date.
    */
   @ShowcaseSource
   public static class MyDateValueChangeHandler implements ValueChangeHandler<Date> {

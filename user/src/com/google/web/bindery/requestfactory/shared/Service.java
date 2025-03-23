@@ -41,5 +41,6 @@ public @interface Service {
    * {@link #value()}.
    */
   // http://bugs.sun.com/view_bug.do?bug_id=6512707
-  Class<? extends ServiceLocator> locator() default com.google.web.bindery.requestfactory.shared.ServiceLocator.class;
+  Class<? extends ServiceLocator> locator()
+      default com.google.web.bindery.requestfactory.shared.ServiceLocator.class;
 }

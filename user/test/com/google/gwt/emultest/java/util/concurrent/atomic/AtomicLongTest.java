@@ -19,19 +19,19 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class AtomicLongTest extends EmulTestBase {
 
-  /** constructor initializes to given value */
+  /** constructor initializes to given value. */
   public void testConstructor() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(1, ai.get());
   }
 
-  /** default constructed initializes to zero */
+  /** default constructed initializes to zero. */
   public void testConstructor2() {
     AtomicLong ai = new AtomicLong();
     assertEquals(0, ai.get());
   }
 
-  /** get returns the last value set */
+  /** get returns the last value set. */
   public void testGetSet() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(1, ai.get());
@@ -41,7 +41,7 @@ public class AtomicLongTest extends EmulTestBase {
     assertEquals(-3, ai.get());
   }
 
-  /** compareAndSet succeeds in changing value if equal to expected else fails */
+  /** compareAndSet succeeds in changing value if equal to expected else fails. */
   public void testCompareAndSet() {
     AtomicLong ai = new AtomicLong(1);
     assertTrue(ai.compareAndSet(1, 2));
@@ -53,7 +53,7 @@ public class AtomicLongTest extends EmulTestBase {
     assertEquals(7, ai.get());
   }
 
-  /** getAndSet returns previous value and sets to given value */
+  /** getAndSet returns previous value and sets to given value. */
   public void testGetAndSet() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(1, ai.getAndSet(0));
@@ -61,7 +61,7 @@ public class AtomicLongTest extends EmulTestBase {
     assertEquals(-10, ai.getAndSet(1));
   }
 
-  /** getAndAdd returns previous value and adds given value */
+  /** getAndAdd returns previous value and adds given value. */
   public void testGetAndAdd() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(1, ai.getAndAdd(2));
@@ -70,7 +70,7 @@ public class AtomicLongTest extends EmulTestBase {
     assertEquals(-1, ai.get());
   }
 
-  /** getAndDecrement returns previous value and decrements */
+  /** getAndDecrement returns previous value and decrements. */
   public void testGetAndDecrement() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(1, ai.getAndDecrement());
@@ -78,7 +78,7 @@ public class AtomicLongTest extends EmulTestBase {
     assertEquals(-1, ai.getAndDecrement());
   }
 
-  /** getAndIncrement returns previous value and increments */
+  /** getAndIncrement returns previous value and increments. */
   public void testGetAndIncrement() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(1, ai.getAndIncrement());
@@ -90,7 +90,7 @@ public class AtomicLongTest extends EmulTestBase {
     assertEquals(1, ai.get());
   }
 
-  /** addAndGet adds given value to current, and returns current value */
+  /** addAndGet adds given value to current, and returns current value. */
   public void testAddAndGet() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(3, ai.addAndGet(2));
@@ -99,7 +99,7 @@ public class AtomicLongTest extends EmulTestBase {
     assertEquals(-1, ai.get());
   }
 
-  /** decrementAndGet decrements and returns current value */
+  /** decrementAndGet decrements and returns current value. */
   public void testDecrementAndGet() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(0, ai.decrementAndGet());
@@ -108,7 +108,7 @@ public class AtomicLongTest extends EmulTestBase {
     assertEquals(-2, ai.get());
   }
 
-  /** incrementAndGet increments and returns current value */
+  /** incrementAndGet increments and returns current value. */
   public void testIncrementAndGet() {
     AtomicLong ai = new AtomicLong(1);
     assertEquals(2, ai.incrementAndGet());

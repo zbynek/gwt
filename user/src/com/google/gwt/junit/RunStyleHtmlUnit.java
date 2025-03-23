@@ -290,7 +290,8 @@ public class RunStyleHtmlUnit extends RunStyle {
   private static final Map<BrowserVersion, String> USER_AGENT_MAP  = Maps.newHashMap();
 
   static {
-    // “Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0″
+    // “Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
+    // Chrome/39.0.2171.71 Safari/537.36 Edge/12.0″
     addBrowser(BrowserVersion.EDGE, "safari");
     addBrowser(BrowserVersion.FIREFOX, "gecko1_8");
     addBrowser(BrowserVersion.CHROME, "safari");

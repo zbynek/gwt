@@ -31,11 +31,11 @@ import java.util.LinkedHashSet;
 public class FieldReference {
   private static class LeftHand {
     /**
-     * The type of values acceptible to this LHS, in order of preference
+     * The type of values acceptable to this LHS, in order of preference.
      */
     private final JType[] types;
     /**
-     * The element on the LHS, for error reporting
+     * The element on the LHS, for error reporting.
      */
     private final XMLElement source;
 

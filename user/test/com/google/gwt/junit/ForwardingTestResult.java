@@ -15,7 +15,6 @@
  */
 package com.google.gwt.junit;
 
-
 import junit.framework.AssertionFailedError;
 import junit.framework.Test;
 import junit.framework.TestFailure;

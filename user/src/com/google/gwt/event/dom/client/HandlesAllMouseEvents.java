@@ -35,7 +35,8 @@ public abstract class HandlesAllMouseEvents implements MouseDownHandler,
    * @param source the event source
    * @param reciever the receiver implementing all mouse handlers
    */
-  public static <H extends MouseDownHandler & MouseUpHandler & MouseOutHandler & MouseOverHandler & MouseMoveHandler & MouseWheelHandler> void handle(
+  public static <H extends MouseDownHandler & MouseUpHandler & MouseOutHandler
+      & MouseOverHandler & MouseMoveHandler & MouseWheelHandler> void handle(
       HasAllMouseHandlers source, H reciever) {
     source.addMouseDownHandler(reciever);
     source.addMouseUpHandler(reciever);

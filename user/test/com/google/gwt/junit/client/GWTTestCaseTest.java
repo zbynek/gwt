@@ -116,7 +116,6 @@ public class GWTTestCaseTest extends GWTTestCaseTestBase {
     testThrowsNonSerializableException();
   }
 
-
   public void testAssertEqualsDouble() {
     assertEquals(0.0, 0.0, 0.0);
     assertEquals(1.1, 1.1, 0.0);

@@ -138,7 +138,7 @@ class ClientFactoryImpl implements ClientFactory {
 
   /**
    * ActivityMapper determines an Activity to run for a particular place,
-   * configures the {@link #getActivityManager()}
+   * configures the {@link #getActivityManager()}.
    */
   protected ActivityMapper createActivityMapper() {
     return new AppActivityMapper(this);

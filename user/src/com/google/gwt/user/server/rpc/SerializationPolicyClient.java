@@ -34,7 +34,7 @@ class SerializationPolicyClient {
   private final int readTimeout;
 
   /**
-   * Creates an client with the given configuration,
+   * Creates a client with the given configuration.
    * @param connectTimeoutMs see {@link URLConnection#setConnectTimeout}
    * @param readTimeoutMs see {@link URLConnection#setReadTimeout}
    */
@@ -61,7 +61,7 @@ class SerializationPolicyClient {
       // The code server doesn't redirect. Fail fast if we get a redirect since
       // it's likely a configuration error.
       if (conn instanceof HttpURLConnection) {
-        ((HttpURLConnection)conn).setInstanceFollowRedirects(false);
+        ((HttpURLConnection) conn).setInstanceFollowRedirects(false);
       }
       conn.connect();
       in = conn.getInputStream();

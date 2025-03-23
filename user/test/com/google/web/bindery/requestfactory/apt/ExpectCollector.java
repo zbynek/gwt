@@ -49,8 +49,6 @@ class ExpectCollector extends AbstractProcessor {
 
     private final Messager messager;
 
-    
-    
     public Scanner(Messager messager) {
       this.messager = messager;
     }

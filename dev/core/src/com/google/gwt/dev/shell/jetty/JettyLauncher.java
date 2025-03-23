@@ -278,24 +278,26 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       private static final String META_INF_SERVICES = "META-INF/services/";
 
-      private final ClasspathPattern systemClassesFromWebappFirst = new ClasspathPattern(new String[] {
-          "-javax.servlet.",
-          "-javax.el.",
-          "-javax.websocket.",
-          "javax.",
-      });
-      private final ClasspathPattern allowedFromSystemClassLoader = new ClasspathPattern(new String[] {
-          "org.eclipse.jetty.",
-          "javax.websocket.",
-          // Jasper
-          "org.apache.jasper.",
-          "org.apache.juli.logging.",
-          "org.apache.tomcat.",
-          "org.apache.el.",
-          // Xerces
-          "org.apache.xerces.",
-          "javax.xml.", // Used by Jetty for jetty-web.xml parsing
-      });
+      private final ClasspathPattern systemClassesFromWebappFirst
+          = new ClasspathPattern(new String[] {
+              "-javax.servlet.",
+              "-javax.el.",
+              "-javax.websocket.",
+              "javax.",
+          });
+      private final ClasspathPattern allowedFromSystemClassLoader
+          = new ClasspathPattern(new String[] {
+              "org.eclipse.jetty.",
+              "javax.websocket.",
+              // Jasper
+              "org.apache.jasper.",
+              "org.apache.juli.logging.",
+              "org.apache.tomcat.",
+              "org.apache.el.",
+              // Xerces
+              "org.apache.xerces.",
+              "javax.xml.", // Used by Jetty for jetty-web.xml parsing
+          });
 
       public WebAppClassLoaderExtension() throws IOException {
         super(bootStrapOnlyClassLoader, WebAppContextWithReload.this);
@@ -545,7 +547,6 @@ public class JettyLauncher extends ServletContainerLauncher {
 
   private final Object privateInstanceLock = new Object();
 
-
   @Override
   public String getName() {
     return "Jetty";
@@ -612,12 +613,14 @@ public class JettyLauncher extends ServletContainerLauncher {
     Configuration.ClassList cl = Configuration.ClassList.setServerDefault(server);
     try {
       // from jetty-plus.xml
-      Thread.currentThread().getContextClassLoader().loadClass("org.eclipse.jetty.plus.webapp.PlusConfiguration");
+      Thread.currentThread().getContextClassLoader()
+          .loadClass("org.eclipse.jetty.plus.webapp.PlusConfiguration");
       cl.addAfter("org.eclipse.jetty.webapp.FragmentConfiguration",
           "org.eclipse.jetty.plus.webapp.EnvConfiguration",
           "org.eclipse.jetty.plus.webapp.PlusConfiguration");
     } catch (ClassNotFoundException cnfe) {
-      logger.log(TreeLogger.Type.DEBUG, "jetty-plus isn't on the classpath, JNDI won't work. This might also affect annotations scanning and JSP.");
+      logger.log(TreeLogger.Type.DEBUG, "jetty-plus isn't on the classpath, JNDI won't work." +
+          " This might also affect annotations scanning and JSP.");
     }
     try {
       // from jetty-annotations.xml
@@ -626,7 +629,8 @@ public class JettyLauncher extends ServletContainerLauncher {
       cl.addBefore("org.eclipse.jetty.webapp.JettyWebXmlConfiguration",
           "org.eclipse.jetty.annotations.AnnotationConfiguration");
     } catch (ClassNotFoundException cnfe) {
-      logger.log(TreeLogger.Type.DEBUG, "jetty-annotations isn't on the classpath, annotation scanning won't work. This might also affect annotations scanning.");
+      logger.log(TreeLogger.Type.DEBUG, "jetty-annotations isn't on the classpath," +
+          " annotation scanning won't work. This might also affect annotations scanning.");
     }
 
     // Create a new web app in the war directory.

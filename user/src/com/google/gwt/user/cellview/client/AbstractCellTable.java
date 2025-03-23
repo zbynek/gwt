@@ -1664,7 +1664,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
    * Sets the skipRowHoverStyleUpdate flag. If set, the CellTable will not update
    * the row's style on row-level hover events (MOUSEOVER and MOUSEOUT).
    *
-   * @param skipRowHoverCheck the new flag value
+   * @param skipRowHoverStyleUpdate the new flag value
    */
   public void setSkipRowHoverStyleUpdate(boolean skipRowHoverStyleUpdate) {
     this.skipRowHoverStyleUpdate = skipRowHoverStyleUpdate;
@@ -2587,7 +2587,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
   }
 
   /**
-   * Set a row's hovering style and fire a {@link RowHoverEvent}
+   * Set a row's hovering style and fire a {@link RowHoverEvent}.
    *
    * @param tr the row element
    * @param event the original event

@@ -20,7 +20,7 @@ package com.google.gwt.emultest.java.util;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/** Base class for testing Iterator interface */
+/** Base class for testing Iterator interface. */
 @SuppressWarnings("rawtypes")
 abstract class TestIterator extends TestObject {
 

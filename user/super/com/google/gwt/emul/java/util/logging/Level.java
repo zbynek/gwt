@@ -24,6 +24,7 @@ import java.util.Locale;
  *  <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Level.html">
  *  The Java API doc for details</a>
  */
+@SuppressWarnings("Checkstyle.LeftCurly")
 public class Level implements Serializable {
 
   public static Level ALL = new LevelAll();

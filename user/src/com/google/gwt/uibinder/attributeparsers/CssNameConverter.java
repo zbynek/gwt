@@ -15,7 +15,6 @@
  */
 package com.google.gwt.uibinder.attributeparsers;
 
-
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;

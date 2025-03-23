@@ -70,7 +70,8 @@ public class DynaTableRf implements EntryPoint {
     requests.initialize(eventBus);
 
     // Add remote logging handler
-    RequestFactoryLogHandler.LoggingRequestProvider provider = new RequestFactoryLogHandler.LoggingRequestProvider() {
+    RequestFactoryLogHandler.LoggingRequestProvider provider
+        = new RequestFactoryLogHandler.LoggingRequestProvider() {
       public LoggingRequest getLoggingRequest() {
         return requests.loggingRequest();
       }

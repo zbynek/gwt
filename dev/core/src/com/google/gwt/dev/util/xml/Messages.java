@@ -47,8 +47,8 @@ class Messages {
   public static final Message0 XML_PARSE_FAILED = new Message0(
       TreeLogger.ERROR, "Failure while parsing XML");
 
-  public static final Message3StringIntString XML_REQUIRED_ATTRIBUTE_MISSING = new Message3StringIntString(
-      TreeLogger.ERROR,
+  public static final Message3StringIntString XML_REQUIRED_ATTRIBUTE_MISSING
+      = new Message3StringIntString(TreeLogger.ERROR,
       "Line $1: Missing required attribute '$2' in element '$0'");
 
   private Messages() {

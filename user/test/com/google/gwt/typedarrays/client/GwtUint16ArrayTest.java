@@ -62,7 +62,7 @@ public class GwtUint16ArrayTest extends Uint16ArrayTest {
   }
 
   /**
-   * Initialize from a JSO rather than a Java array
+   * Initialize from a JSO rather than a Java array.
    */
   protected void setFromJsArray(Uint16Array array, int offset) {
     JsUtils.set(array, getJsoArray(), offset);

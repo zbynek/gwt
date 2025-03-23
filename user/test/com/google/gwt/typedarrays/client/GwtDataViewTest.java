@@ -17,7 +17,6 @@ package com.google.gwt.typedarrays.client;
 
 import com.google.gwt.typedarrays.shared.DataViewTest;
 
-
 /**
  * Test client {@link com.google.gwt.typedarrays.shared.DataView} implementations.
  */

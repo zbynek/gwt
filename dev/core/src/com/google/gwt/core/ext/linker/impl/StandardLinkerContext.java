@@ -107,12 +107,8 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
         }
       };
 
-  static final Comparator<SelectionProperty> SELECTION_PROPERTY_COMPARATOR = new Comparator<SelectionProperty>() {
-    @Override
-    public int compare(SelectionProperty o1, SelectionProperty o2) {
-      return o1.getName().compareTo(o2.getName());
-    }
-  };
+  static final Comparator<SelectionProperty> SELECTION_PROPERTY_COMPARATOR
+      = (o1, o2) -> o1.getName().compareTo(o2.getName());
 
   private final SortedSet<ConfigurationProperty> configurationProperties;
 
@@ -120,12 +116,12 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
 
   private final List<Class<? extends Linker>> linkerClasses;
   private Linker[] linkers;
-  private final Map<Class<? extends Linker>, String> linkerShortNames = new HashMap<Class<? extends Linker>, String>();
+  private final Map<Class<? extends Linker>, String> linkerShortNames = new HashMap<>();
   private final String moduleFunctionName;
   private final long moduleLastModified;
   private final String moduleName;
 
-  private final Map<String, StandardSelectionProperty> propertiesByName = new HashMap<String, StandardSelectionProperty>();
+  private final Map<String, StandardSelectionProperty> propertiesByName = new HashMap<>();
 
   private ResourceOracle publicResourceOracle;
 
@@ -199,9 +195,9 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
 
     // Break ModuleDef properties out into LinkerContext interfaces
     {
-      SortedSet<ConfigurationProperty> mutableConfigurationProperties = new TreeSet<ConfigurationProperty>(
+      SortedSet<ConfigurationProperty> mutableConfigurationProperties = new TreeSet<>(
           CONFIGURATION_PROPERTY_COMPARATOR);
-      SortedSet<SelectionProperty> mutableSelectionProperties = new TreeSet<SelectionProperty>(
+      SortedSet<SelectionProperty> mutableSelectionProperties = new TreeSet<>(
           SELECTION_PROPERTY_COMPARATOR);
       for (com.google.gwt.dev.cfg.ConfigurationProperty p : module
           .getProperties().getConfigurationProperties()) {

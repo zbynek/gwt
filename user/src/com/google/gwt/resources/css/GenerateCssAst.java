@@ -704,7 +704,8 @@ public class GenerateCssAst {
    * of the eager variable expansion performed by
    * {@link GenerationHandler#parseDef(String)}.
    */
-  private static final Map<List<URL>, SoftReference<CachedStylesheet>> SHEETS = Collections.synchronizedMap(new HashMap<List<URL>, SoftReference<CachedStylesheet>>());
+  private static final Map<List<URL>, SoftReference<CachedStylesheet>> SHEETS
+      = Collections.synchronizedMap(new HashMap<>());
   private static final String VALUE_FUNCTION_NAME = "value";
 
   /**

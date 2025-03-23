@@ -38,7 +38,6 @@ public class StyleElement extends Element {
     return (StyleElement) elem;
   }
 
-
   /**
    * Determines whether the given {@link JavaScriptObject} can be cast to
    * this class. A <code>null</code> object will cause this method to

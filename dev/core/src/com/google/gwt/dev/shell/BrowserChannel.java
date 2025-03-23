@@ -50,6 +50,7 @@ public abstract class BrowserChannel {
   /**
    * Class representing a reference to a Java object.
    */
+  @SuppressWarnings("Checkstyle.EqualsHashCode")
   public static class JavaObjectRef implements RemoteObjectRef {
     private int refId;
 

@@ -121,7 +121,6 @@ public class FragmentPartitioningResultTest extends TestCase {
     assertEquals(1, fragmentPartitioningResult.getCommonAncestorFragmentId(LEFTOVERS_ID, 1));
   }
 
-
   public void testWithEmptyInitial() {
     // TODO(rluble): replace all this setup with mocks once mockito is in.
 

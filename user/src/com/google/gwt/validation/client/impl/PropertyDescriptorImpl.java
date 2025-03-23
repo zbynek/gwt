@@ -96,8 +96,7 @@ public final class PropertyDescriptorImpl implements PropertyDescriptor {
   public PropertyDescriptorImpl shallowCopy() {
     ConstraintDescriptorImpl<?>[] desc = new ConstraintDescriptorImpl<?>[descriptors.size()];
     descriptors.toArray(desc);
-    return new PropertyDescriptorImpl( // 
-        name, // 
+    return new PropertyDescriptorImpl(name,
         elementClass, // 
         cascaded, // 
         parentBeanMetadata, // 

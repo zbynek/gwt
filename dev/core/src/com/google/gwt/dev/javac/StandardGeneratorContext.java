@@ -550,8 +550,8 @@ public class StandardGeneratorContext implements GeneratorContext {
 
       // Remind the user if there uncommitted cups.
       if (!uncommittedGeneratedCupsByPrintWriter.isEmpty()) {
-        String msg =
-            "For the following type(s), generated source was never committed (did you forget to call commit()?)";
+        String msg = "For the following type(s), generated source was never committed"
+            + " (did you forget to call commit()?)";
         logger = logger.branch(TreeLogger.WARN, msg, null);
 
         for (Generated unit : uncommittedGeneratedCupsByPrintWriter.values()) {
@@ -872,7 +872,8 @@ public class StandardGeneratorContext implements GeneratorContext {
       logger
           .log(
               TreeLogger.ERROR,
-              "Resource paths are intended to be relative to the compiled output directory and cannot be absolute",
+              "Resource paths are intended to be relative to the"
+                  + " compiled output directory and cannot be absolute",
               null);
       throw new UnableToCompleteException();
     }

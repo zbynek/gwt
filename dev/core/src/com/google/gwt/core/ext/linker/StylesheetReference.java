@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.Linker;
  * An external stylesheet referenced in the module manifest. The index is
  * important because output order must match module declaration order.
  */
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public abstract class StylesheetReference extends Artifact<StylesheetReference> {
   private final String src;
   private final int index;

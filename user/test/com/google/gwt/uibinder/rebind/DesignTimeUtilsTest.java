@@ -289,8 +289,8 @@ public class DesignTimeUtilsTest extends TestCase {
     assertEquals("dtPutAttribute(\"0/0 attr\", val);", statements.get(0));
   }
 
-  private static List<String> call_putAttribute(DesignTimeUtils designTime) throws SAXParseException
-      {
+  private static List<String> call_putAttribute(DesignTimeUtils designTime)
+      throws SAXParseException {
     // prepare XMLElement
     XMLElement element;
     {

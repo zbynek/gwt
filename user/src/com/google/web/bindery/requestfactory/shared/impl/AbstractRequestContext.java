@@ -291,7 +291,8 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
         // TODO: Allow for the encoding of nested collections. See issue 5974.
         // Once we do this, this can turn into an assert.
         throw new RuntimeException(
-            "Unable to encode request as JSON payload; Request methods must have parameters of the form List<T> or Set<T>, where T is a scalar (non-collection) type.");
+            "Unable to encode request as JSON payload; Request methods must have parameters"
+                + " of the form List<T> or Set<T>, where T is a scalar (non-collection) type.");
       }
       Splittable value;
       if (obj instanceof Enum && getAutoBeanFactory() instanceof EnumMap) {
@@ -943,8 +944,8 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
                 Class<?> elementType =
                     ctx instanceof CollectionPropertyContext ? ((CollectionPropertyContext) ctx)
                         .getElementType() : null;
-                decoded =
-                    EntityCodex.decode(AbstractRequestContext.this, ctx.getType(), elementType, raw);
+                decoded = EntityCodex.decode(AbstractRequestContext.this,
+                    ctx.getType(), elementType, raw);
               }
               ctx.set(decoded);
             }

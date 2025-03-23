@@ -22,13 +22,14 @@ import com.sun.source.util.DocTreePath;
 import com.sun.source.util.DocTrees;
 
 import java.io.IOException;
-import javax.lang.model.element.Element;
-import javax.tools.Diagnostic;
 import java.io.Reader;
 import java.nio.CharBuffer;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.lang.model.element.Element;
+import javax.tools.Diagnostic;
 
 /**
  * A taglet for slurping examples into javadoc output.

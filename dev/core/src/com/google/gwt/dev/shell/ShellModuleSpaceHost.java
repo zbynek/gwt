@@ -95,7 +95,8 @@ public class ShellModuleSpaceHost implements ModuleSpaceHost {
       throws UnableToCompleteException {
     this.space = readySpace;
 
-    Event moduleSpaceHostReadyEvent = SpeedTracerLogger.start(DevModeEventType.MODULE_SPACE_HOST_READY);
+    Event moduleSpaceHostReadyEvent = SpeedTracerLogger
+        .start(DevModeEventType.MODULE_SPACE_HOST_READY);
     try {
       // Establish an environment for JavaScript property providers to run.
       //

@@ -55,7 +55,7 @@ import java.util.List;
  */
 public class BinaryTypeReferenceRestrictionsCheckerTest extends TestCase {
   /**
-   * Mocks a binary type
+   * Mocks a binary type.
    */
   static class MockBinaryType implements IBinaryType {
     private final String qualifiedTypeName;

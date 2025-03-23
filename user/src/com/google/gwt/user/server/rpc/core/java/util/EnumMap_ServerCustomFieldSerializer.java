@@ -34,62 +34,62 @@ import java.util.EnumMap;
  * Custom field serializer for {@link java.util.EnumMap} for the server.
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public final class EnumMap_ServerCustomFieldSerializer extends ServerCustomFieldSerializer<EnumMap>
-{
+public final class EnumMap_ServerCustomFieldSerializer
+    extends ServerCustomFieldSerializer<EnumMap> {
 
-    public static void deserialize(ServerSerializationStreamReader streamReader, EnumMap instance,
-        Type[] expectedParameterTypes, DequeMap<TypeVariable< ? >, Type> resolvedTypes)
-        throws SerializationException {
-        Map_ServerCustomFieldSerializerBase.deserialize(streamReader, instance,
-          expectedParameterTypes, resolvedTypes);
-    }
+  public static void deserialize(ServerSerializationStreamReader streamReader, EnumMap instance,
+    Type[] expectedParameterTypes, DequeMap<TypeVariable< ? >, Type> resolvedTypes)
+    throws SerializationException {
+    Map_ServerCustomFieldSerializerBase.deserialize(streamReader, instance,
+      expectedParameterTypes, resolvedTypes);
+  }
 
-    @Override
-    public void deserializeInstance(SerializationStreamReader streamReader, EnumMap instance)
-        throws SerializationException {
-        EnumMap_CustomFieldSerializer.deserialize(streamReader, instance);
-    }
+  @Override
+  public void deserializeInstance(SerializationStreamReader streamReader, EnumMap instance)
+      throws SerializationException {
+    EnumMap_CustomFieldSerializer.deserialize(streamReader, instance);
+  }
 
-    @Override
-    public void deserializeInstance(ServerSerializationStreamReader streamReader, EnumMap instance,
-        Type[] expectedParameterTypes, DequeMap<TypeVariable< ? >, Type> resolvedTypes)
-        throws SerializationException {
-        deserialize(streamReader, instance, expectedParameterTypes, resolvedTypes);
-    }
+  @Override
+  public void deserializeInstance(ServerSerializationStreamReader streamReader, EnumMap instance,
+      Type[] expectedParameterTypes, DequeMap<TypeVariable< ? >, Type> resolvedTypes)
+      throws SerializationException {
+    deserialize(streamReader, instance, expectedParameterTypes, resolvedTypes);
+  }
 
-    @Override
-    public boolean hasCustomInstantiateInstance() {
-        return true;
-    }
+  @Override
+  public boolean hasCustomInstantiateInstance() {
+    return true;
+  }
 
-    @Override
-    public EnumMap instantiateInstance(SerializationStreamReader streamReader)
-        throws SerializationException {
-        return EnumMap_CustomFieldSerializer.instantiate(streamReader);
-    }
+  @Override
+  public EnumMap instantiateInstance(SerializationStreamReader streamReader)
+      throws SerializationException {
+    return EnumMap_CustomFieldSerializer.instantiate(streamReader);
+  }
 
-    @Override
-    public EnumMap instantiateInstance(ServerSerializationStreamReader streamReader,
-        Type[] expectedParameterTypes, DequeMap<TypeVariable< ? >, Type> resolvedTypes)
-        throws SerializationException {
-      return EnumMap_CustomFieldSerializer.instantiate(streamReader);
-    }
+  @Override
+  public EnumMap instantiateInstance(ServerSerializationStreamReader streamReader,
+      Type[] expectedParameterTypes, DequeMap<TypeVariable< ? >, Type> resolvedTypes)
+      throws SerializationException {
+    return EnumMap_CustomFieldSerializer.instantiate(streamReader);
+  }
 
-    @Override
-    public void serializeInstance(SerializationStreamWriter streamWriter, EnumMap instance)
-        throws SerializationException {
-       Class c = instance.getClass();
-       Field keyUniverseField;
-       Object keyUniverse = null;
-       try {
-         keyUniverseField = c.getDeclaredField("keyUniverse");
-         keyUniverseField.setAccessible(true);
-         keyUniverse = keyUniverseField.get(instance);
-       } catch (Exception e) {
-         throw new SerializationException(e);
-       }
-       Object exemplar = Array.get(keyUniverse, 0);
-       streamWriter.writeObject(exemplar);
-       Map_CustomFieldSerializerBase.serialize(streamWriter, instance);
+  @Override
+  public void serializeInstance(SerializationStreamWriter streamWriter, EnumMap instance)
+      throws SerializationException {
+    Class c = instance.getClass();
+    Field keyUniverseField;
+    Object keyUniverse = null;
+    try {
+      keyUniverseField = c.getDeclaredField("keyUniverse");
+      keyUniverseField.setAccessible(true);
+      keyUniverse = keyUniverseField.get(instance);
+    } catch (Exception e) {
+      throw new SerializationException(e);
     }
+    Object exemplar = Array.get(keyUniverse, 0);
+    streamWriter.writeObject(exemplar);
+    Map_CustomFieldSerializerBase.serialize(streamWriter, instance);
+  }
 }

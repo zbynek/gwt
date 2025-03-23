@@ -27,14 +27,13 @@ import java.util.Stack;
 
 import javax.validation.groups.Default;
 
-
 /**
  * Contains all the information known about the inheritance information for validation groups.
  */
 public class ValidationGroupsMetadata {
 
   /**
-   * Builder for {@link ValidationGroupsMetadata}
+   * Builder for {@link ValidationGroupsMetadata}.
    */
   public static class Builder {
     private final Map<Class<?>, Set<Class<?>>> inheritanceinheritanceMap;
@@ -103,7 +102,7 @@ public class ValidationGroupsMetadata {
     if (!(other instanceof ValidationGroupsMetadata)) {
       return false;
     }
-    ValidationGroupsMetadata otherObj = (ValidationGroupsMetadata)other;
+    ValidationGroupsMetadata otherObj = (ValidationGroupsMetadata) other;
     return inheritanceMapping.equals(otherObj.inheritanceMapping)
         && sequenceMapping.equals(otherObj.sequenceMapping);
   }

@@ -48,6 +48,7 @@ public class SingleScriptLinker extends SelectionScriptLinker {
   }
 
   @Transferable
+  @SuppressWarnings("CheckStyle.EqualsHashCode")
   private static class Script extends Artifact<Script> {
     private final String javaScript;
     private final String strongName;

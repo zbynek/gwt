@@ -14,7 +14,6 @@
  * the License.
  */
 
-
 package com.google.gwt.user.client.rpc;
 
 import java.math.MathContext;

@@ -143,7 +143,7 @@ class ScannerBase<R> extends ElementScanner6<R, State> {
 
   /**
    * Ignore all static initializers and methods defined in the base
-   * RequestFactory interfaces
+   * RequestFactory interfaces.
    */
   protected boolean shouldIgnore(ExecutableElement x, State state) {
     TypeMirror enclosingType = x.getEnclosingElement().asType();

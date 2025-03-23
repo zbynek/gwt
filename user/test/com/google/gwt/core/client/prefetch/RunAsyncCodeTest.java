@@ -23,7 +23,7 @@ import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Exercises isLoaded() method in {@link RunAsyncCode}
+ * Exercises isLoaded() method in {@link RunAsyncCode}.
  */
 public class RunAsyncCodeTest extends GWTTestCase {
   /**

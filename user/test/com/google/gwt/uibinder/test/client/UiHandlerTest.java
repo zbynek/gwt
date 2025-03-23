@@ -25,7 +25,7 @@ import static com.google.gwt.uibinder.test.client.ValueChangeWidget.HandlerType.
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Functional test for UiHandler
+ * Functional test for UiHandler.
  */
 public class UiHandlerTest extends GWTTestCase {
   private WidgetBasedUi widgetUi;

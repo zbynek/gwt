@@ -15,7 +15,6 @@
  */
 package com.google.gwt.resources.client;
 
-
 /**
  * Contains various full-stack tests of the CssResource system with gss enabled.
  */

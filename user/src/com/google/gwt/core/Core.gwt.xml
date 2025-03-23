@@ -50,7 +50,8 @@
   <inherits name="com.google.gwt.core.CrossSiteIframeLinker" />
 
   <!-- std and xs linkers are deprecated and will emit a warning, which can be turned off -->
-  <define-configuration-property name="iframe.linker.suppressDeprecationWarning" is-multi-valued="false" />
+  <define-configuration-property name="iframe.linker.suppressDeprecationWarning"
+          is-multi-valued="false" />
   <set-configuration-property name="iframe.linker.suppressDeprecationWarning" value="false" />
 
   <replace-with class="com.google.gwt.core.client.impl.SuperDevModeLogger">
@@ -90,7 +91,8 @@
      - Only trap window.onerror if there is no current window.onerror handler (REPORT_IF_NO_HANDLER)
      - Do not trap anything (legacy behavior) (IGNORE)
   -->
-  <define-property name="gwt.uncaughtexceptionhandler.windowonerror" values="IGNORE, REPORT, REPORT_IF_NO_HANDLER" />
+  <define-property name="gwt.uncaughtexceptionhandler.windowonerror"
+          values="IGNORE, REPORT, REPORT_IF_NO_HANDLER" />
   <set-property name="gwt.uncaughtexceptionhandler.windowonerror" value="REPORT_IF_NO_HANDLER"/>
 
   <!-- To support legacy logging flags -->

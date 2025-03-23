@@ -19,7 +19,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Tests {@link Attribute} ARIA class
+ * Tests {@link Attribute} ARIA class.
  */
 public class AttributeTest extends GWTTestCase {
   private Element div;

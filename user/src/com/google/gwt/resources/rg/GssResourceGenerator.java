@@ -165,7 +165,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     private final AutoConversionMode autoConversionMode;
     private final boolean gssDefaultInUiBinder;
 
-    public GssOptions(boolean enabled, AutoConversionMode autoConversionMode, boolean gssDefaultInUiBinder) {
+    public GssOptions(boolean enabled, AutoConversionMode autoConversionMode,
+        boolean gssDefaultInUiBinder) {
       this.enabled = enabled;
       this.autoConversionMode = autoConversionMode;
       this.gssDefaultInUiBinder = gssDefaultInUiBinder;
@@ -220,7 +221,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     }
   }
 
-  public static SourceCode readUrlContent(URL fileUrl, TreeLogger logger) throws UnableToCompleteException {
+  public static SourceCode readUrlContent(URL fileUrl, TreeLogger logger)
+      throws UnableToCompleteException {
     TreeLogger branchLogger = logger.branch(TreeLogger.DEBUG,
             "Reading GSS stylesheet " + fileUrl.toExternalForm());
     try {
@@ -257,7 +259,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     throw new UnableToCompleteException();
   }
 
-  public static GssOptions getGssOptions(PropertyOracle propertyOracle, TreeLogger logger) throws UnableToCompleteException {
+  public static GssOptions getGssOptions(PropertyOracle propertyOracle, TreeLogger logger)
+      throws UnableToCompleteException {
     boolean gssEnabled;
     boolean gssDefaultInUiBinder;
     AutoConversionMode conversionMode;
@@ -607,8 +610,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     sw.println("new " + method.getReturnType().getQualifiedSourceName() + "() {");
     sw.indent();
 
-    Map<JMethod, String> actualReplacements = writeMethods(logger, context, method, sw, constantDefinitions,
-        cssParsingResult.originalConstantNameMapping, renamingResult.mapping);
+    Map<JMethod, String> actualReplacements = writeMethods(logger, context, method, sw,
+        constantDefinitions, cssParsingResult.originalConstantNameMapping, renamingResult.mapping);
 
     sw.outdent();
     sw.println("}");
@@ -842,7 +845,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
    * because some external at-rule could be located inside a conditional block and could be
    * removed when these blocks are evaluated.
    */
-  private Set<String> revertRenamingOfExternalClasses(CssTree cssTree, RenamingResult renamingResult) {
+  private Set<String> revertRenamingOfExternalClasses(CssTree cssTree,
+      RenamingResult renamingResult) {
     ExternalClassesCollector externalClassesCollector = new ExternalClassesCollector(cssTree
         .getMutatingVisitController(), errorManager);
 
@@ -910,8 +914,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     new MarkNonFlippableNodes(cssTree.getMutatingVisitController(), errorManager).runPass();
   }
 
-  private ConstantDefinitions optimizeTree(CssParsingResult cssParsingResult, ResourceContext context,
-      boolean simplifyCss, boolean eliminateDeadStyles, TreeLogger logger)
+  private ConstantDefinitions optimizeTree(CssParsingResult cssParsingResult,
+      ResourceContext context, boolean simplifyCss, boolean eliminateDeadStyles, TreeLogger logger)
       throws UnableToCompleteException {
     CssTree cssTree = cssParsingResult.tree;
 
@@ -1321,8 +1325,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     return true;
   }
 
-  private Map<JMethod, String> writeMethods(TreeLogger logger, ResourceContext context, JMethod method,
-      SourceWriter sw, ConstantDefinitions constantDefinitions,
+  private Map<JMethod, String> writeMethods(TreeLogger logger, ResourceContext context,
+      JMethod method, SourceWriter sw, ConstantDefinitions constantDefinitions,
       Map<String, String> originalConstantNameMapping, Map<String, String> substitutionMap)
       throws UnableToCompleteException {
     JClassType gssResource = method.getReturnType().isInterface();

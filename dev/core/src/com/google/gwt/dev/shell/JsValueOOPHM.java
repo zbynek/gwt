@@ -114,7 +114,8 @@ public class JsValueOOPHM extends JsValue {
   private static class UndefinedValue {
   }
 
-  private static final ThreadLocal<Map<Object, DispatchObject>> dispatchObjectCache = new ThreadLocal<Map<Object, DispatchObject>>();
+  private static final ThreadLocal<Map<Object, DispatchObject>> dispatchObjectCache
+      = new ThreadLocal<>();
 
   private static final UndefinedValue undefValue = new UndefinedValue();
 

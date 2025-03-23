@@ -36,6 +36,7 @@ import java.io.OutputStream;
  * TODO(bobv): provide a timestamp so we can make the time on output files match
  * that of input files?
  */
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
 
   /**

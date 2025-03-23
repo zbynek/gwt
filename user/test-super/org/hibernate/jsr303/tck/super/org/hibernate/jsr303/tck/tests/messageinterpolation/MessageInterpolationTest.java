@@ -133,7 +133,6 @@ public class MessageInterpolationTest extends AbstractTest {
     );
   }
 
-
   @Test
   @SpecAssertions({
       @SpecAssertion(section = "4.3.1", id = "f"),

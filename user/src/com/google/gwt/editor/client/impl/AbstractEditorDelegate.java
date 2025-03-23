@@ -48,7 +48,7 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements
       CompositeEditor.EditorChain<R, S> {
     private final CompositeEditor<T, R, S> composedEditor;
     private final Class<R> composedElementType;
-    private final Map<S, AbstractEditorDelegate<R, S>> map = new LinkedHashMap<S, AbstractEditorDelegate<R, S>>();
+    private final Map<S, AbstractEditorDelegate<R, S>> map = new LinkedHashMap<>();
 
     /**
      * Constructed via

@@ -32,7 +32,7 @@ import java.util.Set;
  */
 
 public class HtmlTemplatesWriter {
-  private final List<HtmlTemplateMethodWriter> htmlTemplates = new ArrayList<HtmlTemplateMethodWriter>();
+  private final List<HtmlTemplateMethodWriter> htmlTemplates = new ArrayList<>();
   private final Set<String> safeConstantExpressions = new HashSet<String>();
   private final Set<String> uriExpressions = new HashSet<String>();
   private final FieldManager fieldManager;
@@ -54,7 +54,8 @@ public class HtmlTemplatesWriter {
    * 
    * @return the object that models this template method
    */
-  public HtmlTemplateMethodWriter addSafeHtmlTemplate(String html, Tokenator t) throws IllegalArgumentException {
+  public HtmlTemplateMethodWriter addSafeHtmlTemplate(String html, Tokenator t)
+      throws IllegalArgumentException {
     if (html == null) {
       throw new IllegalArgumentException("Template html cannot be null");
     }

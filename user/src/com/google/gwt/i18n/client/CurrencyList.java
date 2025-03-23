@@ -65,7 +65,8 @@ public class CurrencyList implements Iterable<CurrencyData> {
   /**
    * Add currency codes contained in the map to an ArrayList.
    */
-  private static native void loadCurrencyValuesNative(JavaScriptObject map, ArrayList<CurrencyData> collection) /*-{
+  private static native void loadCurrencyValuesNative(
+      JavaScriptObject map, ArrayList<CurrencyData> collection) /*-{
     for (var key in map) {
       if (map.hasOwnProperty(key)) {
         collection.@java.util.ArrayList::add(Ljava/lang/Object;)(map[key]);

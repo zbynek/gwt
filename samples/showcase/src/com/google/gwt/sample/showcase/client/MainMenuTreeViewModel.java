@@ -185,12 +185,12 @@ public class MainMenuTreeViewModel implements TreeViewModel {
   /**
    * The top level categories.
    */
-  private final ListDataProvider<Category> categories = new ListDataProvider<Category>();
+  private final ListDataProvider<Category> categories = new ListDataProvider<>();
 
   /**
    * A mapping of {@link ContentWidget}s to their associated categories.
    */
-  private final Map<ContentWidget, Category> contentCategory = new HashMap<ContentWidget, Category>();
+  private final Map<ContentWidget, Category> contentCategory = new HashMap<>();
 
   /**
    * The cell used to render examples.
@@ -200,7 +200,7 @@ public class MainMenuTreeViewModel implements TreeViewModel {
   /**
    * A mapping of history tokens to their associated {@link ContentWidget}.
    */
-  private final Map<String, ContentWidget> contentToken = new HashMap<String, ContentWidget>();
+  private final Map<String, ContentWidget> contentToken = new HashMap<>();
 
   /**
    * The selection model used to select examples.

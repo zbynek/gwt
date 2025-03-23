@@ -27,7 +27,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /** Tests <code>IdentityHashMap</code>. */
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"unchecked", "rawtypes", "Checkstyle.EqualsHashCode"})
 public class IdentityHashMapTest extends TestMap {
 
   /**

@@ -55,7 +55,7 @@ public abstract class AbstractSerializationStream {
   public static final int SERIALIZATION_STREAM_MIN_VERSION = 5;
 
   /**
-   * First version to support valid JSON formatted payload responses
+   * First version to support valid JSON formatted payload responses.
    */
   public static final int SERIALIZATION_STREAM_JSON_VERSION = 8;
 

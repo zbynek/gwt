@@ -30,6 +30,7 @@ import java.util.Map.Entry;
  * artifact containing the results of {@link #getSerialized()}.
  */
 @Transferable
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class PropertiesMappingArtifact extends Artifact<PropertiesMappingArtifact> {
 
   private final Map<PermutationId, List<Map<String, String>>> mappings;

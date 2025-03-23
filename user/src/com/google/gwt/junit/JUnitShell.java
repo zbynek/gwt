@@ -636,7 +636,7 @@ public class JUnitShell extends DevMode {
   }
 
   /**
-   * Get the compiler options
+   * Get the compiler options.
    *
    * @return the compiler options that have been set.
    */

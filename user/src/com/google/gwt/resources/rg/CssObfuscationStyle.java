@@ -22,12 +22,12 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
  * name accordingly.
  */
 public enum CssObfuscationStyle {
-  VERBOSE (true, false, true, true),
-  DEBUG (true, false, true, false),
-  STABLE_FULL_CLASSNAME (true, true, true, true),
-  STABLE_SHORT_CLASSNAME (true, true, true, false),
-  STABLE_NO_CLASSNAME (true, true, false, false),
-  OBFUSCATED (false, false, false, false);
+  VERBOSE(true, false, true, true),
+  DEBUG(true, false, true, false),
+  STABLE_FULL_CLASSNAME(true, true, true, true),
+  STABLE_SHORT_CLASSNAME(true, true, true, false),
+  STABLE_NO_CLASSNAME(true, true, false, false),
+  OBFUSCATED(false, false, false, false);
 
   static CssObfuscationStyle getObfuscationStyle(String name) {
     if (name.equalsIgnoreCase("pretty")) {

@@ -226,7 +226,8 @@ class ServletValidator {
         + servletClass
         + "' with a mapping to '"
         + servletPath
-        + "', but the web.xml has no corresponding mapping; please add the following lines to your web.xml:\n"
+        + "', but the web.xml has no corresponding mapping;"
+        + " please add the following lines to your web.xml:\n"
         + ServletWriter.generateServletMappingTag(servletName, servletPath);
   }
 
@@ -235,7 +236,8 @@ class ServletValidator {
     String servletName = suggestServletName(servletClass);
     return "Module declares a servlet class '"
         + servletClass
-        + "', but the web.xml has no corresponding declaration; please add the following lines to your web.xml:\n"
+        + "', but the web.xml has no corresponding declaration;"
+        + " please add the following lines to your web.xml:\n"
         + ServletWriter.generateServletTag(servletName, servletClass) + "\n"
         + ServletWriter.generateServletMappingTag(servletName, servletPath);
   }

@@ -836,7 +836,7 @@ public abstract class AbstractClientBundleGenerator extends IncrementalGenerator
       TreeLogger logger, TypeOracle typeOracle, JClassType sourceType)
       throws UnableToCompleteException {
 
-    Map<Class<? extends ResourceGenerator>, List<JMethod>> toReturn = new LinkedHashMap<Class<? extends ResourceGenerator>, List<JMethod>>();
+    Map<Class<? extends ResourceGenerator>, List<JMethod>> toReturn = new LinkedHashMap<>();
 
     JClassType bundleType = typeOracle.findType(ClientBundle.class.getName());
     assert bundleType != null;
@@ -864,7 +864,8 @@ public abstract class AbstractClientBundleGenerator extends IncrementalGenerator
         continue;
 
       } else if (returnType == null
-          || !(returnType.isAssignableTo(resourcePrototypeType) || returnType.isAssignableTo(bundleType))) {
+          || !(returnType.isAssignableTo(resourcePrototypeType)
+          || returnType.isAssignableTo(bundleType))) {
         // Primitives and random other abstract methods
         logger.log(TreeLogger.ERROR, "Unable to implement " + m.getName()
             + " because it does not derive from "
@@ -907,7 +908,8 @@ public abstract class AbstractClientBundleGenerator extends IncrementalGenerator
     JClassType resourceType = method.getReturnType().isClassOrInterface();
     assert resourceType != null;
 
-    ResourceGeneratorType annotation = resourceType.findAnnotationInTypeHierarchy(ResourceGeneratorType.class);
+    ResourceGeneratorType annotation
+        = resourceType.findAnnotationInTypeHierarchy(ResourceGeneratorType.class);
     if (annotation == null) {
       logger.log(TreeLogger.ERROR, "No @"
           + ResourceGeneratorType.class.getName() + " was specifed for type "

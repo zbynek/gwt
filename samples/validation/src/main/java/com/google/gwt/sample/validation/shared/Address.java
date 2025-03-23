@@ -20,7 +20,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import javax.validation.constraints.NotNull;
 
 /**
- * Sample address for validation
+ * Sample address for validation.
  */
 public class Address implements IsSerializable {
 
@@ -29,6 +29,5 @@ public class Address implements IsSerializable {
 
   @Zip
   public String zip;
-
 
 }

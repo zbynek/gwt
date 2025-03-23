@@ -118,7 +118,9 @@ public class RunAsyncFailureTest extends GWTTestCase {
 
       @Override
       public void onSuccess() {
-        if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_1")) { finishTest(); }
+        if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_1")) {
+          finishTest();
+        }
       }
     });
   }
@@ -137,7 +139,9 @@ public class RunAsyncFailureTest extends GWTTestCase {
 
       @Override
       public void onSuccess() {
-        if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_2")) { finishTest(); }
+        if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_2")) {
+          finishTest();
+        }
       }
     });
   }
@@ -156,7 +160,9 @@ public class RunAsyncFailureTest extends GWTTestCase {
 
       @Override
       public void onSuccess() {
-        if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_3")) { finishTest(); }
+        if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_3")) {
+          finishTest();
+        }
       }
     });
   }

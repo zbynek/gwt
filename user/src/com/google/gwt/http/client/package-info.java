@@ -19,15 +19,17 @@
  * processing the associated responses. 
  * 
  * <p>
- * Most applications will be interested in the {@link com.google.gwt.http.client.Request}, {@link com.google.gwt.http.client.RequestBuilder}, 
- * {@link com.google.gwt.http.client.RequestCallback} and {@link com.google.gwt.http.client.Response} classes.
+ * Most applications will be interested in the {@link com.google.gwt.http.client.Request},
+ * {@link com.google.gwt.http.client.RequestBuilder},
+ * {@link com.google.gwt.http.client.RequestCallback} and
+ * {@link com.google.gwt.http.client.Response} classes.
  * </p>
  * 
  * <h2>Caveats</h2>
  * <h3>Same-Origin Security Policy</h3>
  * Modern web browsers restrict client-side scripts from accessing items outside
- * of their source origin.  This means that a script loaded from <code>www.foo.com</code> cannot access
- * content from <code>www.bar.com</code>.  For more details please see, <a
+ * of their source origin.  This means that a script loaded from <code>www.foo.com</code>
+ * cannot access content from <code>www.bar.com</code>.  For more details please see, <a
  * href="http://en.wikipedia.org/wiki/Same_origin_policy">Same-Origin Security
  * Policy</a>.
  * 
@@ -35,7 +37,8 @@
  * Modern web browsers are limited to having only two HTTP requests outstanding at
  * any one time.  If your server experiences an error that prevents it from sending 
  * a response, it can tie up your outstanding requests.  If you are concerned about 
- * this, you can always set timeouts for the request via {@link com.google.gwt.http.client.RequestBuilder#setTimeoutMillis(int)}.
+ * this, you can always set timeouts for the request via
+ * {@link com.google.gwt.http.client.RequestBuilder#setTimeoutMillis(int)}.
  * 
  * <h3>Required Module</h3>
  * Modules that use the classes and interfaces in this package should inherit
@@ -45,7 +48,8 @@
  *  
  * <h2>Quick Howto's</h2>
  * <h3>How should I write a RequestCallback handler class?</h3>
- * The following code shows how a {@link com.google.gwt.http.client.RequestCallback} instance should be written.
+ * The following code shows how a {@link com.google.gwt.http.client.RequestCallback}
+ * instance should be written.
  * {@example com.google.gwt.examples.http.client.RequestCallbackExample}
  * 
  * <h3>How do I make a GET request?</h3>
@@ -61,11 +65,14 @@
  * {@example com.google.gwt.examples.http.client.TimeoutExample}
  * 
  * <h3>How do I construct a string for use in a query or POST body?</h3>
- * The following example demonstrates how to build a x-www-form-urlencoded string that can be used as a query string or as the body of a POST request.
+ * The following example demonstrates how to build a x-www-form-urlencoded string
+ * that can be used as a query string or as the body of a POST request.
  * {@example com.google.gwt.examples.http.client.QueryAndFormDataExample}
  * 
- * <h3>How can I make a {@link com.google.gwt.http.client.RequestBuilder} send a request other than GET or POST?</h3>
- * The following example demonstrates how to allow an HTTP request other than a GET or a POST to be made.  <em>Beware: if you plan on supporting Safari, you cannot use this scheme.</em>
+ * <h3>How can I make a {@link com.google.gwt.http.client.RequestBuilder} send
+ * a request other than GET or POST?</h3>
+ * The following example demonstrates how to allow an HTTP request other than a GET or a POST
+ * to be made.  <em>Beware: if you plan on supporting Safari, you cannot use this scheme.</em>
  * {@example com.google.gwt.examples.http.client.RequestBuilderForAnyHTTPMethodTypeExample}
  */
 package com.google.gwt.http.client;

@@ -94,7 +94,8 @@ public class DevModeServiceRequestProcessor implements RequestProcessor {
   private Response processRestartServer() {
     if (!remoteUI.restartWebServer()) {
       throw new IllegalStateException(
-          "Unable to restart the web server. It is still in the process of starting up. Wait a few seconds and try again.");
+          "Unable to restart the web server. It is still in the process of starting up." +
+              " Wait a few seconds and try again.");
     }
 
     DevModeResponse.Builder devModeResponseBuilder = DevModeResponse.newBuilder();

@@ -245,12 +245,14 @@ import java.math.BigInteger;
  * <tr>
  * <td>sigDigits</td>
  * <td>:=</td>
- * <td style="white-space: nowrap">'<code>#</code>'* '<code>@</code>''<code>@</code>'* '<code>#</code>'*</td>
+ * <td style="white-space: nowrap">'<code>#</code>
+ * '* '<code>@</code>''<code>@</code>'* '<code>#</code>'*</td>
  * </tr>
  * <tr>
  * <td>exponent</td>
  * <td>:=</td>
- * <td style="white-space: nowrap">'<code>E</code>' '<code>+</code>'? '<code>0</code>'* '<code>0</code>'</td>
+ * <td style="white-space: nowrap">'<code>E</code>
+ * ' '<code>+</code>'? '<code>0</code>'* '<code>0</code>'</td>
  * </tr>
  * <tr>
  * <td>padSpec</td>
@@ -307,7 +309,8 @@ import java.math.BigInteger;
 public class NumberFormat {
 
   // Sets of constants as defined for the current locale from CLDR.
-  protected static final NumberConstants localizedNumberConstants = LocaleInfo.getCurrentLocale().getNumberConstants();
+  protected static final NumberConstants localizedNumberConstants
+      = LocaleInfo.getCurrentLocale().getNumberConstants();
 
   /**
    * Current NumberConstants interface to use, see
@@ -329,7 +332,8 @@ public class NumberFormat {
   // Localized characters for dot and comma in number patterns, used to produce
   // the latin mapping for arbitrary locales.  Any separator not in either of
   // these strings will be mapped to non-breaking space (U+00A0).
-  private static final String LOCALIZED_COMMA_EQUIVALENTS = ",\u060C\u066B\u3001\uFE10\uFE11\uFE50\uFE51\uFF0C\uFF64";
+  private static final String LOCALIZED_COMMA_EQUIVALENTS
+      = ",\u060C\u066B\u3001\uFE10\uFE11\uFE50\uFE51\uFF0C\uFF64";
 
   private static final String LOCALIZED_DOT_EQUIVALENTS = ".\u2024\u3002\uFE12\uFE52\uFF0E\uFF61";
   private static final char PATTERN_DECIMAL_SEPARATOR = '.';
@@ -391,7 +395,6 @@ public class NumberFormat {
   public static NumberFormat getCurrencyFormat(String currencyCode) {
     return getCurrencyFormat(lookupCurrency(currencyCode));
   }
-
 
   /**
    * Provides the standard decimal format for the default locale.
@@ -1749,7 +1752,8 @@ public class NumberFormat {
 
     // Do syntax checking on the digits.
     if ((decimalPos < 0 && digitRightCount > 0)
-        || (decimalPos >= 0 && (decimalPos < digitLeftCount || decimalPos > (digitLeftCount + zeroDigitCount)))
+        || (decimalPos >= 0
+            && (decimalPos < digitLeftCount || decimalPos > (digitLeftCount + zeroDigitCount)))
         || groupingCount == 0) {
       throw new IllegalArgumentException("Malformed pattern \"" + pattern + '"');
     }

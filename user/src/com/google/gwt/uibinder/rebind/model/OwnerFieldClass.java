@@ -98,7 +98,7 @@ public class OwnerFieldClass {
    * Mapping from all of the @UiChild tags to their corresponding methods and
    * limits on being called.
    */
-  private final Map<String, Pair<JMethod, Integer>> uiChildren = new HashMap<String, Pair<JMethod, Integer>>();
+  private final Map<String, Pair<JMethod, Integer>> uiChildren = new HashMap<>();
 
   private JConstructor uiConstructor;
  

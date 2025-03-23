@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client.rpc;
 
-
 /**
  * Async remote service class for testing GWT Exception serialization.
  */

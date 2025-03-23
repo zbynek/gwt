@@ -682,7 +682,6 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
       out.append("if (" + context.getModuleFunctionName() + ".succeeded) {\n");
     }
 
-
     if (shouldInstallCode(context)) {
       // Rewrite the code so it can be installed with
       // __MODULE_FUNC__.onScriptDownloaded

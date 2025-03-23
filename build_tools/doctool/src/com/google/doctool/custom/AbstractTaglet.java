@@ -21,12 +21,13 @@ import com.sun.source.doctree.EntityTree;
 import com.sun.source.doctree.StartElementTree;
 import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTreeScanner;
-import jdk.javadoc.doclet.Doclet;
-import jdk.javadoc.doclet.DocletEnvironment;
-import jdk.javadoc.doclet.Taglet;
 
 import javax.lang.model.element.Element;
 import javax.tools.Diagnostic;
+
+import jdk.javadoc.doclet.Doclet;
+import jdk.javadoc.doclet.DocletEnvironment;
+import jdk.javadoc.doclet.Taglet;
 
 /**
  * Abstract taglet baseclass to facilitate some basic operations.

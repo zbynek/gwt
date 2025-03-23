@@ -51,8 +51,7 @@ public class UiBinderParserUiWithAttributesTest extends GWTTestCase {
       this.beanB = beanB;
     }
   }
-  
-  
+
   static class Ui {
     interface Binder extends UiBinder<Element, Ui> {
     }
@@ -93,8 +92,7 @@ public class UiBinderParserUiWithAttributesTest extends GWTTestCase {
     assertNotNull(ui.test3);
     assertNotNull(ui.test3.beanA);
     assertSame(ui.test1, ui.test3.beanA);
-    
-    
+
     assertNotNull(ui.test4);
     assertSame(ui.test1, ui.test4.beanA);
     assertNull(ui.test4.beanB);

@@ -279,7 +279,6 @@ public class CodeSplitterTest extends FullCompileTestBase {
     assertInFragment("functionD", 3);
   }
 
-
   public void testSimpleWithInitialSequence() throws UnableToCompleteException {
     // Set up configuration property.
     initialSequenceProp.addValue("@test.EntryPoint::createInitialCallBack1()");

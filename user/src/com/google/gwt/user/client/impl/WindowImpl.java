@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client.impl;
 
-
 /**
  * Native implementation associated with
  * {@link com.google.gwt.user.client.Window}.

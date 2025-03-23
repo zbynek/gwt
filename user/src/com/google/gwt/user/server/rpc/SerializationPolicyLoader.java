@@ -62,7 +62,8 @@ public final class SerializationPolicyLoader {
    * Flag to enable using enhanced classes, for applications that need them and are taking
    * appropriate steps to secure them. Defaults to false.
    */
-  public static final boolean ENABLE_ENHANCED_CLASSES = "true".equals(System.getProperty(ENABLE_GWT_ENHANCED_CLASSES_PROPERTY));
+  public static final boolean ENABLE_ENHANCED_CLASSES
+      = "true".equals(System.getProperty(ENABLE_GWT_ENHANCED_CLASSES_PROPERTY));
 
   private static final String FORMAT_ERROR_MESSAGE = "Expected: className, "
       + "[true | false], [true | false], [true | false], [true | false], typeId, signature";

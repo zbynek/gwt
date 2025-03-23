@@ -21,7 +21,7 @@ import com.google.gwt.i18n.client.Messages;
 import junit.framework.TestCase;
 
 /**
- * Test of {@see GWTMockUtilities}
+ * Test of {@see GWTMockUtilities}.
  */
 public class GWTMockUtilitiesTest extends TestCase {
   interface MyMessages extends Messages {

@@ -61,7 +61,7 @@ public class CustomFieldSerializerTest extends RpcTestBase {
   /**
    * Tests that the custom field serializers are actually called when the
    * custom field serializer does not derive from
-   * {@link CustomFieldSerializer}
+   * {@link CustomFieldSerializer}.
    */
   public void testCustomFieldSerialization() {
     CustomFieldSerializerTestServiceAsync service = getServiceAsync();

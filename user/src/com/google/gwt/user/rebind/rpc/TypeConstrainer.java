@@ -167,7 +167,8 @@ public class TypeConstrainer {
    * overlaps simplifies the algorithm but returns true more often than it has
    * to.
    */
-  boolean typesMatch(JClassType type1, JClassType type2, Map<JTypeParameter, JClassType> constraints) {
+  boolean typesMatch(JClassType type1, JClassType type2,
+      Map<JTypeParameter, JClassType> constraints) {
     JGenericType type1Generic = type1.isGenericType();
     if (type1Generic != null) {
       return typesMatch(type1Generic.asParameterizedByWildcards(), type2, constraints);
@@ -299,7 +300,8 @@ public class TypeConstrainer {
 
     JClassType type1Class = type1.isClassOrInterface();
     JClassType type2Class = type2.isClassOrInterface();
-    if (type1Class != null && type2Class != null && typesMatch(type1Class, type2Class, constraints)) {
+    if (type1Class != null && type2Class != null
+        && typesMatch(type1Class, type2Class, constraints)) {
       return true;
     }
 
@@ -321,9 +323,9 @@ public class TypeConstrainer {
         com.google.gwt.dev.javac.typemodel.JTypeParameter newParam =
             new com.google.gwt.dev.javac.typemodel.JTypeParameter("TP$"
                 + freshTypeVariableCounter++, -1);
-        newParam
-            .setBounds(new com.google.gwt.dev.javac.typemodel.JClassType[] {(com.google.gwt.dev.javac.typemodel.JClassType) typeOracle
-                .getJavaLangObject()});
+        com.google.gwt.dev.javac.typemodel.JClassType classType
+            = (com.google.gwt.dev.javac.typemodel.JClassType) typeOracle.getJavaLangObject();
+        newParam.setBounds(new com.google.gwt.dev.javac.typemodel.JClassType[] {classType});
         constraints.put(newParam, wildcardType.getUpperBound());
         replacement = newParam;
       }

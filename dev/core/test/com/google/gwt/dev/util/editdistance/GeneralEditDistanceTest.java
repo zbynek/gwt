@@ -26,7 +26,7 @@ public class GeneralEditDistanceTest extends TestCase {
    * A basic set of tests for any unit-cost Levenshtein edit distance
    * implementation.
    */
-  protected static abstract class AbstractLevenshteinTestCase extends TestCase {
+  protected abstract static class AbstractLevenshteinTestCase extends TestCase {
     Factory g;
     AbstractLevenshteinTestCase(Factory g) {
      this.g = g;
@@ -47,26 +47,26 @@ public class GeneralEditDistanceTest extends TestCase {
       }
     }
 
-    /** Tests Levenshtein edit distance on a longer pattern */
+    /** Tests Levenshtein edit distance on a longer pattern. */
     public void testLongerPattern() {
       genericLevenshteinVerify("abcdefghijklmnopqrstuvwxyz",
                                "abcefghijklMnopqrStuvwxyz..",
                                5 /* dMS.. */);
     }
 
-    /** Tests Levenshtein edit distance on a very short pattern */
+    /** Tests Levenshtein edit distance on a very short pattern. */
     public void testShortPattern() {
       genericLevenshteinVerify("short", "shirt", 1);
     }
 
-    /** Verifies zero-length behavior */
+    /** Verifies zero-length behavior. */
     public void testZeroLengthPattern() {
       String nonEmpty = "target";
       genericLevenshteinVerify("", nonEmpty, nonEmpty.length());
       genericLevenshteinVerify(nonEmpty, "", nonEmpty.length());
     }
 
-    /** Tests the default Levenshtein engine on a pair of strings */
+    /** Tests the default Levenshtein engine on a pair of strings. */
     void genericLevenshteinVerify(CharSequence s1, CharSequence s2,
                                   int expectedResult) {
       specificAlgorithmVerify(g.getInstance(s1),
@@ -75,13 +75,13 @@ public class GeneralEditDistanceTest extends TestCase {
   }
 
   /**
-   * A base class for other reusable tests
+   * A base class for other reusable tests.
    */
   public interface Factory {
     public GeneralEditDistance getInstance(CharSequence s1);
   }
 
-  /** Test of the "best-of-breed" Levenshtein engine (getLevenshteinDistance) */
+  /** Test of the "best-of-breed" Levenshtein engine (getLevenshteinDistance). */
   public static class GenericLevenshteinTest extends AbstractLevenshteinTestCase {
     public GenericLevenshteinTest() {
       super(new Factory() {
@@ -94,7 +94,7 @@ public class GeneralEditDistanceTest extends TestCase {
   }
 
   /** A very large string for testing. */
-  public final static String MAGNA =
+  public static final String MAGNA =
         "We have granted to God, and by this our present Charter have " +
         "confirmed, for Us and our Heirs for ever, that the Church of " +
         "England shall be free, and shall have all her whole Rights and " +
@@ -106,7 +106,7 @@ public class GeneralEditDistanceTest extends TestCase {
   /**
    * A small set of words for testing, including at least some of
    * each of these: empty, very short, more than 32/64 character,
-   * punctuation, non-ASCII characters
+   * punctuation, non-ASCII characters.
    */
   static String[] words = { "", "a", "b", "c", "ab", "ace",
     "fortressing",      "inadequately", "prank",        "authored",
@@ -206,7 +206,7 @@ public class GeneralEditDistanceTest extends TestCase {
     return huge.toString();
   }
 
-  /** Exercises an edit distance engine across a wide range of limit values */
+  /** Exercises an edit distance engine across a wide range of limit values. */
   static void genericVerification(GeneralEditDistance ed,
                                   CharSequence s1, CharSequence s2,
                                   int expectedResult) {
@@ -244,7 +244,7 @@ public class GeneralEditDistanceTest extends TestCase {
     assertEquals(ed.getDistance(s2, Integer.MAX_VALUE), expectedResult);
   }
 
-  /** Tests a specific engine on a pair of strings */
+  /** Tests a specific engine on a pair of strings. */
   static void specificAlgorithmVerify(GeneralEditDistance ed,
                                       CharSequence s1, CharSequence s2,
                                       int expectedResult) {
@@ -303,7 +303,7 @@ public class GeneralEditDistanceTest extends TestCase {
     }
   }
 
-  /** Tests special case of Levenshtein edit distance with small limits */
+  /** Tests special case of Levenshtein edit distance with small limits. */
   public void testAtMostOneError() {
     assertEquals(
         GeneralEditDistances.atMostOneError("unchanged", "unchanged"),

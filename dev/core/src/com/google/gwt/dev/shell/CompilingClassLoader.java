@@ -95,12 +95,12 @@ public final class CompilingClassLoader extends ClassLoader implements
     /**
      * Class identifier to DispatchClassInfo mapping.
      */
-    private final ArrayList<DispatchClassInfo> classIdToClassInfo = new ArrayList<DispatchClassInfo>();
+    private final ArrayList<DispatchClassInfo> classIdToClassInfo = new ArrayList<>();
 
     /**
      * Binary or source class name to DispatchClassInfo map.
      */
-    private final Map<String, DispatchClassInfo> classNameToClassInfo = new HashMap<String, DispatchClassInfo>();
+    private final Map<String, DispatchClassInfo> classNameToClassInfo = new HashMap<>();
 
     /**
      * Clears out the contents of this oracle.
@@ -399,7 +399,7 @@ public final class CompilingClassLoader extends ClassLoader implements
    */
   private class MyInstanceMethodOracle implements InstanceMethodOracle {
 
-    private final Map<String, Set<JClassType>> signatureToDeclaringClasses = new HashMap<String, Set<JClassType>>();
+    private final Map<String, Set<JClassType>> signatureToDeclaringClasses = new HashMap<>();
 
     public MyInstanceMethodOracle(Set<JClassType> jsoTypes,
         JClassType javaLangObject, SingleJsoImplData jsoData) {
@@ -517,11 +517,15 @@ public final class CompilingClassLoader extends ClassLoader implements
    * JavaScriptObject subtypes, so this data can remain static.
    */
   private class MySingleJsoImplData implements SingleJsoImplData {
-    private final SortedSet<String> mangledNames = new TreeSet<String>();
-    private final Map<String, List<org.objectweb.asm.commons.Method>> mangledNamesToDeclarations = new HashMap<String, List<org.objectweb.asm.commons.Method>>();
-    private final Map<String, List<org.objectweb.asm.commons.Method>> mangledNamesToImplementations = new HashMap<String, List<org.objectweb.asm.commons.Method>>();
-    private final Set<String> unmodifiableIntfNames = Collections.unmodifiableSet(singleJsoImplTypes);
-    private final SortedSet<String> unmodifiableNames = Collections.unmodifiableSortedSet(mangledNames);
+    private final SortedSet<String> mangledNames = new TreeSet<>();
+    private final Map<String, List<org.objectweb.asm.commons.Method>> mangledNamesToDeclarations
+        = new HashMap<>();
+    private final Map<String, List<org.objectweb.asm.commons.Method>> mangledNamesToImplementations
+        = new HashMap<>();
+    private final Set<String> unmodifiableIntfNames
+        = Collections.unmodifiableSet(singleJsoImplTypes);
+    private final SortedSet<String> unmodifiableNames
+        = Collections.unmodifiableSortedSet(mangledNames);
 
     public MySingleJsoImplData() {
       // Loop over all interfaces with JSO implementations
@@ -559,7 +563,8 @@ public final class CompilingClassLoader extends ClassLoader implements
            */
           JClassType implementingType = typeOracle.getSingleJsoImpl(intfMethod.getEnclosingType());
 
-          if (implementingType == null || implementingType.isAnnotationPresent(GwtScriptOnly.class)) {
+          if (implementingType == null
+              || implementingType.isAnnotationPresent(GwtScriptOnly.class)) {
             /*
              * This means that there is no concrete implementation of the
              * interface by a JSO. Any implementation that might be created by a
@@ -613,7 +618,8 @@ public final class CompilingClassLoader extends ClassLoader implements
             }
             decl += ")";
 
-            org.objectweb.asm.commons.Method declaration = org.objectweb.asm.commons.Method.getMethod(decl);
+            org.objectweb.asm.commons.Method declaration
+                = org.objectweb.asm.commons.Method.getMethod(decl);
             addToMap(mangledNamesToDeclarations, mangledName, declaration);
           }
 
@@ -626,7 +632,8 @@ public final class CompilingClassLoader extends ClassLoader implements
            * This must be kept in sync with the WriteJsoImpl class.
            */
           {
-            String returnName = getBinaryOrPrimitiveName(implementingMethod.getReturnType().getErasedType());
+            String returnName = getBinaryOrPrimitiveName(implementingMethod
+                .getReturnType().getErasedType());
             String jsoName = getBinaryOrPrimitiveName(implementingType);
 
             String decl = returnName + " " + intfMethod.getName() + "$ ("
@@ -637,7 +644,8 @@ public final class CompilingClassLoader extends ClassLoader implements
             }
             decl += ")";
 
-            org.objectweb.asm.commons.Method toImplement = org.objectweb.asm.commons.Method.getMethod(decl);
+            org.objectweb.asm.commons.Method toImplement
+                = org.objectweb.asm.commons.Method.getMethod(decl);
             addToMap(mangledNamesToImplementations, mangledName, toImplement);
           }
         }
@@ -646,7 +654,8 @@ public final class CompilingClassLoader extends ClassLoader implements
       if (logger.isLoggable(TreeLogger.SPAM)) {
         TreeLogger dumpLogger = logger.branch(TreeLogger.SPAM,
             "SingleJsoImpl method mappings");
-        for (Map.Entry<String, List<org.objectweb.asm.commons.Method>> entry : mangledNamesToImplementations.entrySet()) {
+        for (Map.Entry<String, List<org.objectweb.asm.commons.Method>> entry
+            : mangledNamesToImplementations.entrySet()) {
           dumpLogger.log(TreeLogger.SPAM, entry.getKey() + " -> " + entry.getValue());
         }
       }
@@ -662,7 +671,8 @@ public final class CompilingClassLoader extends ClassLoader implements
     @Override
     public List<org.objectweb.asm.commons.Method> getImplementations(
         String mangledName) {
-      List<org.objectweb.asm.commons.Method> toReturn = mangledNamesToImplementations.get(mangledName);
+      List<org.objectweb.asm.commons.Method> toReturn
+          = mangledNamesToImplementations.get(mangledName);
       return toReturn == null ? toReturn
           : Collections.unmodifiableList(toReturn);
     }
@@ -954,7 +964,8 @@ public final class CompilingClassLoader extends ClassLoader implements
 
   private final TypeOracle typeOracle;
 
-  private final Map<Object, Object> weakJavaWrapperCache = new MapMaker().weakKeys().weakValues().makeMap();
+  private final Map<Object, Object> weakJavaWrapperCache
+      = new MapMaker().weakKeys().weakValues().makeMap();
 
   private final Map<Integer, Object> weakJsoCache = new MapMaker().weakValues().makeMap();
 
@@ -1261,7 +1272,6 @@ public final class CompilingClassLoader extends ClassLoader implements
       // No need to rewrite.
       return javaScriptHostBytes;
     }
-
 
     // A JSO impl class needs the class bytes for the original class.
     String lookupClassName = canonicalizeClassName(className);

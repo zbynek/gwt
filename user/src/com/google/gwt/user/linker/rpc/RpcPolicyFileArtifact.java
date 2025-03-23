@@ -22,6 +22,7 @@ import com.google.gwt.core.ext.linker.EmittedArtifact;
  * This artifact provides information about which proxy classes resulted in
  * which rpc proxy files.
  */
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class RpcPolicyFileArtifact extends Artifact<RpcPolicyFileArtifact> {
 
   private final String proxyClass;

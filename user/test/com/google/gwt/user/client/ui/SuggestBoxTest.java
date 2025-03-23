@@ -416,7 +416,7 @@ public class SuggestBoxTest extends WidgetTestBase {
   }
 
   /**
-   * See https://code.google.com/p/google-web-toolkit/issues/detail?id=3533
+   * See <a href="https://code.google.com/p/google-web-toolkit/issues/detail?id=3533">issue 3533</a>.
    */
   public void testKeyDownEvent() {
     final int[] eventFireCount = {0};
@@ -434,7 +434,7 @@ public class SuggestBoxTest extends WidgetTestBase {
   }
 
   /**
-   * See https://code.google.com/p/google-web-toolkit/issues/detail?id=3533
+   * See <a href="https://code.google.com/p/google-web-toolkit/issues/detail?id=3533">issue 3533</a>.
    */
   public void testKeyUpEvent() {
     final int[] eventFireCount = {0};

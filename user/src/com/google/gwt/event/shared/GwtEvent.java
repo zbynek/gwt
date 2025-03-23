@@ -64,7 +64,8 @@ public abstract class GwtEvent<H extends EventHandler> extends Event<H> {
    * event can be revived by calling {@link GwtEvent#revive()}.
    */
   protected void assertLive() {
-    assert (!dead) : "This event has already finished being processed by its original handler manager, so you can no longer access it";
+    assert (!dead) : "This event has already finished being processed" +
+        " by its original handler manager, so you can no longer access it";
   }
 
   /**

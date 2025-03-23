@@ -172,7 +172,8 @@ public class ActivityManager implements PlaceChangeEvent.Handler, PlaceChangeReq
   /**
    * Reject the place change if the current activity is not willing to stop.
    * 
-   * @see com.google.gwt.place.shared.PlaceChangeRequestEvent.Handler#onPlaceChangeRequest(PlaceChangeRequestEvent)
+   * @see com.google.gwt.place.shared.PlaceChangeRequestEvent.Handler#onPlaceChangeRequest(
+   *     PlaceChangeRequestEvent)
    */
   public void onPlaceChangeRequest(PlaceChangeRequestEvent event) {
     event.setWarning(currentActivity.mayStop());

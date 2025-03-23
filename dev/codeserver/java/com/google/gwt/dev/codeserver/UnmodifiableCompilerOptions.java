@@ -239,7 +239,6 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
     throw new UnsupportedOperationException();
   }
 
-
   @Override
   public void setClosureCompilerFormatEnabled(boolean enabled) {
     throw new UnsupportedOperationException();

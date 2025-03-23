@@ -77,7 +77,6 @@ public class TokenStreamTest extends TestCase {
     assertGoodJsni("@org.group.Foo::bar(\nLorg/group/Foo;\nZ)");
     assertGoodJsni("@org.group.Foo::\nbar()");
 
-
     assertBadJsni("@org.group.Foo::bar(\nLorg/group/Foo;,\nZ)");
     assertBadJsni("@org.group.Foo::bar(\nLorg/group/Foo,\nZ)");
 

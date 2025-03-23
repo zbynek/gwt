@@ -28,6 +28,7 @@ import java.io.Serializable;
  * @param <C> The type of Artifact interface that the Artifact can be compared
  *          to.
  */
+@SuppressWarnings("CheckStyle.EqualsHashCode")
 public abstract class Artifact<C extends Artifact<C>> implements
     Comparable<Artifact<?>>, Serializable {
   private transient Class<? extends Linker> linker;

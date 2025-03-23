@@ -671,7 +671,8 @@ public class SerializableTypeOracleBuilder {
     return findCustomFieldSerializer(type.getOracle(), type) != null;
   }
 
-  private static void logSerializableTypes(TreeLogger logger, Set<JClassType> fieldSerializableTypes) {
+  private static void logSerializableTypes(TreeLogger logger,
+      Set<JClassType> fieldSerializableTypes) {
     if (!logger.isLoggable(TreeLogger.DEBUG)) {
       return;
     }
@@ -991,7 +992,8 @@ public class SerializableTypeOracleBuilder {
               TreeLogger.DEBUG,
               "Type '"
                   + classType.getQualifiedSourceName()
-                  + "' should be parameterized to help the compiler produce the smallest code size possible for your module",
+                  + "' should be parameterized to help the compiler produce"
+                  + " the smallest code size possible for your module",
               null);
     }
 
@@ -1037,7 +1039,8 @@ public class SerializableTypeOracleBuilder {
   /**
    * Consider any subtype of java.lang.Object which qualifies for serialization.
    */
-  private void checkAllSubtypesOfObject(TreeLogger logger, TypePath parent, ProblemReport problems) {
+  private void checkAllSubtypesOfObject(TreeLogger logger,
+       TypePath parent, ProblemReport problems) {
     if (alreadyCheckedObject) {
       return;
     }
@@ -1456,7 +1459,8 @@ public class SerializableTypeOracleBuilder {
    * Map<? extends Object, ? extends Object>.
    */
   private boolean isRawMapOrRawCollection(JClassType type) {
-    if (type.asParameterizationOf(collectionClass) == collectionClass.asParameterizedByWildcards()) {
+    if (type.asParameterizationOf(collectionClass)
+        == collectionClass.asParameterizedByWildcards()) {
       return true;
     }
 

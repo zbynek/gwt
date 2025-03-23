@@ -36,7 +36,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Tests {@link JsDuplicateFunctionRemover}.
  */
@@ -90,7 +89,6 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
         ";_.method1();_.method2();function " + firstName + "(){}\n",
         optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class));
   }
-
 
   /**
    * Test for one of the bugs causing issue 8284. JsObfuscateNamer was reassigning the same names

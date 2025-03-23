@@ -57,8 +57,7 @@ public class RPCTypeCheckArraysTest extends TestCase {
    *   - List<Integer>[]: testArrayOfGeneric
    *   - List[]: testArrayOfGeneric
    *   - List<? extends HashSet<Integer>>[]: testArrayOfGeneric
-   */  
-  
+   */
   
   /**
    * A class for testing spoofing of arrays.

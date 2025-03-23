@@ -32,12 +32,13 @@ import com.google.gwt.dev.util.editdistance.GeneralEditDistanceTest.AbstractLeve
  * This Modified form uses less space, and can handle yet larger ones.
  */
 public class ModifiedBerghelRoachEditDistanceTest extends junit.framework.TestCase {
-  /** Basic Levenshtein tests for ModifedBerghelRoachEditDistance */
+  /** Basic Levenshtein tests for ModifedBerghelRoachEditDistance. */
   public static class Basic extends AbstractLevenshteinTestCase {
     Basic() {
       super(new Factory());
     }
   }
+
   private static class Factory implements GeneralEditDistanceTest.Factory {
     @Override
     public GeneralEditDistance getInstance(CharSequence s) {

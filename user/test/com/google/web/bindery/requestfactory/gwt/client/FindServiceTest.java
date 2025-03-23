@@ -268,8 +268,8 @@ public class FindServiceTest extends RequestFactoryTestBase {
 
             SimpleFooRequest editRequest = req.simpleFooRequest();
             SimpleFooProxy editableSimpleFoo = editRequest.edit(response);
-            editableSimpleFoo.setSimpleBarKeyMap( new HashMap<SimpleBarProxy, Integer>());
-            editableSimpleFoo.setSimpleBarValueMap( new HashMap<Integer, SimpleBarProxy>());
+            editableSimpleFoo.setSimpleBarKeyMap(new HashMap<>());
+            editableSimpleFoo.setSimpleBarValueMap(new HashMap<>());
             editRequest.persistAndReturnSelf().using(editableSimpleFoo).with(SIMPLE_FOO_RELATIONS).fire(
                 new Receiver<SimpleFooProxy>() {
                   @Override

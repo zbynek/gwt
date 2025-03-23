@@ -71,7 +71,6 @@ public class AnchorElement extends Element {
     return elem != null && elem.hasTagName(TAG);
   }
 
-
   protected AnchorElement() {
   }
 

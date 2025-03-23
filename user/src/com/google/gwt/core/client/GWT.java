@@ -268,7 +268,6 @@ public final class GWT {
     runAsyncImpl(callback);
   }
 
-
   /**
    * Run the specified callback once the necessary code for it has been loaded.
    */

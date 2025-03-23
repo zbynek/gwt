@@ -22,7 +22,8 @@ A more lenient set of style checks for test cases, needed because test often nee
         <property name="severity" value="error"/>
     </module>
     <module name="TreeWalker">
-        <property name="fileExtensions" value="java"/> 
+        <property name="fileExtensions" value="java"/>
+        <module name="SuppressWarningsHolder" />
         <module name="InterfaceIsType">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
@@ -119,13 +120,7 @@ A more lenient set of style checks for test cases, needed because test often nee
             <property name="severity" value="ignore"/>
             <property name="classes" value="Boolean"/>
         </module>
-        <module name="Regexp">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="check that a space is left after a colon with an assembled error message"/>
-            <property name="severity" value="info"/>
-            <property name="format" value="[^:^&quot;]:&quot; .*+"/>
-            <property name="message" value="check that a space is left after a colon on an assembled error message"/>
-            <property name="illegalPattern" value="true"/>
-        </module>
+
         <module name="Regexp">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="more than one blank line"/>
             <property name="severity" value="info"/>
@@ -209,7 +204,9 @@ A more lenient set of style checks for test cases, needed because test often nee
             <property name="allowLineBreaks" value="true"/>
             <property name="tokens" value="DOT"/>
         </module>
-        <module name="RedundantModifier"/>
+        <module name="RedundantModifier">
+            <property name="severity" value="info"/>
+        </module>
         <module name="EqualsHashCode"/>
         <module name="SuppressionCommentFilter">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
@@ -234,6 +231,7 @@ A more lenient set of style checks for test cases, needed because test often nee
         <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
         <property name="onCommentFormat" value="CHECKSTYLE_ON"/>
     </module>
+    <module name="SuppressWarningsFilter" />
     <module name="JavadocPackage">
         <property name="severity" value="ignore"/>
     </module>

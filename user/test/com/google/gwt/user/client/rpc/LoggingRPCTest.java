@@ -195,5 +195,4 @@ public class LoggingRPCTest extends GWTTestCase {
     return loggingRPCTestService;
   }
 
-
 }

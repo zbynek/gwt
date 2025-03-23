@@ -44,10 +44,9 @@ public class ClassLevelOverridingGwtTest extends
   }
 
   @NotSupported(reason = Reason.XML)
- public void testIgnoreClassLevelAnnotations() {
-  fail("XML configuration is not supported");
- }
-
+  public void testIgnoreClassLevelAnnotations() {
+    fail("XML configuration is not supported");
+  }
 
   @NonTckTest
   public void testThereMustBeOnePassingTest() {

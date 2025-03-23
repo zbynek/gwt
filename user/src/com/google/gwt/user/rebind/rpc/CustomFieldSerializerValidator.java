@@ -32,15 +32,20 @@ import java.util.List;
  */
 public class CustomFieldSerializerValidator {
   private static final String NO_DESERIALIZE_METHOD =
-      "Custom Field Serializer ''{0}'' does not define a deserialize method: ''public static void deserialize({1} reader,{2} instance)''";
+      "Custom Field Serializer ''{0}'' does not define a deserialize method:"
+          + " ''public static void deserialize({1} reader,{2} instance)''";
   private static final String NO_INSTANTIATE_METHOD =
-      "Custom Field Serializer ''{0}'' does not define an instantiate method: ''public static {1} instantiate({2} reader)''; but ''{1}'' is not default instantiable";
+      "Custom Field Serializer ''{0}'' does not define an instantiate method:"
+          + " ''public static {1} instantiate({2} reader)''; but ''{1}'' is not default instantiable";
   private static final String NO_SERIALIZE_METHOD =
-      "Custom Field Serializer ''{0}'' does not define a serialize method: ''public static void serialize({1} writer,{2} instance)''";
+      "Custom Field Serializer ''{0}'' does not define a serialize method:"
+          + " ''public static void serialize({1} writer,{2} instance)''";
   private static final String TOO_MANY_METHODS =
-      "Custom Field Serializer ''{0}'' defines too many methods named ''{1}''; please define only one method with that name";
+      "Custom Field Serializer ''{0}'' defines too many methods named ''{1}'';"
+          + " please define only one method with that name";
   private static final String WRONG_CONCRETE_TYPE_RETURN =
-      "Custom Field Serializer ''{0}'' returns the wrong type from ''concreteType''; return type must be ''java.lang.String''";
+      "Custom Field Serializer ''{0}'' returns the wrong type from ''concreteType'';"
+          + " return type must be ''java.lang.String''";
 
   public static JMethod getConcreteTypeMethod(JClassType serializer) {
     return serializer.findMethod("concreteType", new JType[0]);

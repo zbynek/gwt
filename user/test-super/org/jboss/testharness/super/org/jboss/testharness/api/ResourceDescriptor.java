@@ -2,7 +2,6 @@
 //Removed URL
 package org.jboss.testharness.api;
 
-
 public interface ResourceDescriptor
 {
 

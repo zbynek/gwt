@@ -62,7 +62,7 @@ public class GwtInt8ArrayTest extends Int8ArrayTest {
   }
 
   /**
-   * Initialize from a JSO rather than a Java array
+   * Initialize from a JSO rather than a Java array.
    */
   protected void setFromJsArray(Int8Array array, int offset) {
     JsUtils.set(array, getJsoArray(), offset);

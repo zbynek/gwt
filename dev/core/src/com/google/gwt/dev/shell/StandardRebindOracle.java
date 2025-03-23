@@ -99,7 +99,8 @@ public class StandardRebindOracle implements RebindOracle {
       }
     }
 
-    private Rule getRebindRule(TreeLogger logger, String typeName) throws UnableToCompleteException {
+    private Rule getRebindRule(TreeLogger logger, String typeName)
+        throws UnableToCompleteException {
 
       // Make the rebind decision.
       if (rules.isEmpty()) {

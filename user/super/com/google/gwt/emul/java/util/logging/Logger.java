@@ -331,12 +331,19 @@ public class Logger {
   // public void log(Level level, String msg, Object param1) {}
   // public void log(Level level, String msg, Object[] params) {}
   // public void logp(Level level, String sourceClass, String sourceMethod, String msg) {}
-  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Object param1) {}
-  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Object[] params) {}
-  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Throwable thrown) {}
-  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName, String msg) {}
-  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName, String msg, Object param1) {}
-  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName, String msg, Object[] params) {}
-  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName, String msg, Throwable thrown) {}
+  // public void logp(Level level, String sourceClass, String sourceMethod, String msg,
+  //    Object param1) {}
+  // public void logp(Level level, String sourceClass, String sourceMethod, String msg,
+  //    Object[] params) {}
+  // public void logp(Level level, String sourceClass, String sourceMethod, String msg,
+  //    Throwable thrown) {}
+  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName,
+  //    String msg) {}
+  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName,
+  //    String msg, Object param1) {}
+  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName,
+  //    String msg, Object[] params) {}
+  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName,
+  //    String msg, Throwable thrown) {}
   // public void throwing(String sourceClass, String sourceMethod, Throwable thrown) {}
 }

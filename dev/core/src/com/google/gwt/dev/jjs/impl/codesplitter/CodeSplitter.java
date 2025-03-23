@@ -38,7 +38,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -444,7 +443,6 @@ public class CodeSplitter {
 
     Fragment leftOverFragment =
         new Fragment(Fragment.Type.NOT_EXCLUSIVE, lastInitialFragment);
-
 
     int firstExclusiveFragmentNumber = nextFragmentIdToAssign;
     // Assign fragment numbers to exclusive fragments.

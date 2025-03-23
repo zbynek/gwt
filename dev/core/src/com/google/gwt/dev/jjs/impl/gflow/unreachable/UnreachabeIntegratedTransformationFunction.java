@@ -39,12 +39,14 @@ public class UnreachabeIntegratedTransformationFunction implements
         graph.getInEdges(node), assumptionMap);
 
     if (UnreachableAssumptions.isReachable(in)) {
-      AssumptionUtil.setAssumptions(graph.getOutEdges(node), UnreachableAssumptions.REACHABLE, assumptionMap);
+      AssumptionUtil.setAssumptions(graph.getOutEdges(node),
+          UnreachableAssumptions.REACHABLE, assumptionMap);
       return null;
     }
 
     if (node instanceof CfgNopNode) {
-      AssumptionUtil.setAssumptions(graph.getOutEdges(node), UnreachableAssumptions.UNREACHABLE, assumptionMap);
+      AssumptionUtil.setAssumptions(graph.getOutEdges(node),
+          UnreachableAssumptions.UNREACHABLE, assumptionMap);
       return null;
     }
 

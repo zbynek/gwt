@@ -548,7 +548,6 @@ public class Options {
       return new String[] {"port"};
     }
 
-
     @Override
     public String getPurpose() {
       return "The port where the code server will run.";

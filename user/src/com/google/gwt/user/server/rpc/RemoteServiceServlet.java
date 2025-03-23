@@ -78,15 +78,16 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
           + modulePath
           + ", is not in the same web application as this servlet, "
           + contextPath
-          + ".  Your module may not be properly configured or your client and server code maybe out of date.";
+          + ".  Your module may not be properly configured"
+          + " or your client and server code maybe out of date.";
       servlet.log(message);
     } else {
       // Strip off the context path from the module base URL. It should be a
       // strict prefix.
       String contextRelativePath = modulePath.substring(contextPath.length());
 
-      String serializationPolicyFilePath = SerializationPolicyLoader.getSerializationPolicyFileName(contextRelativePath
-          + strongName);
+      String serializationPolicyFilePath = SerializationPolicyLoader
+          .getSerializationPolicyFileName(contextRelativePath + strongName);
 
       // Open the RPC resource file and read its contents.
       InputStream is = servlet.getServletContext().getResourceAsStream(
@@ -144,7 +145,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * A cache of moduleBaseURL and serialization policy strong name to
    * {@link SerializationPolicy}.
    */
-  private final Map<String, SerializationPolicy> serializationPolicyCache = new HashMap<String, SerializationPolicy>();
+  private final Map<String, SerializationPolicy> serializationPolicyCache = new HashMap<>();
 
   /**
    * The implementation of the service.
@@ -265,7 +266,8 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
               + strongName
               + "' for module '"
               + moduleBaseURL
-              + "'; a legacy, 1.3.3 compatible, serialization policy will be used.  You may experience SerializationExceptions as a result.");
+              + "'; a legacy, 1.3.3 compatible, serialization policy will be used."
+              + "  You may experience SerializationExceptions as a result.");
       serializationPolicy = RPC.getDefaultSerializationPolicy();
     }
 

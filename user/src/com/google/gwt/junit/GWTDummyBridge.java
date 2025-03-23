@@ -37,7 +37,7 @@ class GWTDummyBridge extends GWTBridge {
    */
   @Override
   public <T> T create(Class<?> classLiteral) {
-    if (fakeMessages && (classLiteral != null ) && Messages.class.isAssignableFrom(classLiteral)) {
+    if (fakeMessages && (classLiteral != null) && Messages.class.isAssignableFrom(classLiteral)) {
       return (T) FakeMessagesMaker.create((Class<? extends Messages>) classLiteral);
     } else {
       return null;

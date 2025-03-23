@@ -616,6 +616,7 @@ public class JsoTest extends GWTTestCase {
     Bar bar = makeBar();
     Object o = new Object() {
       @Override
+      @SuppressWarnings("CheckStyle.EqualsHashCode")
       public int hashCode() {
         // Return something unlikely so as not to collide with the JSOs.
         return 0xDEADBEEF;

@@ -26,6 +26,7 @@ public abstract class Event<H> {
    * 
    * @param <H> handler type
    */
+  @SuppressWarnings("Checkstyle.EqualsHashCode")
   public static class Type<H> {
     private static int nextHashCode;
     private final int index;

@@ -82,6 +82,7 @@ public final class ClientSerializationStreamWriter extends
    * 
    * @return RegExp object
    */
+  // CHECKSTYLE_OFF
   private static native JavaScriptObject getQuotingRegex() /*-{
     // "|" = AbstractSerializationStream.RPC_SEPARATOR_CHAR
     var ua = navigator.userAgent.toLowerCase();
@@ -103,6 +104,7 @@ public final class ClientSerializationStreamWriter extends
       return /[\u0000\|\\\uD800-\uFFFF]/g;
     }
   }-*/;
+  // CHECKSTYLE_ON
 
   private StringBuilder encodeBuffer;
 

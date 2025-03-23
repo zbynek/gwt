@@ -28,7 +28,7 @@ import junit.framework.TestCase;
  */
 public class MyersBitParallelEditDistanceTest extends TestCase {
 
-  /** Generates an instance (just a notational shorthand) */
+  /** Generates an instance (just a notational shorthand). */
   static MyersBitParallelEditDistance generate(String pattern) {
     return MyersBitParallelEditDistance.getInstance(pattern);
   }
@@ -137,7 +137,7 @@ public class MyersBitParallelEditDistanceTest extends TestCase {
                                                 5 + 4 /*fN@05, aG$6*/);
   }
 
-  /** Verifies the choice of bit array sizing */
+  /** Verifies the choice of bit array sizing. */
   public void testBitArraySizing() {
     String thirtyTwo = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
     assertEquals(generate("").getClass(),
@@ -152,7 +152,7 @@ public class MyersBitParallelEditDistanceTest extends TestCase {
                  MyersBitParallelEditDistance.Multi.class);
   }
 
-  /** Tests an "impossible" exception path */
+  /** Tests an "impossible" exception path. */
   public void testInternalCloneNotSupportedException() {
     try {
       new MyersBitParallelEditDistance.Multi("not really impossible") {
@@ -167,13 +167,13 @@ public class MyersBitParallelEditDistanceTest extends TestCase {
     }
   }
 
-  /** Test main programs to make sure they do not die unnaturally */
+  /** Test main programs to make sure they do not die unnaturally. */
   public void testMainProgramsForSanity() {
     MyersBitParallelEditDistance.main(new String[] { "yes", "no", "5" });
     MyersBitParallelEditDistance.Multi.main(new String[] { "yes", "no", "5" });
   }
 
-  /** Test on a variety of word pairs, reusing an instance appropriately */
+  /** Test on a variety of word pairs, reusing an instance appropriately. */
   public void testOnWordSet() {
     String [] words = GeneralEditDistanceTest.words;
     int [][] expect = GeneralEditDistanceTest.wordsDistances;
@@ -187,7 +187,7 @@ public class MyersBitParallelEditDistanceTest extends TestCase {
     }
   }
 
-  /** Tests a short pattern and target */
+  /** Tests a short pattern and target. */
   public void testShort() {
     String s1 = "short";
     String s2 = "snorts";
@@ -195,7 +195,7 @@ public class MyersBitParallelEditDistanceTest extends TestCase {
                                                 s1, s2, 2);
   }
 
-  /** Tests zero-length patterns and targets; distance is other length */
+  /** Tests zero-length patterns and targets; distance is other length. */
   public void testZeroLength() {
     assertEquals(0, generate("").getDistance("", 1));
 

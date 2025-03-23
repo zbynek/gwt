@@ -349,7 +349,8 @@ public final class ValidatorCreator extends AbstractCreator {
   }
 
   private void writeValidateProperty(SourceWriter sw) {
-    sw.println("public <T> Set<ConstraintViolation<T>> validateProperty(T object,String propertyName, Class<?>... groups) {");
+    sw.println("public <T> Set<ConstraintViolation<T>> validateProperty(" +
+        "T object,String propertyName, Class<?>... groups) {");
     sw.indent();
 
     sw.println("checkNotNull(object, \"object\");");
@@ -392,7 +393,8 @@ public final class ValidatorCreator extends AbstractCreator {
   }
 
   private void writeValidateValue(SourceWriter sw) {
-    sw.println("public <T> Set<ConstraintViolation<T>> validateValue(Class<T> beanType, String propertyName, Object value, Class<?>... groups) {");
+    sw.println("public <T> Set<ConstraintViolation<T>> validateValue("
+        + "Class<T> beanType, String propertyName, Object value, Class<?>... groups) {");
     sw.indent();
 
     sw.println("checkNotNull(beanType, \"beanType\");");

@@ -99,7 +99,7 @@ public class DispatchClassInfo {
 
   private LinkedHashMap<String, LinkedHashMap<String, Member>> findMostDerivedMembers(
       Class<?> targetClass, boolean addConstructors) {
-    LinkedHashMap<String, LinkedHashMap<String, Member>> members = new LinkedHashMap<String, LinkedHashMap<String, Member>>();
+    LinkedHashMap<String, LinkedHashMap<String, Member>> members = new LinkedHashMap<>();
     findMostDerivedMembers(members, targetClass, addConstructors);
     return members;
   }

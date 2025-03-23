@@ -29,6 +29,7 @@ import java.util.TreeMap;
  * generates a selection script.
  */
 @Transferable
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class SelectionInformation extends Artifact<SelectionInformation> {
   private final int hashCode;
   private final TreeMap<String, String> propMap;

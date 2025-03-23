@@ -37,7 +37,8 @@ import com.google.gwt.dev.util.DefaultTextOutput;
 @Shardable
 @Deprecated
 public class IFrameLinker extends SelectionScriptLinker {
-  private static final String SUPPRESS_DEPRECATION_WARNING_PROPERTY = "iframe.linker.suppressDeprecationWarning";
+  private static final String SUPPRESS_DEPRECATION_WARNING_PROPERTY
+      = "iframe.linker.suppressDeprecationWarning";
 
   /**
    * This string is inserted between script chunks. It is made default access
@@ -46,7 +47,8 @@ public class IFrameLinker extends SelectionScriptLinker {
   static final String SCRIPT_CHUNK_SEPARATOR = "--></script>\n<script><!--\n";
 
   // Also used by the XSLinker.
-  static void maybeEmitDeprecationWarning(String linkerName, TreeLogger logger, LinkerContext context) {
+  static void maybeEmitDeprecationWarning(String linkerName, TreeLogger logger,
+     LinkerContext context) {
     boolean suppressDeprecationWarning = false;
     for (ConfigurationProperty prop : context.getConfigurationProperties()) {
       if (SUPPRESS_DEPRECATION_WARNING_PROPERTY.equals(prop.getName())) {
@@ -188,7 +190,8 @@ public class IFrameLinker extends SelectionScriptLinker {
       out.print("};");
       out.newlineOpt();
     }
-    out.print("var $stats = $wnd.__gwtStatsEvent ? function(a) {return $wnd.__gwtStatsEvent(a);} : null,");
+    out.print("var $stats = $wnd.__gwtStatsEvent ?"
+        + " function(a) {return $wnd.__gwtStatsEvent(a);} : null,");
     out.newlineOpt();
     out.print("$sessionId = $wnd.__gwtStatsSessionId ? $wnd.__gwtStatsSessionId : null;");
     out.newlineOpt();

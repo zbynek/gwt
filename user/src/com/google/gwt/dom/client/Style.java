@@ -766,8 +766,6 @@ public class Style extends JavaScriptObject {
     public abstract String getCssName();
   }
 
-
-
   /**
    * Enum for the 'text-justify' CSS3 property.
    */

@@ -89,7 +89,6 @@ public abstract class MethodVisitor {
    * @param typeDecl
    * @param method
    * @param enclosingType
-   * @param loc
    */
   protected abstract void processMethod(TypeDeclaration typeDecl,
       AbstractMethodDeclaration method, String enclosingType);
@@ -98,7 +97,6 @@ public abstract class MethodVisitor {
    * Collect data about interesting methods on a particular type in a
    * compilation unit.
    *
-   * @param cud
    * @param typeDecl
    */
   private void collectMethods(TypeDeclaration typeDecl) {

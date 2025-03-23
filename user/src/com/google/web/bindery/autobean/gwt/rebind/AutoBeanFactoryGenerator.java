@@ -489,7 +489,8 @@ public class AutoBeanFactoryGenerator extends Generator {
       sw.indent();
       if (peer != null) {
         // toReturn = new FooAutoBean(getFactory(), toReturn).as();
-        sw.println("toReturn = new %s(getFactory(), toReturn).as();", peer.getQualifiedSourceName());
+        sw.println("toReturn = new %s(getFactory(), toReturn).as();",
+            peer.getQualifiedSourceName());
       }
       sw.outdent();
       sw.println("}");
@@ -582,9 +583,10 @@ public class AutoBeanFactoryGenerator extends Generator {
                 arguments.length() > 0 ? "," : "", arguments);
           } else {
             // Type toReturn = (Type) getWrapped().doFoo(params);
-            String callValueType = ModelUtils.ensureBaseType(jmethod.getReturnType()).getQualifiedSourceName();
-            sw.println("%s toReturn = (%s) %s.this.getWrapped().%s(%s);", callValueType, callValueType,
-                type.getSimpleSourceName(), methodName, arguments);
+            String callValueType = ModelUtils.ensureBaseType(jmethod.getReturnType())
+                .getQualifiedSourceName();
+            sw.println("%s toReturn = (%s) %s.this.getWrapped().%s(%s);",
+                callValueType, callValueType, type.getSimpleSourceName(), methodName, arguments);
             // Non-value types might need to be wrapped
             writeReturnWrapper(sw, type, method);
             // call("doFoo", toReturn, params);

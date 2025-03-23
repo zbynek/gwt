@@ -21,7 +21,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Domain object for MapKeyProxy used to test entities as map keys
+ * Domain object for MapKeyProxy used to test entities as map keys.
  */
 public class MapKey {
 

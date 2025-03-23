@@ -4,7 +4,6 @@ package org.testng;
 
 import java.io.Serializable;
 
-
 /**
  * <code>IClass</code> represents a test class and a collection of its instances.
  * 

@@ -552,7 +552,8 @@ public class JsniReferenceResolver {
         "Referencing field '%2$s.%3$s': field '%6$s.%7$s' is deprecated";
 
     /**
-     * Formats messages for {@link #emitError} and {@link #emitWarning}, substituting as follows:
+     * Formats messages for {@link #emitError} and {@link #emitWarning}.
+     * Substitution is done as follows:
      * <ul>
      * <li> %1$s -> full original jsni string </li>
      * <li> %2$s -> full original jsni classname </li>
@@ -581,7 +582,6 @@ public class JsniReferenceResolver {
 
       return String.format(msg, formatParameters);
     }
-
 
     private void emitError(String msg, SourceInfo errorInfo, JsniRef jsniRef, Object... extraPars) {
       JsniMethodCollector.reportJsniError(errorInfo, method, formatMessage(msg, jsniRef, extraPars));

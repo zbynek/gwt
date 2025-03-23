@@ -24,6 +24,7 @@ import com.google.gwt.dev.js.SizeBreakdown;
  * Captures some metrics from the compile permutations step of the build.
  */
 @Transferable
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class CompilationMetricsArtifact extends Artifact<CompilationMetricsArtifact> {
 
   private long compileElapsedMilliseconds;

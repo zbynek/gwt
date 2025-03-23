@@ -110,8 +110,8 @@ public class Jsni {
         }
 
         if (member == null) {
-          throw new HostedModeException(
-              "JSNI rewriter found reference to non-existent field in a field reference or java method tear-off: "
+          throw new HostedModeException("JSNI rewriter found reference to non-existent field"
+                  + " in a field reference or java method tear-off: "
                   + ident + " at " + x.getSourceInfo());
         }
 

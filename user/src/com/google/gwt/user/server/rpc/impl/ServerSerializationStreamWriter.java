@@ -299,12 +299,12 @@ public final class ServerSerializationStreamWriter extends
   /**
    * Map of {@link Class} objects to {@link ValueWriter}s.
    */
-  private static final Map<Class<?>, ValueWriter> CLASS_TO_VALUE_WRITER = new IdentityHashMap<Class<?>, ValueWriter>();
+  private static final Map<Class<?>, ValueWriter> CLASS_TO_VALUE_WRITER = new IdentityHashMap<>();
 
   /**
    * Map of {@link Class} vector objects to {@link VectorWriter}s.
    */
-  private static final Map<Class<?>, VectorWriter> CLASS_TO_VECTOR_WRITER = new IdentityHashMap<Class<?>, VectorWriter>();
+  private static final Map<Class<?>, VectorWriter> CLASS_TO_VECTOR_WRITER = new IdentityHashMap<>();
 
   /**
    * Number of escaped JS Chars.

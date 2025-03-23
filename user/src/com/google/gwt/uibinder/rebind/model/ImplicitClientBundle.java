@@ -29,9 +29,9 @@ import java.util.Set;
  */
 public class ImplicitClientBundle {
   // LinkedHashSets for consistent order across recompiles
-  private final LinkedHashSet<ImplicitCssResource> cssMethods = new LinkedHashSet<ImplicitCssResource>();
-  private final LinkedHashSet<ImplicitImageResource> imageMethods = new LinkedHashSet<ImplicitImageResource>();
-  private final LinkedHashSet<ImplicitDataResource> dataMethods =  new LinkedHashSet<ImplicitDataResource>();
+  private final LinkedHashSet<ImplicitCssResource> cssMethods = new LinkedHashSet<>();
+  private final LinkedHashSet<ImplicitImageResource> imageMethods = new LinkedHashSet<>();
+  private final LinkedHashSet<ImplicitDataResource> dataMethods = new LinkedHashSet<>();
   private final String packageName;
   private final String className;
   private final String fieldName;

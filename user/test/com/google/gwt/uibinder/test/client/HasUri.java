@@ -19,7 +19,7 @@ import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
- * Used by {@link SafeUriIntegrationTest}
+ * Used by {@link SafeUriIntegrationTest}.
  */
 public class HasUri extends SimplePanel {
   SafeUri uri;

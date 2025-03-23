@@ -21,12 +21,12 @@ package com.google.gwt.useragent.client;
  */
 public interface UserAgent {
   /**
-   * Returns the value of user agent for this permutation
+   * Returns the value of user agent for this permutation.
    */
   String getCompileTimeValue();
 
   /**
-   * Returns the calculated value of user agent on the runtime
+   * Returns the calculated value of user agent on the runtime.
    */
   String getRuntimeValue();
 }

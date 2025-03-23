@@ -10,6 +10,9 @@ Description:
 <!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN" "https://checkstyle.org/dtds/configuration_1_3.dtd">
 <module name="Checker">
     <property name="severity" value="warning"/>
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="(\.(gif|ico|icobin|jpg|launchsrc|keystore|mp3|mp4|ogg|ogv|png|properties|wav)|LocalizedNamesImpl_.*.java|com.google.gwt.aria.client..*.java|(goog|inlay).css)$"/>
+    </module>
     <module name="RegexpHeader">
        <property name="fileExtensions" value="java"/>
        <property name="severity" value="error"/>
@@ -22,11 +25,12 @@ Description:
         <property name="severity" value="error"/>
     </module>
     <module name="LineLength">
-        <property name="max" value="100"/>
-        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+        <property name="max" value="110"/>
+        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://|@com\.google|@link"/>
     </module>
     <module name="TreeWalker">
-        <property name="fileExtensions" value="java"/>
+       <property name="fileExtensions" value="java"/>
+       <module name="SuppressWarningsHolder" />
        <module name="InterfaceIsType">
             <property name="severity" value="ignore"/>
         </module>
@@ -121,7 +125,7 @@ Description:
         </module>
         <module name="Regexp">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="more than one blank line"/>
-            <property name="severity" value="info"/>
+            <property name="severity" value="warning"/>
             <property name="format" value="[\r]?[\n][ \t]*[\r]?[\n][ \t]*[\r]?[\n][ \t]*"/>
             <property name="message" value="more than one blank line"/>
             <property name="illegalPattern" value="true"/>
@@ -193,7 +197,9 @@ Description:
             <property name="allowLineBreaks" value="true"/>
             <property name="tokens" value="DOT"/>
         </module>
-        <module name="RedundantModifier"/>
+        <module name="RedundantModifier">
+            <property name="severity" value="ignore"/>
+        </module>
         <module name="EqualsHashCode"/>
 
         <module name="SuppressionCommentFilter">
@@ -219,6 +225,7 @@ Description:
         <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
         <property name="onCommentFormat" value="CHECKSTYLE_ON"/>
     </module>
+    <module name="SuppressWarningsFilter" />
     <module name="JavadocPackage">
         <property name="severity" value="ignore"/>
     </module>

@@ -100,7 +100,7 @@ public class RequestFactoryExceptionPropagationTest extends
     }
   }
 
-  /** An abstraction to verify an uncaught exception */
+  /** An abstraction to verify an uncaught exception. */
   public interface ExceptionVerifier {
     void verify(Throwable ex);
   }

@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client;
 
-
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.Window.Navigator;

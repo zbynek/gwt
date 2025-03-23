@@ -230,7 +230,6 @@ public class JsDuplicateFunctionRemover {
    */
   private FreshNameGenerator freshNameGenerator;
 
-
   public JsDuplicateFunctionRemover(JsProgram program, FreshNameGenerator freshNameGenerator) {
     this.program = program;
     this.freshNameGenerator = freshNameGenerator;

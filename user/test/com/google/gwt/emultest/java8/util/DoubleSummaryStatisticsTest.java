@@ -16,7 +16,6 @@
 
 package com.google.gwt.emultest.java8.util;
 
-
 import static java.lang.Double.MAX_VALUE;
 import static java.lang.Double.MIN_VALUE;
 import static java.lang.Double.NEGATIVE_INFINITY;

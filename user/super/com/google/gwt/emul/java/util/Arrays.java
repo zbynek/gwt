@@ -1694,7 +1694,7 @@ public class Arrays {
   }
 
   /**
-   * Sort a subset of an array using the given comparator
+   * Sort a subset of an array using the given comparator.
    */
   private static void nativeSort(Object array, int fromIndex, int toIndex, CompareFunction fn) {
     Object temp = ArrayHelper.unsafeClone(array, fromIndex, toIndex);

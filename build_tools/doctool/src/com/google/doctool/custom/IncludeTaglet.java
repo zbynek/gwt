@@ -19,12 +19,13 @@ import com.google.doctool.ResourceIncluder;
 
 import com.sun.source.doctree.DocTree;
 
-import javax.lang.model.element.Element;
-import javax.tools.Diagnostic;
 import java.io.IOException;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.lang.model.element.Element;
+import javax.tools.Diagnostic;
 
 /**
  * A taglet for slurping in the content of artbitrary files appearing on the

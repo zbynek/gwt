@@ -110,23 +110,33 @@ public class LoadingStrategyBase implements LoadingStrategy {
       this.downloadStrategy = downloadStrategy;
     }
 
-    public LoadTerminatedHandler getErrorHandler() { return errorHandler; }
+    public LoadTerminatedHandler getErrorHandler() {
+      return errorHandler;
+    }
 
-    public int getFragment() { return fragment; }
+    public int getFragment() {
+      return fragment;
+    }
 
-    public int getRetryCount() { return retryCount; }
+    public int getRetryCount() {
+      return retryCount;
+    }
 
     protected void setRetryCount(int retryCount) {
       this.retryCount = retryCount;
     }
 
-    public String getUrl() { return url; }
+    public String getUrl() {
+      return url;
+    }
 
     protected void setUrl(String url) {
       this.url = url;
     }
 
-    public String getOriginalUrl() { return originalUrl; }
+    public String getOriginalUrl() {
+      return originalUrl;
+    }
 
     public void onLoadError(Throwable e, boolean mayRetry) {
       if (mayRetry) {
@@ -223,7 +233,9 @@ public class LoadingStrategyBase implements LoadingStrategy {
     request.tryDownload();
   }
 
-  protected int getMaxAutoRetryCount() { return MAX_AUTO_RETRY_COUNT; }
+  protected int getMaxAutoRetryCount() {
+    return MAX_AUTO_RETRY_COUNT;
+  }
 
   private int getManualRetryNum(int fragment) {
     int ser = manualRetryNumbers.get(fragment);

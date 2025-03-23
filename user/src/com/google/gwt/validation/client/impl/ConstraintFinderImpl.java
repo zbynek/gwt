@@ -98,8 +98,7 @@ public final class ConstraintFinderImpl implements ConstraintFinder {
     for (Class<?> clazz : groups) {
       if (Default.class.equals(clazz) && beanMetadata.defaultGroupSequenceIsRedefined()) {
         this.groups.addAll(beanMetadata.getDefaultGroupSequence());
-      }
-      else {
+      } else {
         this.groups.add(clazz);
       }
     }
@@ -126,8 +125,7 @@ public final class ConstraintFinderImpl implements ConstraintFinder {
         Group g = groupIterator.next();
         addMatchingDescriptorsForGroup(g.getGroup(), matchingDescriptors);
       }
-    }
-    else {
+    } else {
       for (ConstraintDescriptorImpl<?> descriptor : constraintDescriptors) {
         if (definedInSet.contains(descriptor.getDefinedOn()) &&
             elementTypes.contains(descriptor.getElementType())) {

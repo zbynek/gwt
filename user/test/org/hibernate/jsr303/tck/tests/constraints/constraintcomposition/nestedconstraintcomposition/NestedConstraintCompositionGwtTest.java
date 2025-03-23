@@ -26,7 +26,6 @@ public class NestedConstraintCompositionGwtTest extends GWTTestCase {
 
   private NestedConstraintCompositionTest delegate = new NestedConstraintCompositionTest();
 
-
   @Override
   public String getModuleName() {
     return "org.hibernate.jsr303.tck.tests.constraints.constraintcomposition.nestedconstraintcomposition.TckTest";

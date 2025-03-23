@@ -200,5 +200,3 @@ public class RequestFactoryGeneratorTest extends TestCase {
     };
   }
 }
-
-

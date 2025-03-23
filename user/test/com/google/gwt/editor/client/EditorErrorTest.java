@@ -380,7 +380,6 @@ public class EditorErrorTest extends GWTTestCase {
 
     assertEquals(0, editor.errors.size());
 
-
     List<EditorError> list = addressEditor.errors;
     assertNotNull(list);
     assertEquals(1, list.size());

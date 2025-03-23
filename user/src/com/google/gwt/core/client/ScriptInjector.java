@@ -329,7 +329,7 @@ public class ScriptInjector {
   }-*/;
 
   /**
-   * Utility class - do not instantiate
+   * Utility class - do not instantiate.
    */
   private ScriptInjector() {
   }

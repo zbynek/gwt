@@ -221,7 +221,6 @@ public class SpeedTracerLoggerTest extends TestCase {
         dataObject.get("message").asString().getString());
   }
 
-
   public void testSpeedTracerLoggerRaw() throws IOException, JsonException {
    Writer writer = new StringWriter();
     SpeedTracerLogger logger = new SpeedTracerLogger(writer, Format.RAW);

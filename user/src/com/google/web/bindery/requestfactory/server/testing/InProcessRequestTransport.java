@@ -33,7 +33,7 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
  * </pre>
  * 
  * @see com.google.web.bindery.vm.RequestFactorySource
- * @see com.google.web.bindery.requestfactory.server.ServiceLayer#create(com.google.gwt.requestfactory.server.ServiceLayerDecorator...)
+ * @see com.google.web.bindery.requestfactory.server.ServiceLayer#create
  *      ServiceLayer.create()
  * @see com.google.gwt.event.shared.SimpleEventBus SimpleEventBus
  * @see SimpleRequestProcessor

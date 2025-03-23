@@ -29,7 +29,7 @@ public interface SimpleJsonRpcRequestFactory extends RequestFactory {
 
     FooRequest foo();
 
-    /** Simple request */
+    /** Simple request. */
     @JsonRpcWireName(value = "simple.foo", version = "v1")
     public interface FooRequest extends Request<Void> {
 

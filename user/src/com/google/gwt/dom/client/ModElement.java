@@ -71,8 +71,8 @@ public class ModElement extends Element {
    */
   public static boolean is(Element elem) {
     return elem != null &&
-        ( elem.getTagName().equalsIgnoreCase(TAG_INS) ||
-          elem.getTagName().equalsIgnoreCase(TAG_DEL) );
+        (elem.getTagName().equalsIgnoreCase(TAG_INS)
+            || elem.getTagName().equalsIgnoreCase(TAG_DEL));
   }
 
   protected ModElement() {

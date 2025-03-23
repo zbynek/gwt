@@ -79,9 +79,17 @@ import java.util.TreeMap;
  */
 public class JClassTypeAdapter {
 
-  private final Map<Class<?>, JClassType> adaptedClasses =
-    new HashMap<Class<?>, JClassType>();
-  private final List<Object> allMocks = new ArrayList<Object>();
+  private final Map<Class<?>, JClassType> adaptedClasses = new HashMap<>();
+  private final List<Object> allMocks = new ArrayList<>();
+  private static final Map<Class<?>, JPrimitiveType> PRIMITIVE_TYPE_MAP = Map.of(
+      boolean.class, JPrimitiveType.INT,
+      char.class, JPrimitiveType.CHAR,
+      byte.class, JPrimitiveType.BYTE,
+      long.class, JPrimitiveType.LONG,
+      short.class, JPrimitiveType.SHORT,
+      float.class, JPrimitiveType.FLOAT,
+      double.class, JPrimitiveType.DOUBLE,
+      void.class, JPrimitiveType.VOID);
 
   /**
    * Creates a mock GWT class type for the given Java class.
@@ -545,15 +553,10 @@ public class JClassTypeAdapter {
    * @return the GWT primitive equivalent
    */
   private JType adaptPrimitiveType(Class<?> type) {
-    if (boolean.class.equals(type)) { return JPrimitiveType.BOOLEAN; }
-    if (int.class.equals(type)) { return JPrimitiveType.INT; }
-    if (char.class.equals(type)) { return JPrimitiveType.CHAR; }
-    if (byte.class.equals(type)) { return JPrimitiveType.BYTE; }
-    if (long.class.equals(type)) { return JPrimitiveType.LONG; }
-    if (short.class.equals(type)) { return JPrimitiveType.SHORT; }
-    if (float.class.equals(type)) { return JPrimitiveType.FLOAT; }
-    if (double.class.equals(type)) { return JPrimitiveType.DOUBLE; }
-    if (void.class.equals(type)) { return JPrimitiveType.VOID; }
+    JPrimitiveType primitiveType = PRIMITIVE_TYPE_MAP.get(type);
+    if (primitiveType != null) {
+      return primitiveType;
+    }
 
     throw new IllegalArgumentException(
         "Invalid primitive type: " + type.getName());

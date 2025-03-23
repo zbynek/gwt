@@ -23,7 +23,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Checks that JSPs are supported in JettyLauncher (through JUnitShell)
+ * Checks that JSPs are supported in JettyLauncher (through JUnitShell).
  */
 public class JspTest extends GWTTestCase {
   @Override

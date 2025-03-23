@@ -37,7 +37,7 @@ public class TaskListUpdateEvent extends GwtEvent<TaskListUpdateEvent.Handler> {
     void onTaskListUpdated(TaskListUpdateEvent event);
   }
 
-  public static final Type<TaskListUpdateEvent.Handler> TYPE = new Type<TaskListUpdateEvent.Handler>();
+  public static final Type<TaskListUpdateEvent.Handler> TYPE = new Type<>();
 
   private final List<TaskProxy> tasks;
 

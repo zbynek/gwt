@@ -88,9 +88,9 @@ public final class GwtBeanDescriptorImpl<T> implements GwtBeanDescriptor<T> {
   }
 
   private final Class<T> clazz;
-  private final Set<ConstraintDescriptorImpl<?>> constraints = new HashSet<ConstraintDescriptorImpl<?>>();
+  private final Set<ConstraintDescriptorImpl<?>> constraints = new HashSet<>();
 
-  private final Map<String, PropertyDescriptorImpl> descriptorMap = new HashMap<String, PropertyDescriptorImpl>();
+  private final Map<String, PropertyDescriptorImpl> descriptorMap = new HashMap<>();
   private final boolean isBeanConstrained;
 
   private final BeanMetadata beanMetadata;
@@ -140,7 +140,6 @@ public final class GwtBeanDescriptorImpl<T> implements GwtBeanDescriptor<T> {
     return clazz;
   }
 
-  
   @Override
   public boolean hasConstraints() {
     return !constraints.isEmpty();

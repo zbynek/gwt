@@ -72,7 +72,8 @@ public final class Collections {
     @Override
     public List instantiateInstance(SerializationStreamReader streamReader)
         throws SerializationException {
-      return com.google.gwt.user.client.rpc.core.java.util.Collections.SingletonList_CustomFieldSerializer.instantiate(streamReader);
+      return com.google.gwt.user.client.rpc.core.java.util.Collections
+          .SingletonList_CustomFieldSerializer.instantiate(streamReader);
     }
 
     @Override
@@ -85,7 +86,8 @@ public final class Collections {
     @Override
     public void serializeInstance(SerializationStreamWriter streamWriter, List instance)
         throws SerializationException {
-      com.google.gwt.user.client.rpc.core.java.util.Collections.SingletonList_CustomFieldSerializer.serialize(streamWriter, instance);
+      com.google.gwt.user.client.rpc.core.java.util.Collections
+          .SingletonList_CustomFieldSerializer.serialize(streamWriter, instance);
     }
   }
 }

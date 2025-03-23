@@ -234,8 +234,8 @@ public abstract class AbstractGwtSpecificValidator<G> implements
       ConstraintDescriptorImpl<A> constraintDescriptor,
       MessageAndPath messageAndPath) {
     MessageInterpolator messageInterpolator = context.getMessageInterpolator();
-    com.google.gwt.validation.client.impl.MessageInterpolatorContextImpl messageContext = new MessageInterpolatorContextImpl(
-        constraintDescriptor, value);
+    com.google.gwt.validation.client.impl.MessageInterpolatorContextImpl messageContext
+        = new MessageInterpolatorContextImpl(constraintDescriptor, value);
     String message = messageInterpolator.interpolate(
         messageAndPath.getMessage(), messageContext);
     ConstraintViolation<T> violation = ConstraintViolationImpl.<T> builder() //
@@ -252,7 +252,8 @@ public abstract class AbstractGwtSpecificValidator<G> implements
     return violation;
   }
 
-  private <T> GroupChain createGroupChainFromGroups(GwtValidationContext<T> context, Class<?>... groups) {
+  private <T> GroupChain createGroupChainFromGroups(
+      GwtValidationContext<T> context, Class<?>... groups) {
     List<Class<?>> groupsList = addDefaultGroupWhenEmpty(Arrays.asList(groups));
     ValidationGroupsMetadata validationGroupsMetadata =
         context.getValidator().getValidationGroupsMetadata();

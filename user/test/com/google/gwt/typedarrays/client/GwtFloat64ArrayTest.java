@@ -64,7 +64,7 @@ public class GwtFloat64ArrayTest extends Float64ArrayTest {
   }
 
   /**
-   * Initialize from a JSO rather than a Java array
+   * Initialize from a JSO rather than a Java array.
    */
   protected void setFromJsArray(Float64Array array, int offset) {
     JsUtils.set(array, getJsoArray(), offset);

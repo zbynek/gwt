@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 /**
  * Assertion tool class. Presents assertion methods with a more natural parameter order.
  * The order is always <B>actualValue</B>, <B>expectedValue</B> [, message].
@@ -40,7 +39,7 @@ public class Assert {
    * @param message the assertion error message
    */
   static public void assertTrue(boolean condition, String message) {
-    if(!condition) {
+    if (!condition) {
       failNotEquals( Boolean.valueOf(condition), Boolean.TRUE, message);
     }
   }

@@ -795,7 +795,7 @@ public class ImageTest extends GWTTestCase {
   }
 
   /**
-   * Same test, but don't remove from the dom first
+   * Same test, but don't remove from the dom first.
    */
   public void testWrapOfSubclassWithoutRemove() {
     String uid = Document.get().createUniqueId();
@@ -811,7 +811,7 @@ public class ImageTest extends GWTTestCase {
   }
 
   /**
-   * Same test, but with removeFromParent instead of detachNow
+   * Same test, but with removeFromParent instead of detachNow.
    */
   public void testRemoveFromParent() {
     String uid = Document.get().createUniqueId();

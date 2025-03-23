@@ -18,7 +18,6 @@ import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 
 import org.xml.sax.SAXParseException;
 
-
 /**
  * Tests UiBinderWriter validation of UiRender getters and render method.
  */

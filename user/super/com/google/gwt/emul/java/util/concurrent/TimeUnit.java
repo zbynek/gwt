@@ -16,6 +16,7 @@ package java.util.concurrent;
  * GWT emulation of TimeUnit, created by removing unsupported operations from
  * Doug Lea's public domain version.
  */
+@SuppressWarnings("Checkstyle.LeftCurly")
 public enum TimeUnit {
   NANOSECONDS {
     public long toNanos(long d)   { return d; }
@@ -154,8 +155,12 @@ public enum TimeUnit {
   private static final long MAX_C1_C0 = MAX / C1_C0;
 
   static long x(long d, long m, long over) {
-    if (d >  over) return Long.MAX_VALUE;
-    if (d < -over) return Long.MIN_VALUE;
+    if (d >  over) {
+      return Long.MAX_VALUE;
+    }
+    if (d < -over) {
+      return Long.MIN_VALUE;
+    }
     return d * m;
   }
 

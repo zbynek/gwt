@@ -72,11 +72,12 @@ public class StandardCompilationResult extends CompilationResult {
    * Smaller maps come before larger maps, then we compare the concatenation of
    * every value.
    */
-  public static final Comparator<SortedMap<SelectionProperty, String>> MAP_COMPARATOR = new MapComparator();
+  public static final Comparator<SortedMap<SelectionProperty, String>> MAP_COMPARATOR
+      = new MapComparator();
 
   private static final DiskCache diskCache = DiskCache.INSTANCE;
 
-  private final SortedSet<SortedMap<SelectionProperty, String>> propertyValues = new TreeSet<SortedMap<SelectionProperty, String>>(
+  private final SortedSet<SortedMap<SelectionProperty, String>> propertyValues = new TreeSet<>(
       MAP_COMPARATOR);
 
   private List<SoftPermutation> softPermutations = Lists.create();

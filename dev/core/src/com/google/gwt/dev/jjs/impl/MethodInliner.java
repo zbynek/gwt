@@ -237,7 +237,7 @@ public class MethodInliner {
       JMethod clinit = targetType.getClinitMethod();
 
       // If the clinit is a non-native, empty body we can optimize it out here
-      if (!clinit.isJsniMethod() && (((JMethodBody) clinit.getBody())).getStatements().size() == 0) {
+      if (!clinit.isJsniMethod() && (((JMethodBody) clinit.getBody())).getStatements().isEmpty()) {
         return null;
       }
 
@@ -577,7 +577,8 @@ public class MethodInliner {
       JLocal originalLocal = x.getLocal();
       JLocal newLocal = newLocalsByOriginalLocal.get(originalLocal);
       if (newLocal == null) {
-        newLocal = JProgram.createLocal(originalLocal.getSourceInfo(), originalLocal.getName(), originalLocal.getType(), originalLocal.isFinal(), methodBody);
+        newLocal = JProgram.createLocal(originalLocal.getSourceInfo(), originalLocal.getName(),
+            originalLocal.getType(), originalLocal.isFinal(), methodBody);
         newLocalsByOriginalLocal.put(originalLocal, newLocal);
       }
 

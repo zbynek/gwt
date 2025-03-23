@@ -210,8 +210,8 @@ public class EnumNameObfuscator {
     return blacklistedEnums.contains(cType.getName().replace('$', '.'));
   }
 
-  public static void exec(JProgram jprogram, TreeLogger logger, ConfigurationProperties configurationProperties,
-      PrecompileTaskOptions options) {
+  public static void exec(JProgram jprogram, TreeLogger logger,
+      ConfigurationProperties configurationProperties, PrecompileTaskOptions options) {
     if (!configurationProperties.getBoolean(ENUM_NAME_OBFUSCATION_PROPERTY, false)) {
       return;
     }

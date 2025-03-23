@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
 /**
  * Tests JsType object method devirtualization functionality.
  */
-@SuppressWarnings("cast")
+@SuppressWarnings({"cast", "Checkstyle.EqualsHashCode"})
 public class JsTypeObjectMethodsTest extends GWTTestCase {
 
   @Override

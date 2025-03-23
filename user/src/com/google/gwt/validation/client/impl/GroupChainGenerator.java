@@ -65,8 +65,7 @@ public class GroupChainGenerator {
     for (Class<?> clazz : groups) {
       if (isGroupSequence(clazz)) {
         insertSequence(clazz, chain);
-      }
-      else {
+      } else {
         Group group = new Group(clazz);
         chain.insertGroup(group);
         insertInheritedGroups(clazz, chain);
@@ -157,12 +156,11 @@ public class GroupChainGenerator {
     }
     List<Group> resolvedGroupSequence = new ArrayList<Group>();
     List<Class<?>> sequenceList = validationGroupsMetadata.getSequenceList(group);
-    for (Class<?> clazz : sequenceList ) {
+    for (Class<?> clazz : sequenceList) {
       if (isGroupSequence(clazz)) {
         List<Group> tmpSequence = resolveSequence(clazz, processedSequences);
         addGroups(resolvedGroupSequence, tmpSequence);
-      }
-      else {
+      } else {
         List<Group> list = new ArrayList<Group>();
         list.add(new Group(clazz, group));
         addGroups(resolvedGroupSequence, list);

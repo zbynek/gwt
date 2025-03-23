@@ -31,8 +31,8 @@ public class GlobalInformation {
   private static final SizeBreakdown[] EMPTY_SIZE_BREAKDOWN = new SizeBreakdown[0];
   public Map<String, Map<String, String>> dependencies = null;
   private Map<String, String> classToPackage = new TreeMap<String, String>();
-  private HashMap<String, HashSet<String>> classToWhatItDependsOn = new HashMap<String, HashSet<String>>();
-  private Map<Integer, SizeBreakdown> exclusiveCodeBreakdowns = new HashMap<Integer, SizeBreakdown>();
+  private HashMap<String, HashSet<String>> classToWhatItDependsOn = new HashMap<>();
+  private Map<Integer, SizeBreakdown> exclusiveCodeBreakdowns = new HashMap<>();
   private SizeBreakdown initialCodeBreakdown = new SizeBreakdown(
       "Initially downloaded code", "initial");
   private SizeBreakdown leftoversBreakdown = new SizeBreakdown(

@@ -251,7 +251,7 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
   }
 
   /**
-   * See https://code.google.com/p/google-web-toolkit/issues/detail?id=7900
+   * See <a href="https://code.google.com/p/google-web-toolkit/issues/detail?id=7900">issue 7900</a>.
    */
   public void testCreatePersistCascadingAndReturnSelfEditWithReferences() {
     delayTestFinish(DELAY_TEST_FINISH);
@@ -277,7 +277,7 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
   }
 
   /**
-   * See https://code.google.com/p/google-web-toolkit/issues/detail?id=7900
+   * See <a href="https://code.google.com/p/google-web-toolkit/issues/detail?id=7900">issue 7900</a>.
    */
   public void testCreateReferencePersistCascadingAndReturnSelfEdit() {
     delayTestFinish(DELAY_TEST_FINISH);

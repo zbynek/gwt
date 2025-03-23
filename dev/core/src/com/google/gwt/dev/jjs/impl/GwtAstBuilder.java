@@ -2840,7 +2840,8 @@ public class GwtAstBuilder {
         Object element = it.next();
         if (element != null) {
           if (element instanceof JExpression) {
-            JExpression unboxed = maybeBoxOrUnbox((JExpression) element, (Expression) statements[i]);
+            JExpression unboxed = maybeBoxOrUnbox((JExpression) element,
+                (Expression) statements[i]);
             result.add((T) unboxed.makeStatement());
           } else if (element instanceof JStatement) {
             result.add((T) element);
@@ -4224,7 +4225,8 @@ public class GwtAstBuilder {
     enclosingType.addField(field);
     if (x.isARecordComponent) {
       // Skip setting jsinterop properties on record component fields
-      RecordComponentBinding component = ((SourceTypeBinding) binding.declaringClass).getRecordComponent(x.name);
+      RecordComponentBinding component = ((SourceTypeBinding) binding.declaringClass)
+          .getRecordComponent(x.name);
       processSuppressedWarnings(field, component.sourceRecordComponent().annotations);
     } else {
       JsInteropUtil.maybeSetJsInteropProperties(field, shouldExport(field), x.annotations);
@@ -4445,7 +4447,8 @@ public class GwtAstBuilder {
     processSuppressedWarnings(parameter, annotations);
   }
 
-  private static void processSuppressedWarnings(CanHaveSuppressedWarnings x, Annotation... annotations) {
+  private static void processSuppressedWarnings(CanHaveSuppressedWarnings x,
+      Annotation... annotations) {
     x.setSuppressedWarnings(JdtUtil.getSuppressedWarnings(annotations));
   }
 

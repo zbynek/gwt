@@ -106,9 +106,11 @@ public class ImageBundleGenerator extends Generator {
   static final String MSG_NO_FILE_BASED_ON_METHOD_NAME = "No matching image resource was found; "
       + "any of the following filenames would have matched had they been present:";
 
-  private static final String ABSTRACTIMAGEPROTOTYPE_QNAME = "com.google.gwt.user.client.ui.AbstractImagePrototype";
+  private static final String ABSTRACTIMAGEPROTOTYPE_QNAME
+      = "com.google.gwt.user.client.ui.AbstractImagePrototype";
 
-  private static final String CLIPPEDIMAGEPROTOTYPE_QNAME = "com.google.gwt.user.client.ui.impl.ClippedImagePrototype";
+  private static final String CLIPPEDIMAGEPROTOTYPE_QNAME
+      = "com.google.gwt.user.client.ui.impl.ClippedImagePrototype";
 
   private static final String GWT_QNAME = "com.google.gwt.core.client.GWT";
 

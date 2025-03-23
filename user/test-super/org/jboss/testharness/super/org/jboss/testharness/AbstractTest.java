@@ -1,34 +1,20 @@
 //Modified by Google.
 package org.jboss.testharness;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import java.util.logging.Logger;
 import org.jboss.testharness.api.Configuration;
 import org.jboss.testharness.api.DeploymentException;
-//import org.jboss.testharness.api.TestResult;
-//import org.jboss.testharness.api.TestResult.Status;
-//import org.jboss.testharness.impl.ConfigurationImpl;
-//import org.jboss.testharness.impl.packaging.ArtifactGenerator;
 import org.jboss.testharness.impl.packaging.TCKArtifact;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
-//import org.testng.ITestContext;
 import org.testng.ITestResult;
-//import org.testng.annotations.AfterClass;
-//import org.testng.annotations.AfterSuite;
-//import org.testng.annotations.BeforeClass;
-//import org.testng.annotations.BeforeSuite;
 
 /**
  * Abstract Test
  * <p>
  * Modified by Google to only include the minimum needed to run the JSR-303 tck.
  */
-public abstract class AbstractTest implements IHookable
-{
+public abstract class AbstractTest implements IHookable {
 
    private static Logger log = Logger.getLogger(AbstractTest.class.getName());
 
@@ -83,32 +69,23 @@ public abstract class AbstractTest implements IHookable
       return deploymentException;
    }
 
-
-   private void undeployArtifact() throws Exception
-   {
-      if (isDeployToContainerNeeded())
-      {
+   private void undeployArtifact() throws Exception {
+      if (isDeployToContainerNeeded()) {
          getCurrentConfiguration().getContainers().undeploy(artifact.getDefaultName());
       }
-      if (getCurrentConfiguration().isStandalone() && artifact != null && artifact.isUnit())
-      {
+      if (getCurrentConfiguration().isStandalone() && artifact != null && artifact.isUnit()) {
          getCurrentConfiguration().getStandaloneContainers().undeploy();
       }
    }
 
-   private void checkAssertionsEnabled()
-   {
+   private void checkAssertionsEnabled() {
       boolean assertionsEnabled = false;
-      try
-      {
+      try {
          assert false;
-      }
-      catch (AssertionError error)
-      {
+      } catch (AssertionError error) {
          assertionsEnabled = true;
       }
-      if (!assertionsEnabled)
-      {
+      if (!assertionsEnabled) {
          throw new IllegalStateException("Assertions must be enabled!");
       }
    }

@@ -91,7 +91,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     private final String internalName;
 
     /**
-     * A timestamp as returned from {@link System#currentTimeMillis()}
+     * A timestamp as returned from {@link System#currentTimeMillis()}.
      */
     private final long lastModifiedTime;
     private final String packageName;
@@ -306,7 +306,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   }
 
   /**
-   * Returns the original type or its raw type if it is generic
+   * Returns the original type or its raw type if it is generic.
    */
   private static JType possiblySubstituteRawType(JType type) {
     if (type != null) {

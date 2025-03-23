@@ -58,7 +58,8 @@ public class ResourceOracleImpl extends AbstractResourceOracle {
     static final Message1String IGNORING_SHADOWED_RESOURCE =
         new Message1String(
             TreeLogger.DEBUG,
-            "Resource '$0' is being shadowed by another resource higher in the classpath having the same name; this one will not be used");
+            "Resource '$0' is being shadowed by another resource higher in the classpath"
+                + " having the same name; this one will not be used");
     static final Message0 REFRESHING_RESOURCES = new Message0(TreeLogger.TRACE,
         "Refreshing resources");
   }

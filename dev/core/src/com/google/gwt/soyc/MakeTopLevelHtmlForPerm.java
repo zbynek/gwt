@@ -376,7 +376,8 @@ public class MakeTopLevelHtmlForPerm {
           + "See why it's live</a></li>\");");
       outFile.println("    for (var sp = 1; sp <= "
           + globalInformation.getNumFragments() + "; sp++) {");
-      outFile.println("      var d2 = 'methodDependencies-sp' + sp + '-" + getPermutationId() + ".html';");
+      outFile.println("      var d2 = 'methodDependencies-sp' + sp + '-"
+          + getPermutationId() + ".html';");
       outFile.println("      document.write(\"<li><a href='\" + d2 + \"#\" + className +\"'>"
           + " See why it's not exclusive to s.p. #\" + sp + \" (\" + spl[sp - 1] + \")"
           + "</a></li>\");");
@@ -1395,7 +1396,8 @@ public class MakeTopLevelHtmlForPerm {
   private String[] getUnreferencedTypes(
       PrecompilationMetricsArtifact precompilationMetrics) {
     List<String> astTypes = Lists.newArrayList(precompilationMetrics.getAstTypes());
-    Set<String> unreferencedTypes = Sets.newHashSet(precompilationMetrics.getFinalTypeOracleTypes());
+    Set<String> unreferencedTypes = Sets.newHashSet(
+        precompilationMetrics.getFinalTypeOracleTypes());
     unreferencedTypes.removeAll(astTypes);
     String[] results = unreferencedTypes.toArray(new String[unreferencedTypes.size()]);
     Arrays.sort(results);

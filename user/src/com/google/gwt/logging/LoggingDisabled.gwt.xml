@@ -35,7 +35,8 @@
   </replace-with>
 
   <!-- Set up and handle the gwt.logging.logLevel property -->
-  <define-property name="gwt.logging.logLevel" values="ALL, FINEST, FINER, FINE, CONFIG, INFO, WARNING, SEVERE" />
+  <define-property name="gwt.logging.logLevel"
+      values="ALL, FINEST, FINER, FINE, CONFIG, INFO, WARNING, SEVERE" />
   <replace-with class="com.google.gwt.logging.client.DefaultLevel.All">
     <when-type-is class="com.google.gwt.logging.client.DefaultLevel" />
     <when-property-is name="gwt.logging.logLevel" value="ALL" />

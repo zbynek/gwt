@@ -23,7 +23,7 @@ import com.google.gwt.dev.jjs.impl.MethodInliner;
 import com.google.gwt.dev.jjs.impl.OptimizerTestBase;
 
 /**
- * Tests for {@link DataflowOptimizer}
+ * Tests for {@link DataflowOptimizer}.
  */
 public class DataflowOptimizerTest extends OptimizerTestBase {
   @Override
@@ -75,7 +75,7 @@ public class DataflowOptimizerTest extends OptimizerTestBase {
   }
 
   /**
-   * Test case for issue 8115 (http://code.google.com/p/google-web-toolkit/issues/detail?id=8115)
+   * Test case for <a href="http://code.google.com/p/google-web-toolkit/issues/detail?id=8115">issue 8115</a>.
    * @throws Exception
    */
   public void testCatchThrowExceptionFinally() throws Exception {
@@ -367,7 +367,7 @@ public class DataflowOptimizerTest extends OptimizerTestBase {
   }
 
   /**
-   * Test fix for http://code.google.com/p/google-web-toolkit/issues/detail?id=5739
+   * Test fix for <a href="http://code.google.com/p/google-web-toolkit/issues/detail?id=5739">issue 5739</a> .
    */
   public void testExceptionInitializerFlow() throws Exception {
     addSnippetClassDecl("static int foo() { return 0; }");

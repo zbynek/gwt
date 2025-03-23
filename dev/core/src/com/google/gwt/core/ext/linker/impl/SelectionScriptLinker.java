@@ -60,7 +60,8 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
   /**
    * File name for computeScriptBase.js.
    */
-  protected static final String COMPUTE_SCRIPT_BASE_JS = "com/google/gwt/core/ext/linker/impl/computeScriptBaseOld.js";
+  protected static final String COMPUTE_SCRIPT_BASE_JS
+      = "com/google/gwt/core/ext/linker/impl/computeScriptBaseOld.js";
 
   /**
    * The extension added to demand-loaded fragment files.
@@ -80,7 +81,8 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
   /**
    * File name for processMetas.js.
    */
-  protected static final String PROCESS_METAS_JS = "com/google/gwt/core/ext/linker/impl/processMetasOld.js";
+  protected static final String PROCESS_METAS_JS
+      = "com/google/gwt/core/ext/linker/impl/processMetasOld.js";
 
   /**
    * TODO(bobv): Move this class into c.g.g.core.linker when HostedModeLinker

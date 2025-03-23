@@ -16,20 +16,6 @@
 
 package com.google.doctool.custom;
 
-import jdk.javadoc.doclet.Doclet;
-import jdk.javadoc.doclet.DocletEnvironment;
-import jdk.javadoc.doclet.Reporter;
-
-import javax.lang.model.SourceVersion;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.PackageElement;
-import javax.lang.model.type.ArrayType;
-import javax.lang.model.type.TypeKind;
-import javax.lang.model.type.TypeMirror;
-import javax.tools.Diagnostic;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,6 +32,21 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.PackageElement;
+import javax.lang.model.type.ArrayType;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
+import javax.tools.Diagnostic;
+
+import jdk.javadoc.doclet.Doclet;
+import jdk.javadoc.doclet.DocletEnvironment;
+import jdk.javadoc.doclet.Reporter;
 
 /**
  * A doclet for listing the specified classes and
@@ -80,18 +81,19 @@ public class JavaEmulSummaryDoclet implements Doclet {
                 pw.println("</ol>\n");
 
                 getSpecifiedPackages(env).forEach(pack -> {
+                    String packageName = pack.getQualifiedName().toString();
                     Optional<Module> matchingModuleName = ModuleLayer.boot().modules().stream()
-                            .filter(m -> m.getPackages().contains(pack.getQualifiedName().toString()))
+                            .filter(m -> m.getPackages().contains(packageName))
                             .findFirst();
 
                     pw.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
-                            pack.getQualifiedName().toString().replace('.', '_'),
-                            pack.getQualifiedName().toString());
+                            packageName.replace('.', '_'),
+                            packageName);
                     pw.println("<dl>");
 
                     String packURL = JAVADOC_URL
                             + matchingModuleName.map(m -> m.getName() + "/").orElse("")
-                            + pack.getQualifiedName().toString().replace(".", "/") + "/";
+                            + packageName.replace(".", "/") + "/";
 
                     Iterator<? extends Element> classesIterator = pack.getEnclosedElements()
                             .stream()

@@ -89,7 +89,7 @@ public class SimpleBeanEditorTest extends GWTTestCase {
   /**
    * See <a
    * href="http://code.google.com/p/google-web-toolkit/issues/detail?id=6016"
-   * >issue 6016</a>
+   * >issue 6016</a>.
    */
   static class EditorWithGenericSubEditors implements Editor<Department> {
 
@@ -421,7 +421,7 @@ public class SimpleBeanEditorTest extends GWTTestCase {
   /**
    * See <a
    * href="https://code.google.com/p/google-web-toolkit/issues/detail?id=6139"
-   * >issue 6139</a>
+   * >issue 6139</a>.
    */
   public void testEditorOfSuperclass() {
     DepartmentWithList dpt = new DepartmentWithList();
@@ -453,7 +453,7 @@ public class SimpleBeanEditorTest extends GWTTestCase {
   /**
    * See <a
    * href="http://code.google.com/p/google-web-toolkit/issues/detail?id=6016"
-   * >issue 6016</a>
+   * >issue 6016</a>.
    */
   public void testEditorWithGenericSubEditors() {
     EditorWithGenericSubEditorsDriver driver = GWT.create(EditorWithGenericSubEditorsDriver.class);

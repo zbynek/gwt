@@ -18,7 +18,6 @@
 // Changed by Google
 package javax.validation;
 
-
 /**
  * Receives configuration information, selects the appropriate
  * Bean Validation provider and builds the appropriate <code>ValidatorFactory</code>.

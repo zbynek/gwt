@@ -73,7 +73,7 @@ public class RequestFactoryServlet extends HttpServlet {
   }
 
   /**
-   * Returns the thread-local {@link ServletContext}
+   * Returns the thread-local {@link ServletContext}.
    * 
    * @return the {@link ServletContext} associated with this servlet
    */

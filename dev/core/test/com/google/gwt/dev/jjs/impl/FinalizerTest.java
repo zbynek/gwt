@@ -62,7 +62,6 @@ public class FinalizerTest extends OptimizerTestBase {
     assertFinal(result.findField("foo"));
   }
 
-
   public void testFinalizeField_Volatile() throws Exception {
     addSnippetClassDecl("static volatile int foo = 0;");
     Result result = optimize("void", "");

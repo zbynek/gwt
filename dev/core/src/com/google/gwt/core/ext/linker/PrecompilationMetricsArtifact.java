@@ -25,6 +25,7 @@ import java.util.List;
  * Captures some metrics from the precompilation step.
  */
 @Transferable
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class PrecompilationMetricsArtifact extends Artifact<PrecompilationMetricsArtifact> {
 
   private long elapsedMilliseconds;

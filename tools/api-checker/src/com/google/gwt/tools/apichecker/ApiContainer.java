@@ -55,7 +55,6 @@ public final class ApiContainer {
   private final String name;
   private final TypeOracle typeOracle;
 
-
   /**
    * A public constructor used for programmatic invocation and testing.
    *
@@ -65,8 +64,8 @@ public final class ApiContainer {
    * @param logger TreeLogger for logging messages
    * @throws UnableToCompleteException if there is a TypeOracle exception
    */
-  ApiContainer(String name, Set<Resource> resources, Set<String> excludedPackages, TreeLogger logger)
-      throws UnableToCompleteException {
+  ApiContainer(String name, Set<Resource> resources, Set<String> excludedPackages,
+               TreeLogger logger) throws UnableToCompleteException {
     this(name, resources, excludedPackages, logger, null);
   }
 
@@ -80,9 +79,8 @@ public final class ApiContainer {
    * @param sourceLevel Java source compatibility level
    * @throws UnableToCompleteException if there is a TypeOracle exception
    */
-  ApiContainer(String name, Set<Resource> resources, Set<String> excludedPackages, TreeLogger logger,
-      SourceLevel sourceLevel)
-      throws UnableToCompleteException {
+  ApiContainer(String name, Set<Resource> resources, Set<String> excludedPackages,
+               TreeLogger logger, SourceLevel sourceLevel) throws UnableToCompleteException {
     this.name = name;
     this.logger = logger;
     logger.log(TreeLogger.INFO, "name = " + name + ", builders.size = " + resources.size(), null);
@@ -90,7 +88,6 @@ public final class ApiContainer {
         sourceLevel == null ? SourceLevel.DEFAULT_SOURCE_LEVEL : sourceLevel);
     this.typeOracle = createTypeOracle(resources);
     this.excludedPackages = excludedPackages;
-
 
     initializeApiPackages();
   }

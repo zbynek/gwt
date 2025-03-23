@@ -186,7 +186,6 @@ public class JavaAstConstructor {
         }
       };
 
-
   public static final MockJavaResource ENUM = new MockJavaResource("java.lang.Enum") {
     @Override
     public CharSequence getContent() {

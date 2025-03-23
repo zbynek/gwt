@@ -26,6 +26,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 /** Tests <code>HashMap</code>. */
+@SuppressWarnings("Checkstyle.EqualsHashCode")
 public class HashMapTest extends TestMap {
   private static final int CAPACITY_16 = 16;
   private static final int CAPACITY_NEG_ONE_HALF = -1;

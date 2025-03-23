@@ -57,7 +57,7 @@ public abstract class BaseGwtConfiguration implements
 
   @Override
   public final ValidatorFactory buildValidatorFactory() {
-    GwtConfigurationState configurationState = new GwtConfigurationState( //
+    GwtConfigurationState configurationState = new GwtConfigurationState(
         constraintValidatorFactory, //
         messageInterpolator, //
         properties, //

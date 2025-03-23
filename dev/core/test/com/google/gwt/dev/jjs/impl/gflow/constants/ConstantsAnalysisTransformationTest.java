@@ -101,17 +101,17 @@ public class ConstantsAnalysisTransformationTest extends CfgIntegratedAnalysisTe
   public void testConstantCondition() throws Exception {
     transform("void", "while (true) { }").into(
         "while (true) {",
-        "}" );
+        "}");
   }
 
   public void testNullValue() throws Exception {
     transform("void", "Object e = null; boolean b = e == null;").into(
         "Object e = null;",
-        "boolean b = true;" );
+        "boolean b = true;");
 
     transform("void", "Object e = null; boolean b = e != null;").into(
         "Object e = null;",
-        "boolean b = false;" );
+        "boolean b = false;");
   }
 
   public void testIncDec() throws Exception {

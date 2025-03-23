@@ -104,7 +104,8 @@ public class SslConfiguration {
     return Optional.of(new SslConfiguration(clientAuth, keyStore, keyStorePassword, useSsl));
   }
 
-  public SslConfiguration(ClientAuthType clientAuth, String keyStore, String keyStorePassword, boolean useSsl) {
+  public SslConfiguration(ClientAuthType clientAuth, String keyStore,
+        String keyStorePassword, boolean useSsl) {
     this.clientAuth = clientAuth;
     this.keyStore = keyStore;
     this.keyStorePassword = keyStorePassword;

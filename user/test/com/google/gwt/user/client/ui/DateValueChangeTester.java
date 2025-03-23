@@ -23,7 +23,6 @@ import junit.framework.Assert;
 import java.util.Date;
 import java.util.LinkedList;
 
-
 /**
  * Handy tool for testing classes that implement {@link HasValue} of
  * {@link Date}.
