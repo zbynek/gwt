@@ -29,11 +29,16 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
+import javax.lang.model.type.TypeVariable;
 import javax.tools.Diagnostic;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,7 +48,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -59,13 +67,21 @@ public class JavaEmulSummaryDoclet implements Doclet {
     private Reporter reporter;
     private String outputFile;
 
+    private static final String WONTFIX = "\uD83D\uDED1";
+    private static final String REFLECTION = "\uD83D\uDD0D";
+    private static final String LOCALES = "\uD83C\uDF10";
+    private static final String UNDECIDED = "\u23F3";
+    private Properties properties = new Properties();
+
     @Override
     public boolean run(DocletEnvironment env) {
         try {
-
+            properties.load(Files.newInputStream(Path.of(
+                "build_tools/doctool/src/com/google/doctool/custom/missing.properties")));
+            System.out.println(properties.keySet());
             File outFile = new File(outputFile);
             outFile.getParentFile().mkdirs();
-            try (FileWriter fw = new FileWriter(outFile);
+            try (FileWriter fw = new FileWriter(outFile, StandardCharsets.UTF_8);
                  PrintWriter pw = new PrintWriter(fw, true)) {
 
                 pw.println("<ol class=\"toc\" id=\"pageToc\">");
@@ -78,7 +94,10 @@ public class JavaEmulSummaryDoclet implements Doclet {
                         });
 
                 pw.println("</ol>\n");
-
+                Set<String> allClasses = getSpecifiedPackages(env)
+                    .flatMap(pack -> pack.getEnclosedElements().stream()
+                    .flatMap(clazz -> withInnerClasses(clazz, pack)))
+                    .collect(Collectors.toSet());
                 getSpecifiedPackages(env).forEach(pack -> {
                     Optional<Module> matchingModuleName = ModuleLayer.boot().modules().stream()
                             .filter(m -> m.getPackages().contains(pack.getQualifiedName().toString()))
@@ -104,7 +123,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
                     while (classesIterator.hasNext()) {
                         Element cls = classesIterator.next();
                         // Each class links to Oracle's main JavaDoc
-                        emitClassDocs(env, pw, packURL, cls);
+                        emitClassDocs(env, pw, packURL, cls, pack.getQualifiedName().toString() + ".", allClasses);
                         if (classesIterator.hasNext()) {
                             pw.print("\n");
                         }
@@ -120,7 +139,16 @@ public class JavaEmulSummaryDoclet implements Doclet {
         return true;
     }
 
-    private void emitClassDocs(DocletEnvironment env, PrintWriter pw, String packURL, Element cls) {
+    private Stream<String> withInnerClasses(Element clazz, PackageElement pack) {
+        return Stream.concat(
+            Stream.of(pack.getQualifiedName() + "." + clazz.getSimpleName().toString()),
+            clazz.getEnclosedElements().stream()
+                .map(inner -> pack.getQualifiedName()
+                    + "." + clazz.getSimpleName() + "$" + inner.getSimpleName()));
+    }
+
+    private void emitClassDocs(DocletEnvironment env, PrintWriter pw, String packURL, Element cls,
+                               String pack, Set<String> allClasses) {
         pw.format("  <dt><a href=\"%s%s.html\">%s</a></dt>\n", packURL,
                 qualifiedSimpleName(cls), qualifiedSimpleName(cls));
 
@@ -133,7 +161,8 @@ public class JavaEmulSummaryDoclet implements Doclet {
                 .collect(Collectors.joining(", "));
 
         if (!fields.isEmpty()) {
-            pw.format("  <dd style='margin-bottom: 0.5em;'>%s</dd>\n", fields);
+            pw.format("  <dd style='margin-bottom: 0.5em;'><strong>Fields:</strong> %s</dd>\n",
+                fields);
         }
 
         List<String> constructors = cls.getEnclosedElements()
@@ -141,25 +170,58 @@ public class JavaEmulSummaryDoclet implements Doclet {
                 .filter(element -> ElementKind.CONSTRUCTOR == element.getKind())
                 .filter(member -> member.getModifiers().contains(Modifier.PUBLIC))
                 .map(member -> (ExecutableElement) member)
-                .map(executableElement -> flatSignature(env, cls, executableElement))
+                .map(executableElement -> flatSignature(t -> simpleParamName(env, t), cls, executableElement))
                 .collect(Collectors.toList());
 
-        List<String> methods = cls.getEnclosedElements()
-                .stream()
-                .filter(element -> ElementKind.METHOD == element.getKind())
-                .filter(member -> member.getModifiers().contains(Modifier.PUBLIC))
-                .map(member -> (ExecutableElement) member)
-                .map(executableElement -> flatSignature(env, cls, executableElement))
-                .collect(Collectors.toList());
+        List<String> methods = getMethodNames(cls, t -> simpleParamName(env, t));
 
-        List<String> members = new ArrayList<>(constructors);
-        members.addAll(methods);
+        List<String> erasedMethods = getMethodNames(cls, t -> erasedParamName(env, t));
 
-        // Print out all constructors and methods
-        if (!members.isEmpty()) {
-            pw.format("  <dd>%s</dd>\n", createMemberList(members));
+        if (!constructors.isEmpty()) {
+            pw.format("  <dd><strong>Constructors:</strong> %s</dd>\n",
+                createMemberList(constructors));
         }
+        // Print out all constructors and methods
+        if (!methods.isEmpty()) {
+            pw.format("  <dd><strong>Methods:</strong> %s</dd>\n",
+                createMemberList(methods));
+        }
+        String[] parts = (pack + cls.getSimpleName()).split("\\$");
+        List<String> missingMethods = new ArrayList<>();
+        try {
+            Class<?> c = Class.forName(parts[0]);
+            if (parts.length > 1) {
+                c = Arrays.stream(c.getDeclaredClasses())
+                    .filter(inner -> inner.getSimpleName().equals(cls.getSimpleName().toString()))
+                    .findFirst().orElse(c);
+            }
+            Class<?> superclass = c.getSuperclass() != null ? c.getSuperclass() : Object.class;
+            List<Method> superMethods = new ArrayList<>(Arrays.asList(superclass.getMethods()));
 
+            for (Class<?> iface: c.getInterfaces()) {
+                if (!allClasses.contains(iface.getTypeName())) {
+                    //System.out.println("Missing interface: " + iface.getTypeName());
+                }
+                superMethods.addAll(Arrays.asList(iface.getMethods()));
+            }
+            for (Method method: c.getDeclaredMethods()) {
+                if (java.lang.reflect.Modifier.isPublic(method.getModifiers())
+                        && !erasedMethods.contains(getReflectionSignature(method))
+                        && superMethods.stream().noneMatch(m ->
+                    nameAndParamCount(m).equals(nameAndParamCount(method)))) {
+                    String status = getStatus(parts[0] + "#" + getReflectionSignature(method));
+                    missingMethods.add("<span class=\"status-" + status + "\">[" + status
+                        + "]</span>" + getReflectionSignature(method));
+                    //System.out.println(parts[0] + "#" + getReflectionSignature(method) + "\\");
+                }
+            }
+        } catch (ClassNotFoundException e) {
+           // System.out.println("Loading failed " + parts[0]);
+          // OK to ignore
+        }
+        if (!missingMethods.isEmpty()) {
+            pw.format("  <dd><strong>Missing implementation:</strong> %s</dd>\n", createMemberList(missingMethods));
+        }
         Iterator<? extends Element> classesIterator = cls.getEnclosedElements()
                 .stream()
                 .filter(element -> element.getKind().isClass()
@@ -174,11 +236,40 @@ public class JavaEmulSummaryDoclet implements Doclet {
         while (classesIterator.hasNext()) {
             Element innerCls = classesIterator.next();
             // Each class links to Sun's main JavaDoc
-            emitClassDocs(env, pw, packURL, innerCls);
+            emitClassDocs(env, pw, packURL, innerCls, pack + cls.getSimpleName() + "$", allClasses);
             if (classesIterator.hasNext()) {
                 pw.print("\n");
             }
         }
+    }
+
+    private String getStatus(String methodRef) {
+        for (Object category: properties.keySet()) {
+            if (properties.get(category).toString().contains(methodRef)) {
+                return category.toString();
+            }
+        }
+        return "?";
+    }
+
+    private List<String> getMethodNames(Element cls, Function<TypeMirror, String> typeNamer) {
+        return cls.getEnclosedElements()
+            .stream()
+            .filter(element -> ElementKind.METHOD == element.getKind())
+            .filter(member -> member.getModifiers().contains(Modifier.PUBLIC))
+            .map(member -> (ExecutableElement) member)
+            .map(executableElement -> flatSignature(typeNamer, cls, executableElement))
+            .collect(Collectors.toList());
+    }
+
+    private String nameAndParamCount(Method m) {
+        return m.getName() + ":" + m.getParameterCount();
+    }
+
+    private String getReflectionSignature(Method method) {
+        return method.getName() + "(" + Arrays.stream(method.getParameters())
+            .map(param -> param.getType().getSimpleName())
+            .collect(Collectors.joining(", ")) + ")";
     }
 
     private String createMemberList(Collection<String> members) {
@@ -202,14 +293,14 @@ public class JavaEmulSummaryDoclet implements Doclet {
         return elementName;
     }
 
-    private String flatSignature(DocletEnvironment env, Element parent, ExecutableElement member) {
+    private String flatSignature(Function<TypeMirror, String> namer, Element parent, ExecutableElement member) {
         return (ElementKind.CONSTRUCTOR == member.getKind()
                 ? parent.getSimpleName().toString()
                 : member.getSimpleName().toString()) +
                 "(" + member.getParameters()
                 .stream()
                 .map(Element::asType)
-                .map(t -> simpleParamName(env, t))
+                .map(namer)
                 .collect(Collectors.joining(", ")) + ")";
     }
 
@@ -220,6 +311,19 @@ public class JavaEmulSummaryDoclet implements Doclet {
             return simpleParamName(env, ((ArrayType) type).getComponentType()) + "[]";
         } else {
             return qualifiedSimpleName(env.getTypeUtils().asElement(type));
+        }
+    }
+
+    private String erasedParamName(DocletEnvironment env, TypeMirror type) {
+        if (TypeKind.TYPEVAR == type.getKind()) {
+            TypeMirror upperBound = ((TypeVariable) type).getUpperBound();
+            return erasedParamName(env, upperBound);
+        } else if (type.getKind().isPrimitive()) {
+            return String.valueOf(type);
+        } else if (TypeKind.ARRAY == type.getKind()) {
+            return erasedParamName(env, ((ArrayType) type).getComponentType()) + "[]";
+        } else {
+            return env.getTypeUtils().asElement(type).getSimpleName().toString();
         }
     }
 
