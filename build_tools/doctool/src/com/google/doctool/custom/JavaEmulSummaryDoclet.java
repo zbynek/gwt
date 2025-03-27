@@ -16,21 +16,6 @@
 
 package com.google.doctool.custom;
 
-import jdk.javadoc.doclet.Doclet;
-import jdk.javadoc.doclet.DocletEnvironment;
-import jdk.javadoc.doclet.Reporter;
-
-import javax.lang.model.SourceVersion;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.PackageElement;
-import javax.lang.model.type.ArrayType;
-import javax.lang.model.type.TypeKind;
-import javax.lang.model.type.TypeMirror;
-import javax.lang.model.type.TypeVariable;
-import javax.tools.Diagnostic;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -43,17 +28,35 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.PackageElement;
+import javax.lang.model.type.ArrayType;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.type.TypeVariable;
+import javax.tools.Diagnostic;
+
+import jdk.javadoc.doclet.Doclet;
+import jdk.javadoc.doclet.DocletEnvironment;
+import jdk.javadoc.doclet.Reporter;
+
 
 /**
  * A doclet for listing the specified classes and
@@ -62,16 +65,12 @@ import java.util.stream.Stream;
 public class JavaEmulSummaryDoclet implements Doclet {
 
     public static final String OPT_OUTFILE = "-outfile";
-    private static final String JAVADOC_URL = "https://docs.oracle.com/en/java/javase/11/docs/api/";
+    private static final String JAVADOC_URL = "https://docs.oracle.com/en/java/javase/17/docs/api/";
 
     private Reporter reporter;
     private String outputFile;
 
-    private static final String WONTFIX = "\uD83D\uDED1";
-    private static final String REFLECTION = "\uD83D\uDD0D";
-    private static final String LOCALES = "\uD83C\uDF10";
-    private static final String UNDECIDED = "\u23F3";
-    private Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
     @Override
     public boolean run(DocletEnvironment env) {
@@ -80,9 +79,12 @@ public class JavaEmulSummaryDoclet implements Doclet {
                 "build_tools/doctool/src/com/google/doctool/custom/missing.properties")));
             System.out.println(properties.keySet());
             File outFile = new File(outputFile);
+            File outFileMissing = new File(outputFile.replace(".html", "-missing.html"));
             outFile.getParentFile().mkdirs();
             try (FileWriter fw = new FileWriter(outFile, StandardCharsets.UTF_8);
-                 PrintWriter pw = new PrintWriter(fw, true)) {
+                 PrintWriter pw = new PrintWriter(fw, true);
+                 FileWriter fwM = new FileWriter(outFileMissing, StandardCharsets.UTF_8);
+                 PrintWriter pwM = new PrintWriter(fwM, true)) {
 
                 pw.println("<ol class=\"toc\" id=\"pageToc\">");
                 getSpecifiedPackages(env)
@@ -106,6 +108,9 @@ public class JavaEmulSummaryDoclet implements Doclet {
                     pw.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
                             pack.getQualifiedName().toString().replace('.', '_'),
                             pack.getQualifiedName().toString());
+                    pwM.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
+                        pack.getQualifiedName().toString().replace('.', '_'),
+                        pack.getQualifiedName().toString());
                     pw.println("<dl>");
 
                     String packURL = JAVADOC_URL
@@ -123,7 +128,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
                     while (classesIterator.hasNext()) {
                         Element cls = classesIterator.next();
                         // Each class links to Oracle's main JavaDoc
-                        emitClassDocs(env, pw, packURL, cls, pack.getQualifiedName().toString() + ".", allClasses);
+                        emitClassDocs(env, pw, pwM, packURL, cls, pack.getQualifiedName().toString() + ".", allClasses);
                         if (classesIterator.hasNext()) {
                             pw.print("\n");
                         }
@@ -131,6 +136,13 @@ public class JavaEmulSummaryDoclet implements Doclet {
 
                     pw.println("</dl>\n");
                 });
+                for (Object s: properties.keySet()) {
+                    if (s.toString().endsWith(".title")) {
+                        String id = s.toString().replace(".title", "");
+                        pwM.format("<h3 id=\"%s\">%s</h3>", id, properties.get(s));
+                        pwM.println(properties.get(s.toString().replace(".title", ".description")));
+                    }
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -147,7 +159,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
                     + "." + clazz.getSimpleName() + "$" + inner.getSimpleName()));
     }
 
-    private void emitClassDocs(DocletEnvironment env, PrintWriter pw, String packURL, Element cls,
+    private void emitClassDocs(DocletEnvironment env, PrintWriter pw, PrintWriter pwM, String packURL, Element cls,
                                String pack, Set<String> allClasses) {
         pw.format("  <dt><a href=\"%s%s.html\">%s</a></dt>\n", packURL,
                 qualifiedSimpleName(cls), qualifiedSimpleName(cls));
@@ -187,7 +199,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
                 createMemberList(methods));
         }
         String[] parts = (pack + cls.getSimpleName()).split("\\$");
-        List<String> missingMethods = new ArrayList<>();
+        Map<String,List<String>> missingMethods = new HashMap<>();
         try {
             Class<?> c = Class.forName(parts[0]);
             if (parts.length > 1) {
@@ -200,7 +212,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
 
             for (Class<?> iface: c.getInterfaces()) {
                 if (!allClasses.contains(iface.getTypeName())) {
-                    //System.out.println("Missing interface: " + iface.getTypeName());
+                    System.out.println("Missing interface: " + iface.getTypeName());
                 }
                 superMethods.addAll(Arrays.asList(iface.getMethods()));
             }
@@ -210,17 +222,23 @@ public class JavaEmulSummaryDoclet implements Doclet {
                         && superMethods.stream().noneMatch(m ->
                     nameAndParamCount(m).equals(nameAndParamCount(method)))) {
                     String status = getStatus(parts[0] + "#" + getReflectionSignature(method));
-                    missingMethods.add("<span class=\"status-" + status + "\">[" + status
-                        + "]</span>" + getReflectionSignature(method));
-                    //System.out.println(parts[0] + "#" + getReflectionSignature(method) + "\\");
+                    missingMethods.computeIfAbsent(status, s -> new ArrayList<>())
+                        .add(getReflectionSignature(method));
                 }
             }
         } catch (ClassNotFoundException e) {
-           // System.out.println("Loading failed " + parts[0]);
+           System.out.println("Loading failed " + parts[0]);
           // OK to ignore
         }
         if (!missingMethods.isEmpty()) {
-            pw.format("  <dd><strong>Missing implementation:</strong> %s</dd>\n", createMemberList(missingMethods));
+            pwM.format("  <dt><a href=\"%s%s.html\">%s</a></dt>\n", packURL,
+                qualifiedSimpleName(cls), qualifiedSimpleName(cls));
+            for (Map.Entry<String, List<String>> entry: missingMethods.entrySet()) {
+                pwM.format("  <dd><strong><a href=\"#%s\">%s</a>:</strong> %s</dd>\n",
+                    entry.getKey(),
+                    properties.get(entry.getKey() + ".title"),
+                    createMemberList(entry.getValue()));
+            }
         }
         Iterator<? extends Element> classesIterator = cls.getEnclosedElements()
                 .stream()
@@ -236,7 +254,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
         while (classesIterator.hasNext()) {
             Element innerCls = classesIterator.next();
             // Each class links to Sun's main JavaDoc
-            emitClassDocs(env, pw, packURL, innerCls, pack + cls.getSimpleName() + "$", allClasses);
+            emitClassDocs(env, pw, pwM, packURL, innerCls, pack + cls.getSimpleName() + "$", allClasses);
             if (classesIterator.hasNext()) {
                 pw.print("\n");
             }
