@@ -13,29 +13,25 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest.java17.lang;
+package com.google.gwt.emultest.java17.util.stream;
 
-import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.emultest.java.util.EmulTestBase;
-import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.JUnitShell;
-import com.google.gwt.junit.Platform;
 
-/**
- * Tests for java.lang.String Java 12 - 17 API emulation.
- */
-@DoNotRunWith(Platform.Devel)
-public class StringTest extends EmulTestBase {
+import java.util.stream.LongStream;
 
-  public void testTransform() {
-    assertFalse(isGwtSourceLevel17());
-  }
+public class LongStreamTest extends EmulTestBase {
 
-  public void testIndent() {
-    assertFalse(isGwtSourceLevel17());
-  }
-
-  private boolean isGwtSourceLevel17() {
-    return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA17) >= 0;
+  public void testMapMulti() {
+    LongStream.LongMapMultiConsumer doubling = (num, callback) -> {
+      callback.accept(num);
+      callback.accept(num + num);
+    };
+    assertEquals(new long[0],
+        hideFromCompiler(LongStream.of()).mapMulti(doubling).toArray());
+    assertEquals(new long[]{1L, 2L, 3L, 6L},
+        hideFromCompiler(LongStream.of(1L, 3L)).mapMulti(doubling).toArray());
+    assertEquals(new long[0],
+        hideFromCompiler(LongStream.of(1L, 2L)).mapMulti((a, b) -> {
+        }).toArray());
   }
 }

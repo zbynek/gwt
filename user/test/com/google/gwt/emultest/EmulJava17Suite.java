@@ -15,8 +15,12 @@
  */
 package com.google.gwt.emultest;
 
+import com.google.gwt.emultest.java17.lang.CharSequenceTest;
 import com.google.gwt.emultest.java17.lang.StringTest;
 import com.google.gwt.emultest.java17.util.stream.CollectorsTest;
+import com.google.gwt.emultest.java17.util.stream.DoubleStreamTest;
+import com.google.gwt.emultest.java17.util.stream.IntStreamTest;
+import com.google.gwt.emultest.java17.util.stream.LongStreamTest;
 import com.google.gwt.emultest.java17.util.stream.StreamTest;
 
 import org.junit.runner.RunWith;
@@ -25,9 +29,13 @@ import org.junit.runners.Suite;
 /** Test JRE emulations. */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+    CharSequenceTest.class,
     StringTest.class,
     CollectorsTest.class,
-    StreamTest.class
+    StreamTest.class,
+    DoubleStreamTest.class,
+    IntStreamTest.class,
+    LongStreamTest.class
 })
 public class EmulJava17Suite {
 }

@@ -15,27 +15,14 @@
  */
 package com.google.gwt.emultest.java17.lang;
 
-import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.emultest.java.util.EmulTestBase;
-import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.JUnitShell;
-import com.google.gwt.junit.Platform;
 
-/**
- * Tests for java.lang.String Java 12 - 17 API emulation.
- */
-@DoNotRunWith(Platform.Devel)
-public class StringTest extends EmulTestBase {
+public class CharSequenceTest extends EmulTestBase {
 
-  public void testTransform() {
-    assertFalse(isGwtSourceLevel17());
-  }
-
-  public void testIndent() {
-    assertFalse(isGwtSourceLevel17());
-  }
-
-  private boolean isGwtSourceLevel17() {
-    return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA17) >= 0;
+  public void testIsEmpty() {
+    assertTrue(hideFromCompiler(new StringBuilder()).isEmpty());
+    assertFalse(hideFromCompiler(new StringBuilder("foo")).isEmpty());
+    assertTrue(hideFromCompiler("").isEmpty());
+    assertFalse(hideFromCompiler("foo").isEmpty());
   }
 }

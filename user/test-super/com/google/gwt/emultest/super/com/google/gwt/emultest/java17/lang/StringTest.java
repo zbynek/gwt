@@ -28,13 +28,26 @@ public class StringTest extends EmulTestBase {
   }
 
   public void testIndent() {
-    assertEquals("  x", hideFromCompiler("x").indent(2));
-    assertEquals("x", hideFromCompiler("  x").indent(-2));
-    assertEquals("  x\n  y", hideFromCompiler("x\ny").indent(2));
-    assertEquals("  x\r\n  y", hideFromCompiler("x\r\ny").indent(2));
-    assertEquals("  x\r  y", hideFromCompiler("x\ry").indent(2));
-    assertEquals("x\ny", hideFromCompiler("  x\n  y").indent(-2));
-    assertEquals("x\r\ny", hideFromCompiler("  x\r\n  y").indent(-2));
-    assertEquals("x\ry", hideFromCompiler("  x\r  y").indent(-2));
+    assertEquals("  x\n", hideFromCompiler("x").indent(2));
+    assertEquals("x\n", hideFromCompiler("  x").indent(-2));
+    assertEquals("  x\n  y\n", hideFromCompiler("x\ny").indent(2));
+    assertEquals("  x\n  y\n", hideFromCompiler("x\r\ny").indent(2));
+    assertEquals("  x\n  y\n", hideFromCompiler("x\ry").indent(2));
+    assertEquals("x\ny\n", hideFromCompiler("  x\n  y").indent(-2));
+    assertEquals("x\ny\n", hideFromCompiler("  x\r\n  y").indent(-2));
+    assertEquals("x\ny\n", hideFromCompiler("  x\r  y").indent(-2));
+  }
+
+  public void testStripIndent() {
+    assertEquals("", hideFromCompiler("").stripIndent());
+    assertEquals("x", hideFromCompiler("x").stripIndent());
+    assertEquals("x", hideFromCompiler("  x").stripIndent());
+    assertEquals("x\n", hideFromCompiler("x\r\n").stripIndent());
+    assertEquals("x\ny", hideFromCompiler("  x\n  y").stripIndent());
+    assertEquals("x\ny", hideFromCompiler("  x\r\n  y").stripIndent());
+    assertEquals(" x\ny", hideFromCompiler("  x\n y").stripIndent());
+    assertEquals("x\n y", hideFromCompiler(" x\n  y").stripIndent());
+    assertEquals("x\n\ny", hideFromCompiler("  x\n      \n  y").stripIndent());
+    assertEquals(" x\ny", hideFromCompiler("\t x\r\n y").stripIndent());
   }
 }

@@ -21,29 +21,10 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.Platform;
 
-/**
- * Tests for java.util.stream.Stream Java 12 - 17 API emulation.
- */
 @DoNotRunWith(Platform.Devel)
-public class StreamTest extends EmulTestBase {
-
-  public void testToList() {
-    assertFalse(isGwtSourceLevel17());
-  }
+public class IntStreamTest extends EmulTestBase {
 
   public void testMapMulti() {
-    assertFalse(isGwtSourceLevel17());
-  }
-
-  public void testMapMultiToInt() {
-    assertFalse(isGwtSourceLevel17());
-  }
-
-  public void testMapMultiToLong() {
-    assertFalse(isGwtSourceLevel17());
-  }
-
-  public void testMapMultiToDouble() {
     assertFalse(isGwtSourceLevel17());
   }
 

@@ -15,24 +15,23 @@
  */
 package com.google.gwt.emultest.java17.util.stream;
 
-import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.emultest.java.util.EmulTestBase;
-import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.JUnitShell;
-import com.google.gwt.junit.Platform;
 
-/**
- * Tests for java.util.stream.Collectors Java 12 - 17 API emulation.
- */
-@DoNotRunWith(Platform.Devel)
-public class CollectorsTest extends EmulTestBase {
+import java.util.stream.DoubleStream;
 
-  public void testTeeing() {
-    assertFalse(isGwtSourceLevel17());
+public class DoubleStreamTest extends EmulTestBase {
+
+  public void testMapMulti() {
+    DoubleStream.DoubleMapMultiConsumer doubling = (num, callback) -> {
+      callback.accept(num);
+      callback.accept(num + num);
+    };
+    assertEquals(new double[0],
+        hideFromCompiler(DoubleStream.of()).mapMulti(doubling).toArray());
+    assertEquals(new double[]{1.0, 2.0, 3.0, 6.0},
+        hideFromCompiler(DoubleStream.of(1.0, 3.0)).mapMulti(doubling).toArray());
+    assertEquals(new double[0],
+        hideFromCompiler(DoubleStream.of(1.0, 2.0)).mapMulti((a, b) -> {
+        }).toArray());
   }
-
-  private boolean isGwtSourceLevel17() {
-    return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA17) >= 0;
-  }
-
 }
