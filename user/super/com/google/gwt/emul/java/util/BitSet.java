@@ -20,8 +20,6 @@ import static javaemul.internal.InternalPreconditions.checkArraySize;
 
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.LongUtils;
-
-import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
