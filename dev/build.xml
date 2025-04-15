@@ -94,7 +94,7 @@
           <include name="apache/commons/commons-logging-1.3.5.jar"/>
           <include name="htmlunit/htmlunit-4.11.1/htmlunit-cssparser-4.11.0.jar"/>
           <include name="htmlunit/htmlunit-4.11.1/htmlunit-4.11.1.jar"/>
-          <include name="htmlunit/htmlunit-4.11.1/htmlunit-core-js-4.11.0.jar"/>
+          <include name="htmlunit/htmlunit-4.11.1/htmlunit-core-js-4.11.0-unicode.jar"/>
           <include name="htmlunit/htmlunit-4.11.1/htmlunit-csp-4.11.0.jar"/>
           <include name="htmlunit/htmlunit-4.11.1/htmlunit-websocket-client-4.11.0.jar"/>
           <include name="htmlunit/htmlunit-4.11.1/htmlunit-xpath-4.11.0.jar"/>
@@ -165,7 +165,7 @@
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-logging-1.3.5.jar"/>
           <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-4.11.1/htmlunit-cssparser-4.11.0.jar"/>
           <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-4.11.1/htmlunit-4.11.1.jar"/>
-          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-4.11.1/htmlunit-core-js-4.11.0.jar"/>
+          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-4.11.1/htmlunit-core-js-4.11.0-unicode.jar"/>
           <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-4.11.1/htmlunit-csp-4.11.0.jar"/>
           <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-4.11.1/htmlunit-websocket-client-4.11.0.jar"/>
           <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-4.11.1/htmlunit-xpath-4.11.0.jar"/>
