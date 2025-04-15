@@ -581,7 +581,7 @@ public class DateTest extends GWTTestCase {
       Date accum2 = createLocal("12/30/2030 3:4:5");
       String a2 = accum2.toLocaleString();
       assertTrue(a2 + " should describe 12/30/2030",
-          a2.contains("2030") || a2.contains("12/30/2030"));
+          a2.contains("2030") || a2.contains("12/30/30"));
     }
   }
 

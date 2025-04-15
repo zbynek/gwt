@@ -15,8 +15,6 @@
  */
 package com.google.gwt.emultest.java.lang;
 
-import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Arrays;
@@ -24,7 +22,6 @@ import java.util.Arrays;
 /**
  * Tests for java.lang.Character.
  */
-@DoNotRunWith(Platform.HtmlUnitBug)
 public class CharacterTest extends GWTTestCase {
 
   private static class CharSequenceAdapter implements CharSequence {
