@@ -57,44 +57,6 @@
             <artifactId>icu4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>tapestry</groupId>
-            <artifactId>tapestry</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>javassist</groupId>
-                    <artifactId>javassist</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-fileupload</groupId>
-                    <artifactId>commons-fileupload</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>ognl</groupId>
-                    <artifactId>ognl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>oro</groupId>
-                    <artifactId>oro</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>hivemind</groupId>
-                    <artifactId>hivemind</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>hivemind</groupId>
-                    <artifactId>hivemind-lib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
         </dependency>

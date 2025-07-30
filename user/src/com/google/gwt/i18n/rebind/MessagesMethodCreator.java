@@ -60,10 +60,11 @@ import com.google.gwt.user.rebind.AbstractGeneratorClassCreator;
 import com.google.gwt.user.rebind.AbstractMethodCreator;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import org.apache.tapestry.util.text.LocalizedPropertiesLoader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,6 +74,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -1557,18 +1559,16 @@ class MessagesMethodCreator extends AbstractMethodCreator {
         InputStream stream =
             ResourceLocatorImpl.tryFindResourceAsStream(logger, resourceOracle, propFile);
         if (stream != null) {
-          try {
-            LocalizedPropertiesLoader loader = new LocalizedPropertiesLoader(stream, "UTF-8");
-            map = new HashMap<String, String>();
-            loader.load(map);
+          try (stream) {
+            Properties properties = new Properties();
+            properties.load(new InputStreamReader(stream, StandardCharsets.UTF_8));
+            map = new HashMap<>();
+            for (Map.Entry<Object, Object>entry: properties.entrySet()) {
+              map.put((String) entry.getKey(), (String) entry.getValue());
+            }
             break;
           } catch (IOException e) {
             logger.log(TreeLogger.WARN, "Ignoring error reading file " + propFile, e);
-          } finally {
-            try {
-              stream.close();
-            } catch (IOException e) {
-            }
           }
         }
       }

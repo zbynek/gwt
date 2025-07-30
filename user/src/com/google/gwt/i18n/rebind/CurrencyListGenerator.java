@@ -33,19 +33,18 @@ import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import org.apache.tapestry.util.text.LocalizedProperties;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
@@ -322,7 +321,7 @@ public class CurrencyListGenerator extends Generator {
      */
     Map<String, CurrencyInfo> allCurrencyData = new HashMap<String, CurrencyInfo>();
 
-    LocalizedProperties currencyExtra = null;
+    Properties currencyExtra = null;
     /*
      * The searchList is guaranteed to be ordered such that subclasses always
      * precede superclasses. Therefore, we iterate backwards to ensure that
@@ -331,14 +330,14 @@ public class CurrencyListGenerator extends Generator {
     String lastDefaultCurrencyCode = null;
     for (int i = searchList.size(); i-- > 0;) {
       GwtLocale search = searchList.get(i);
-      LocalizedProperties newExtra =
+      Properties newExtra =
           getProperties(logger, CURRENCY_EXTRA_PREFIX, search, context.getResourcesOracle());
       if (newExtra != null) {
         currencyExtra = newExtra;
       }
-      Map<String, String> currencyData =
+      Properties currencyData =
           getCurrencyData(logger, search, context.getResourcesOracle());
-      Set<String> keySet = currencyData.keySet();
+      Set<Object> keySet = currencyData.keySet();
       String[] currencies = new String[keySet.size()];
       keySet.toArray(currencies);
       Arrays.sort(currencies);
@@ -348,7 +347,7 @@ public class CurrencyListGenerator extends Generator {
         String extraData = currencyExtra == null ? null
             : currencyExtra.getProperty(currencyCode);
         allCurrencyData.put(currencyCode, new CurrencyInfo(currencyCode,
-            currencyData.get(currencyCode), extraData));
+            (String) currencyData.get(currencyCode), extraData));
       }
 
       String defCurrencyCode = getDefaultCurrency(logger, search, context.getResourcesOracle());
@@ -563,14 +562,14 @@ public class CurrencyListGenerator extends Generator {
    * not-used-flag=1 Trailing empty fields can be omitted
    */
   @SuppressWarnings("unchecked")
-  private Map<String, String> getCurrencyData(TreeLogger logger, GwtLocale locale,
+  private Properties getCurrencyData(TreeLogger logger, GwtLocale locale,
       ResourceOracle resourceOracle) {
-    LocalizedProperties currencyData =
+    Properties currencyData =
         getProperties(logger, CURRENCY_DATA_PREFIX, locale, resourceOracle);
     if (currencyData == null) {
-      return Collections.emptyMap();
+      return new Properties();
     }
-    return currencyData.getPropertyMap();
+    return currencyData;
   }
 
   /**
@@ -579,7 +578,7 @@ public class CurrencyListGenerator extends Generator {
   private String getDefaultCurrency(TreeLogger logger, GwtLocale locale,
       ResourceOracle resourceOracle) {
     String defCurrencyCode = null;
-    LocalizedProperties numberConstants =
+    Properties numberConstants =
         getProperties(logger, NUMBER_CONSTANTS_PREFIX, locale, resourceOracle);
     if (numberConstants != null) {
       defCurrencyCode = numberConstants.getProperty("defCurrencyCode");
@@ -601,7 +600,7 @@ public class CurrencyListGenerator extends Generator {
    * @return LocalizedProperties instance containing properties file or null if
    *         not found.
    */
-  private LocalizedProperties getProperties(TreeLogger logger, String prefix,
+  private Properties getProperties(TreeLogger logger, String prefix,
       GwtLocale locale, ResourceOracle resourceOracle) {
     String propFile = prefix;
     if (!locale.isDefault()) {
@@ -609,11 +608,11 @@ public class CurrencyListGenerator extends Generator {
     }
     propFile += ".properties";
     InputStream str = null;
-    LocalizedProperties props = new LocalizedProperties();
+    Properties props = new Properties();
     try {
       str = ResourceLocatorImpl.tryFindResourceAsStream(logger, resourceOracle, propFile);
       if (str != null) {
-        props.load(str, "UTF-8");
+        props.load(new InputStreamReader(str, "UTF-8"));
         return props;
       }
     } catch (UnsupportedEncodingException e) {

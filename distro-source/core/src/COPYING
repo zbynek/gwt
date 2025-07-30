@@ -193,10 +193,6 @@ e.g. "gwt-dev-linux.jar".
   Source code availability: http://tomcat.apache.org
     modifications are at org/apache/tomcat/ within gwt-dev.jar
 
-* Apache Tapestry
-  License: Apache License v. 2.0 (above)
-  Source code availability: http://tapestry.apache.org
-
 * ASM 3.1
   License: (custom)
     http://asm.objectweb.org/license.html

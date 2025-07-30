@@ -18,13 +18,12 @@ package com.google.gwt.i18n.rebind;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.i18n.shared.GwtLocale;
 
-import org.apache.tapestry.util.text.LocalizedProperties;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -51,17 +50,16 @@ class LocalizedPropertiesResource extends AbstractResource {
   @SuppressWarnings("unchecked")
   public LocalizedPropertiesResource(InputStream m, GwtLocale locale) {
     super(locale);
-    LocalizedProperties props = new LocalizedProperties();
+    Properties props = new Properties();
     try {
-      props.load(m, Util.DEFAULT_ENCODING);
+      props.load(new InputStreamReader(m, Util.DEFAULT_ENCODING));
     } catch (IOException e) {
       throw new RuntimeException("Failed to load " + this.getPath(), e);
     }
     entries = new HashMap<String, MultipleFormEntry>();
-    for (Object propEntryObj : props.getPropertyMap().entrySet()) {
-      Map.Entry<String, String> propEntry = (Entry<String, String>) propEntryObj;
-      String key = propEntry.getKey().trim();
-      String value = propEntry.getValue();
+    for (Map.Entry<?, ?> propEntry : props.entrySet()) {
+      String key = ((String) propEntry.getKey()).trim();
+      String value = (String) propEntry.getValue();
       int startBracket = key.indexOf('[');
       int endBracket = key.indexOf(']', startBracket + 1);
       String form = null;

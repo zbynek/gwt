@@ -21,14 +21,13 @@ import com.google.gwt.i18n.client.Localizable;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import org.apache.tapestry.util.text.LocalizedProperties;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -36,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -236,13 +236,12 @@ public abstract class AbstractLocalizableInterfaceCreator {
   // use of raw type from LocalizedProperties
   void generateFromPropertiesFile() throws IOException {
     InputStream propStream = new FileInputStream(resourceFile);
-    LocalizedProperties p = new LocalizedProperties();
-    p.load(propStream, Util.DEFAULT_ENCODING);
+    Properties p = new Properties();
+    p.load(new InputStreamReader(propStream, Util.DEFAULT_ENCODING));
     addFormatters();
-    // TODO: Look for a generic version of Tapestry's LocalizedProperties class
-    Set<String> keySet = p.getPropertyMap().keySet();
+    Set<Object> keySet = p.keySet();
     // sort keys for deterministic results
-    String[] keys = keySet.toArray(new String[keySet.size()]);
+    String[] keys = keySet.toArray(new String[0]);
     Arrays.sort(keys);
     if (keys.length == 0) {
       throw new IllegalStateException(

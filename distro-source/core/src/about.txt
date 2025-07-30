@@ -6,7 +6,6 @@ Visit http://www.gwtproject.org.
 This product includes software developed by:
  - The Apache Software Foundation (http://www.apache.org/).
    - Tomcat (http://tomcat.apache.org/) with modifications
-   - Tapestry (http://tapestry.apache.org/)
  - The Eclipse Foundation (http://www.eclipse.org/).
    - Java Development Tools (http://www.eclipse.org/jdt/)
    - Standard Widget Toolkit (http://www.eclipse.org/swt/) with modifications

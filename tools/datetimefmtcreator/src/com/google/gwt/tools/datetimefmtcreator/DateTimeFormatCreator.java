@@ -23,8 +23,6 @@ import com.google.gwt.i18n.shared.GwtLocaleFactory;
 import com.ibm.icu.text.DateTimePatternGenerator;
 import com.ibm.icu.util.ULocale;
 
-import org.apache.tapestry.util.text.LocalizedProperties;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,6 +37,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -155,20 +154,20 @@ public class DateTimeFormatCreator {
         FileInputStream str = null;
         try {
           str = new FileInputStream(f);
-          LocalizedProperties props = new LocalizedProperties();
+          Properties props = new Properties();
           props.load(str);
-          Map<String, String> map = props.getPropertyMap();
-          for (Map.Entry<String, String> entry : map.entrySet()) {
-            String[] value = split(entry.getValue());
-            if ("dateFormats".equals(entry.getKey()) || "timeFormats".equals(entry.getKey())
-                || "weekendRange".equals(entry.getKey())) {
+          for (Map.Entry<?, ?> entry : props.entrySet()) {
+            String[] value = split((String) entry.getValue());
+            String propKey = (String) entry.getKey();
+            if ("dateFormats".equals(propKey) || "timeFormats".equals(propKey)
+                || "weekendRange".equals(propKey)) {
               // split these out into separate fields
               for (int i = 0; i < value.length; ++i) {
-                Key key = new Key(locale, entry.getKey() + i);
+                Key key = new Key(locale, propKey + i);
                 properties.put(key, new String[] {value[i]});
               }
             } else {
-              Key key = new Key(locale, entry.getKey());
+              Key key = new Key(locale, propKey);
               properties.put(key, value);
             }
           }
