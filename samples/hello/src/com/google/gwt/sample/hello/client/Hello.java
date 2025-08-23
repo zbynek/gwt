@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * HelloWorld application.
+ * Hello World application.
  */
 public class Hello implements EntryPoint {
 
