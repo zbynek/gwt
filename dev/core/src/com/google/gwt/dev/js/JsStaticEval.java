@@ -408,13 +408,9 @@ public class JsStaticEval {
       }
 
       if (evalBooleanContext.contains(x)) {
-        if ((x.getOperator() == JsUnaryOperator.NOT)
-            && (x.getArg() instanceof JsPrefixOperation)) {
-          JsPrefixOperation arg = (JsPrefixOperation) x.getArg();
-          if (arg.getOperator() == JsUnaryOperator.NOT) {
-            ctx.replaceMe(arg.getArg());
-            return;
-          }
+        JsExpression unwrapped = unwrapDoubleNegation(x);
+        if (unwrapped != null) {
+            ctx.replaceMe(unwrapped);
         }
       }
     }
@@ -626,6 +622,14 @@ public class JsStaticEval {
         return arg2;
       } else if (eval1.isBooleanFalse()) {
         return arg1;
+      }
+    }
+    // simplify !!X && Y -> X && Y
+    if (arg1 instanceof JsPrefixOperation) {
+      JsPrefixOperation prefOp = (JsPrefixOperation) arg1;
+      JsExpression unwrapped = unwrapDoubleNegation(prefOp);
+      if (unwrapped != null) {
+        return new JsBinaryOperation(expr.getSourceInfo(), JsBinaryOperator.AND, unwrapped,  arg2);
       }
     }
     return expr;
@@ -848,5 +852,16 @@ public class JsStaticEval {
       stats.recordModified();
     }
     return stats;
+  }
+
+  private static JsExpression unwrapDoubleNegation(JsPrefixOperation x) {
+    if ((x.getOperator() == JsUnaryOperator.NOT)
+        && (x.getArg() instanceof JsPrefixOperation)) {
+      JsPrefixOperation arg = (JsPrefixOperation) x.getArg();
+      if (arg.getOperator() == JsUnaryOperator.NOT) {
+        return arg.getArg();
+      }
+    }
+    return null;
   }
 }

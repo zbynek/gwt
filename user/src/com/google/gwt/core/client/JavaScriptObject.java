@@ -177,11 +177,11 @@ public class JavaScriptObject {
   }
 
   private static native boolean hasEquals(Object object) /*-{
-    return !!object && !!object.equals;
+    return object && !!object.equals;
   }-*/;
 
   private static native boolean hasHashCode(Object object) /*-{
-    return !!object && !!object.hashCode;
+    return object && !!object.hashCode;
   }-*/;
 
   private static native boolean callEquals(Object thisObject, Object thatObject) /*-{

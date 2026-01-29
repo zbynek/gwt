@@ -375,7 +375,7 @@ function gwtOnLoad(errFn, moduleName, moduleBase, softPermutationId, computeProp
     var oldUnload = window.onunload;
     window.onunload = function() {
       // run wrapped unload first in case it is running gwt code
-      !!oldUnload && oldUnload();
+      oldUnload && oldUnload();
       try {
         // wrap in try/catch since plugins are not required to supply this
         plugin.disconnect();

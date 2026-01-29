@@ -154,6 +154,16 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("alert(true);", optimize("alert(\"a\" !== null)"));
   }
 
+  public void testShortCircuitAnd() throws Exception {
+    assertEquals("alert(a);", optimize("alert(true && a)"));
+    assertEquals("alert(false);", optimize("alert(false && a)"));
+    // could be !!a
+    assertEquals("alert(a&&true);", optimize("alert(a && true)"));
+    // could be false
+    assertEquals("alert(a&&false);", optimize("alert(a && false)"));
+    assertEquals("alert(a&&!!b);", optimize("alert(!!a && !!b)"));
+  }
+
   public void testLiteralEqNull() throws Exception {
     assertEquals("alert(false);", optimize("alert('test' == null)"));
   }

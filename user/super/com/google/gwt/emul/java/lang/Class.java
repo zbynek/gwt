@@ -256,7 +256,7 @@ public final class Class<T> implements Type {
      // during application start up, before class Integer has been initialized.
 
     clazz.@Class::typeName = "Class$" +
-        (!!typeId ? "S" + typeId : "" + clazz.@Class::sequentialId);
+        (typeId ? "S" + typeId : "" + clazz.@Class::sequentialId);
     clazz.@Class::canonicalName = clazz.@Class::typeName;
     clazz.@Class::simpleName = clazz.@Class::typeName;
   }-*/;
