@@ -28,7 +28,6 @@ public class TextOutputVisitor extends JVisitor implements TextOutput {
 
   public TextOutputVisitor(TextOutput textOutput) {
     this.textOutput = textOutput;
-    textOutput.
   }
 
   @Override
