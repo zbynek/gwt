@@ -439,7 +439,9 @@ public final class JavaToJavaScriptCompiler {
         // TODO(stalcup): move to normalization
         // Must run before code splitter and namer.
         JsStackEmulator.exec(jprogram, jsProgram, properties, jjsmap);
-
+        if (options.getOutput() == JsOutputOption.OBFUSCATED) {
+          new JsLiteralObfuscator().accept(jsProgram);
+        }
         // TODO(stalcup): move to optimize.
         internedLiteralByVariableName = renameJsSymbols(properties, jjsmap);
 
