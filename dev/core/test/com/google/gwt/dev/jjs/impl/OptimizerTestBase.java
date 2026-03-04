@@ -402,8 +402,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     try {
       return optimize(null, returnType, codeSnippet);
     } catch (UnableToCompleteException e) {
-      fail();
-      return null;
+      throw new AssertionError(e);
     }
   }
 

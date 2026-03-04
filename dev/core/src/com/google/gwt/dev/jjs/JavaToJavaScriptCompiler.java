@@ -1445,6 +1445,7 @@ public final class JavaToJavaScriptCompiler {
     float minChangeRate = atMaxLevel ? FIXED_POINT_CHANGE_RATE : EFFICIENT_CHANGE_RATE;
     OptimizerContext optimizerCtx = new FullOptimizerContext(jprogram);
     while (true) {
+      System.out.println("Pass " + passCount + " of " + passLimit);
       passCount++;
       if (passCount > passLimit) {
         break;
@@ -1454,22 +1455,38 @@ public final class JavaToJavaScriptCompiler {
       }
       AstDumper.maybeDumpAST(jprogram);
       // Clinits might have become empty
+
+      System.out.println("oracle");
       jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
 
       int lastNodeCount = nodeCount;
       int mods;
 
+      System.out.println("main");
       try (OptimizerStats stats = OptimizerStats.javaPass(passCount)) {
         stats.recordVisits(nodeCount);
+        System.out.println("verifier");
         JavaAstVerifier.assertProgramIsConsistent(jprogram);
+        System.out.println("prunesr");
         stats.recordModified(Pruner.exec(jprogram, true, optimizerCtx));
+        System.out.println("finalizer");
         stats.recordModified(Finalizer.exec(jprogram, optimizerCtx));
+
+        System.out.println("static");
         stats.recordModified(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(),
             optimizerCtx));
+
+        System.out.println("type tighten");
         stats.recordModified(TypeTightener.exec(jprogram, optimizerCtx));
+
+        System.out.println("method tighten");
         stats.recordModified(MethodCallTightener.exec(jprogram, optimizerCtx));
         // Note: Specialization should be done before inlining.
+
+        System.out.println("specialize");
         stats.recordModified(MethodCallSpecializer.exec(jprogram, optimizerCtx));
+
+        System.out.println("dce");
         stats.recordModified(DeadCodeElimination.exec(jprogram, optimizerCtx));
         stats.recordModified(MethodInliner.exec(jprogram, optimizerCtx));
         if (options.shouldInlineLiteralParameters()) {

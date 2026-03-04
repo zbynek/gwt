@@ -728,6 +728,9 @@ public class TypeTightener {
       list = Sets.newLinkedHashSet();
       map.put(key, list);
     }
+    if (value == null) {
+      throw new IllegalArgumentException("Null value for key: " + key);
+    }
     list.add(value);
   }
 

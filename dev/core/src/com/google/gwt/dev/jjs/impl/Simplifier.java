@@ -34,6 +34,7 @@ import com.google.gwt.dev.jjs.ast.JUnaryOperator;
 import com.google.gwt.dev.jjs.ast.JValueLiteral;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -519,8 +520,8 @@ public class Simplifier {
   private static JStatement rewriteIfStatementAsExpression(SourceInfo sourceInfo,
       JExpression conditionExpression, JBlock thenBlock, JBlock elseBlock,
       JType methodReturnType) {
-    JStatement thenStmt = thenBlock.singleStatement();
-    JStatement elseStmt = elseBlock.singleStatement();
+    JStatement thenStmt = convertToMulti(thenBlock.singleStatement());
+    JStatement elseStmt = convertToMulti(elseBlock.singleStatement());
 
     if (thenStmt instanceof JReturnStatement && elseStmt instanceof JReturnStatement
         && methodReturnType != null) {
@@ -529,8 +530,42 @@ public class Simplifier {
       // return ... ? ... : ...;
       JExpression thenExpression = ((JReturnStatement) thenStmt).getExpr();
       JExpression elseExpression = ((JReturnStatement) elseStmt).getExpr();
-      if (thenExpression == null || elseExpression == null) {
+      JExpression thenReturn = thenExpression;
+      int thenSize = 1;
+      if (thenExpression instanceof JMultiExpression) {
+        thenSize = ((JMultiExpression) thenExpression).getNumberOfExpressions();
+        thenReturn = ((JMultiExpression) thenExpression).getExpression( thenSize - 1);
+      }
+      JExpression elseReturn = elseExpression;
+      int elseSize = 1;
+      if (elseExpression instanceof JMultiExpression) {
+        elseSize = ((JMultiExpression) elseExpression).getNumberOfExpressions();
+        elseReturn = ((JMultiExpression) elseExpression).getExpression(elseSize - 1);
+      }
+      if (thenReturn == null || elseReturn == null) {
         // empty returns are not supported.
+        if (thenReturn == null && elseReturn == null) {
+          JExpression asExpression;
+          if (thenSize == 1 && elseSize == 1) {
+            asExpression = conditionExpression;
+          } else if (thenSize == 1) {
+            elseExpression = removeLast((JMultiExpression) elseExpression);
+            asExpression = new JBinaryOperation(sourceInfo, JPrimitiveType.VOID, JBinaryOperator.OR,
+                conditionExpression, elseExpression);
+          } else if (elseSize == 1) {
+            thenExpression = removeLast((JMultiExpression) thenExpression);
+            asExpression = new JBinaryOperation(sourceInfo, JPrimitiveType.VOID, JBinaryOperator.AND,
+                conditionExpression, thenExpression);
+          } else {
+            elseExpression = removeLast((JMultiExpression) elseExpression);
+            thenExpression = removeLast((JMultiExpression) thenExpression);
+            asExpression = new JConditional(
+                sourceInfo, methodReturnType, conditionExpression, thenExpression, elseExpression
+            );
+          }
+          return new JBlock(sourceInfo, asExpression.makeStatement(),
+              new JReturnStatement(sourceInfo, null));
+        }
         return null;
       }
 
@@ -572,5 +607,36 @@ public class Simplifier {
     }
 
     return null;
+  }
+
+  private static JExpression removeLast(JMultiExpression elseExpression) {
+    elseExpression.removeExpression(elseExpression.getNumberOfExpressions() - 1);
+    return elseExpression.getNumberOfExpressions() == 1 ?
+        elseExpression.getExpression(0) : elseExpression;
+  }
+
+  private static JStatement convertToMulti(JStatement jStatement) {
+    if (jStatement instanceof JBlock) {
+      for (JStatement statement : ((JBlock) jStatement).getStatements()) {
+        if (!(statement instanceof JExpressionStatement)
+            && !(statement instanceof JReturnStatement)) {
+          return jStatement;
+        }
+      }
+      boolean isReturn = false;
+      List<JExpression> expressions = new ArrayList<>();
+      for (JStatement statement : ((JBlock) jStatement).getStatements()) {
+        if (statement instanceof JExpressionStatement) {
+          expressions.add(((JExpressionStatement) statement).getExpr());
+        }
+        if (statement instanceof JReturnStatement) {
+          expressions.add(((JReturnStatement) statement).getExpr());
+          isReturn = true;
+        }
+      }
+      JExpression expr = new JMultiExpression(jStatement.getSourceInfo(), expressions);
+      return isReturn ? expr.makeReturnStatement() : expr.makeStatement();
+    }
+    return jStatement;
   }
 }

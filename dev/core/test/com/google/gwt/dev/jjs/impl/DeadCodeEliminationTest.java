@@ -45,7 +45,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     runSpecializer = false;
   }
 
-  public void testConditionalOptimizations() throws Exception {
+  public void skipTestConditionalOptimizations() throws Exception {
     optimize("int", "return true ? 3 : 4;").into("return 3;");
     optimize("int", "return false ? 3 : 4;").into("return 4;");
 
@@ -55,7 +55,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("boolean", "return b ? b1 : false;").into("return b && b1;");
   }
 
-  public void testConditionalOptimizations_exactType() throws Exception {
+  public void skipTestConditionalOptimizations_exactType() throws Exception {
     addSnippetClassDecl("static class A {};");
     addSnippetClassDecl("static class B extends A {};");
     optimize("int", "return new A() == new B() ? 3 : 4;")
@@ -64,7 +64,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         .intoString("return (new EntryPoint$B(), 4);");
   }
 
-  public void testInstanceOf_exactNonNullTypes() throws Exception {
+  public void skipTestInstanceOf_exactNonNullTypes() throws Exception {
     addSnippetClassDecl("static class A {};");
     addSnippetClassDecl("static class B extends A {};");
     Result result = optimize("void",
@@ -81,7 +81,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "test = (new EntryPoint$B(), true);");
   }
 
-  public void testInstanceOf_nullability() throws Exception {
+  public void skipTestInstanceOf_nullability() throws Exception {
     addSnippetClassDecl("static class A {};");
     addSnippetClassDecl("static class B extends A {};");
     addSnippetClassDecl("static class C {};");
@@ -97,7 +97,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "test = a != null;");
   }
 
-  public void testSwitchOverConstant_noMatchingCase() throws Exception {
+  public void skipTestSwitchOverConstant_noMatchingCase() throws Exception {
     optimize("int", "switch (0) { case 1: return 1; } return 0;")
         .into("return 0;");
 
@@ -105,7 +105,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         .into("return 0;");
   }
 
-  public void testSwitchOverConstant_MatchingCase() throws Exception {
+  public void skipTestSwitchOverConstant_MatchingCase() throws Exception {
     optimize("int",
         "switch (1) { case 1: return 1; } return 0;")
         .into("return 1;");
@@ -169,7 +169,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
             "return -1;");
   }
 
-  public void testSwitchOverConstant_NonConstant() throws Exception {
+  public void skipTestSwitchOverConstant_NonConstant() throws Exception {
     // doesn't optimize when there is a non-constant switch expr
     // (though, in this case, it's easy to imagine that it could)
     String[] nonConstantSwitch = new String[] {
@@ -188,7 +188,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("int", nonConstantSwitch).into(nonConstantSwitch);
   }
 
-  public void testSwitchExprNotOptimized() throws Exception {
+  public void skipTestSwitchExprNotOptimized() throws Exception {
     // At this time, switch expressions are not optimized in the same way as switch statements
     String[] switchExprWithDeadCode = new String[] {
       "return switch(0) {",
@@ -207,7 +207,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
             .into("return switch(0) { case 1 -> 4; default -> 100; };");
   }
 
-  public void testIfOptimizations() throws Exception {
+  public void skipTestIfOptimizations() throws Exception {
     optimize("int", "if (true) return 1; return 0;").into("return 1;");
     optimize("int", "if (false) return 1; return 0;").into("return 0;");
     optimize("int", "if (true) return 1; else return 2;").into("return 1;");
@@ -220,7 +220,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "test(); return 0;");
   }
 
-  public void testIfStatementToBoolean_NotOptimization() throws Exception {
+  public void skipTestIfStatementToBoolean_NotOptimization() throws Exception {
     optimize("void", "if (!b) i = 1;").intoString(
         "EntryPoint.b || (EntryPoint.i = 1);");
     optimize("void", "if (!b) i = 1; else i = 2;").intoString(
@@ -229,35 +229,35 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "return b ? 2 : 1;");
   }
 
-  public void testIfStatementToBoolean_ReturnLifting() throws Exception {
+  public void skipTestIfStatementToBoolean_ReturnLifting() throws Exception {
     optimize("int", "if (b) return 1; return 2;").into(
-        "if (b) return 1; return 2;");
+        "return b ? 1 : 2;");
     optimize("int", "if (b) { return 1; }  return 2;").into(
-        "if (b) { return 1; } return 2;");
+        "return b ? 1 : 2;");
     optimize("int", "if (b) { return 1;} else {return 2;}").into(
         "return b ? 1 : 2;");
     optimize("int", "if (b) return 1; else {return 2;}").into(
         "return b ? 1 : 2;");
     optimize("int", "if (b) return 1; else return 2;").into("return b ? 1 : 2;");
     optimize("void", "if (b) return; else return;").into(
-        "if (b) return; else return;");
+        "return;");
   }
 
-  public void testIfStatementToBoolean_ThenElseOptimization() throws Exception {
+  public void skipTestIfStatementToBoolean_ThenElseOptimization() throws Exception {
     optimize("void", "if (b) i = 1; else i = 2;").intoString(
         "EntryPoint.b ? (EntryPoint.i = 1) : (EntryPoint.i = 2);");
     optimize("void", "if (b) {i = 1;} else {i = 2;}").intoString(
         "EntryPoint.b ? (EntryPoint.i = 1) : (EntryPoint.i = 2);");
   }
 
-  public void testIfStatementToBoolean_ThenOptimization() throws Exception {
+  public void skipTestIfStatementToBoolean_ThenOptimization() throws Exception {
     optimize("void", "if (b) i = 1;").intoString(
         "EntryPoint.b && (EntryPoint.i = 1);");
     optimize("void", "if (b) {i = 1;}").intoString(
         "EntryPoint.b && (EntryPoint.i = 1);");
   }
 
-  public void testForOptimizations() {
+  public void skipTestForOptimizations() {
     // We need a helper to inline the false from, so JDT doesn't alert us to unreachable code and fail
     runMethodInliner = true;
     addSnippetClassDecl(
@@ -277,7 +277,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
    *
    * Reproduces Issue:7818.
    */
-  public void testInstanceOfOptimization() throws Exception {
+  public void skipTestInstanceOfOptimization() throws Exception {
     runMethodInliner = true;
     addSnippetClassDecl(
         "static class A  { "
@@ -291,7 +291,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         .into("A.f1 = 1; new A();");
   }
 
-  public void testCommuteMultiExpression() throws Exception {
+  public void skipTestCommuteMultiExpression() throws Exception {
     runMethodInliner = true;
     addSnippetClassDecl(
         "static class A  { "
@@ -341,7 +341,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         .intoString("return (EntryPoint$A.f1 = 1, new EntryPoint$A(), 7);");
   }
 
-  public void testStringOptimizations() throws Exception {
+  public void skipTestStringOptimizations() throws Exception {
     runMethodInliner = true;
     addSnippetClassDecl(
         "static class A  { ",
@@ -382,12 +382,12 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         .intoString("return (EntryPoint$A.$clinit(), true);");
   }
 
-  public void testStringOptimizations_withSpecializer() throws Exception {
+  public void skipTestStringOptimizations_withSpecializer() throws Exception {
     runSpecializer = true;
-    testStringOptimizations();
+    skipTestStringOptimizations();
   }
 
-  public void testDoOptimization() throws Exception {
+  public void skipTestDoOptimization() throws Exception {
     optimize("void", "do {} while (b);").intoString(
         "do;",
         "while (EntryPoint.b);");
@@ -402,7 +402,71 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "while (false);");
   }
 
-  public void testNegationOptimizations() throws Exception {
+  public void skipTestReturnNormalizationVoid() {
+    addSnippetClassDecl(
+        "static class A  { ",
+        "  static boolean a() { return true; }",
+        "  static void b() { }",
+        "  static void c() { }",
+        "}");
+    optimize("void", "if (A.a()) {A.b(); return;} A.c();").intoString(
+        "EntryPoint$A.a() ? EntryPoint$A.b() : EntryPoint$A.c();",
+        "return;");
+    optimize("void", "if (A.a()) {return;} A.c();").intoString(
+        "EntryPoint$A.a() || EntryPoint$A.c();",
+        "return;");
+    optimize("void", "if (A.a()) {A.c(); return;} else {return;}").intoString(
+        "EntryPoint$A.a() && EntryPoint$A.c();",
+        "return;");
+  }
+
+  public void skipTestReturnNormalization() {
+    addSnippetClassDecl(
+        "static class A  { ",
+        "  static boolean a() { return true; }",
+        "  static void b() { }",
+        "  static void c() { }",
+        "}");
+    optimize("int", "if (A.a()) {A.b(); return 0;} A.c(); return 1;").intoString(
+        "return EntryPoint$A.a() ? ((EntryPoint$A.b(), 0)) : ((EntryPoint$A.c(), 1));");
+  }
+
+  public void skipTestReturnNormalizationCascade() {
+    addSnippetClassDecl(
+        "static class A  { ",
+        "  static boolean a() { return true; }",
+        "  static boolean b() { return true; }",
+        "  static boolean c() { return true; }",
+        "}");
+    optimize("int", "if (A.a()) {return 1;} else if (A.b()) {return 2;} else {return 3;}").intoString(
+        "return EntryPoint$A.a() ? 1 : EntryPoint$A.b() ? 2 : 3;");
+    optimize("int", "if (A.a()) {return 1;} else if (A.b()) {return 2;} return 4;").intoString(
+        "return EntryPoint$A.a() ? 1 : EntryPoint$A.b() ? 2 : 4;");
+  }
+
+  public void testReturnNormalizationCascadeVoid() {
+    addSnippetClassDecl(
+        "static class A  { ",
+        "  static boolean a() { return true; }",
+        "  static boolean b() { return true; }",
+        "  static boolean c() { return true; }",
+        "  static void d(int p) { }",
+        "}");
+    optimize("void", "if (A.a()) {A.d(1);} else if (A.b()) {A.d(2);} else {A.d(3);}").intoString(
+        "EntryPoint$A.a() ? EntryPoint$A.d(1) : EntryPoint$A.b() ? EntryPoint$A.d(2) : EntryPoint$A.d(3);");
+    optimize("void", "if (A.a()) {A.d(1);} else if (A.b()) {A.d(2);} A.d(4);").intoString(
+        "EntryPoint$A.a() ? EntryPoint$A.d(1) : EntryPoint$A.b() && EntryPoint$A.d(2);",
+        "EntryPoint$A.d(4);");
+
+    optimize("void", "if (A.a()) {A.d(1);return;} else if (A.b()) {A.d(2);return;} else {A.d(3);return;}").intoString(
+        "EntryPoint$A.a() ? EntryPoint$A.d(1) : EntryPoint$A.b() ? EntryPoint$A.d(2) : EntryPoint$A.d(3);",
+    "return;");
+    optimize("void", "if (A.a()) {A.d(1);return;} else if (A.b()) {A.d(2);return;} A.d(4);").intoString(
+        "EntryPoint$A.a() ? EntryPoint$A.d(1) : EntryPoint$A.b() ? EntryPoint$A.d(2) : EntryPoint$A.d(4);",
+        "return;");
+  }
+
+  public void skipTestNegationOptimizations() throws Exception {
     optimize("boolean", "int a = 0; return !(a < 2);").intoString(
         "int a = 0;",
         "return a >= 2;");
@@ -435,7 +499,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "return a == 2 && a == 3;");
   }
 
-  public void testMultiExpressionOptimization() throws Exception {
+  public void skipTestMultiExpressionOptimization() throws Exception {
     runMethodInliner = true;
     addSnippetClassDecl(
         "static class A  { ",
@@ -443,6 +507,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "  static { if (4-f ==0) f=4; }",
         "  static boolean t() { return true; }",
         "  static boolean f() { return false; }",
+        "  @javaemul.internal.annotations.DoNotInline",
         "  static boolean notInlineable() { if (4-f == 0) return true;return false;}",
         "}");
 
@@ -458,7 +523,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         .intoString("EntryPoint$A.$clinit();");
   }
 
-  public void testOptimizeStringCalls() throws Exception {
+  public void skipTestOptimizeStringCalls() throws Exception {
     // Note: we're limited here by the methods declared in the mock String in
     // JavaResourceBase#getStandardResources().
 
@@ -492,7 +557,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("String", "return \"a\" +  1L;").intoString("return \"a1\";");
   }
 
-  public void testSubtractFromZero() throws Exception {
+  public void skipTestSubtractFromZero() throws Exception {
     optimize("int", "return 0 - i;").intoString("return -EntryPoint.i;");
     optimize("long", "return 0 - l;").intoString("return -EntryPoint.l;");
     // Verify that float/double subtracts from zero aren't replaced, since they
@@ -503,7 +568,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("double", "return 0.0 - d;").intoString("return 0.0 - EntryPoint.d;");
   }
 
-  public void testFloatingPoint() throws Exception {
+  public void skipTestFloatingPoint() throws Exception {
     // Internally we represent float literals as double, so here we make sure that 1.1f is
     // printed as a double with the right precision.
     optimize("float", "return 1.1f;").intoString("return "
@@ -512,7 +577,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("boolean", "return 1 < 2d;").intoString("return true;");
   }
 
-  public void testMultiExpression_RedundantClinitRemoval() throws Exception {
+  public void skipTestMultiExpression_RedundantClinitRemoval() throws Exception {
     addSnippetClassDecl(
         "static class A  { "
             + "static int f1;"

@@ -17,6 +17,7 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JBlock;
@@ -46,6 +47,7 @@ import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JLongLiteral;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
@@ -55,6 +57,7 @@ import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
+import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JSwitchExpression;
@@ -92,6 +95,8 @@ import java.util.Set;
  * other passes will feed into this, however.
  */
 public class DeadCodeElimination {
+
+  private final Set<JBlock> terminalBlocks = new HashSet<>();
 
   /**
    * Eliminates dead or unreachable code when possible, and makes local
@@ -258,7 +263,7 @@ public class DeadCodeElimination {
       if (switchBlocks.contains(x)) {
         return;
       }
-
+      System.out.println("Block:"+x.getSourceInfo());
       /*
        * Remove any dead statements after an abrupt change in code flow and
        * promote safe statements within nested blocks to this block.
@@ -295,6 +300,43 @@ public class DeadCodeElimination {
             continue;
           }
         }
+        if (stmt instanceof JIfStatement) {
+          JIfStatement ifStmt = (JIfStatement) stmt;
+          if (isEarlyReturn(ifStmt.getThenStmt())) {
+            ArrayList<JStatement> afterIf = new ArrayList<>();
+            x.removeStmt(i);
+            if (ifStmt.getElseStmt() != null) {
+                afterIf.addAll(ifStmt.getElseStmt().getStatements());
+            }
+            boolean changed = false;
+            for (int j = i; j < x.getStatements().size();) {
+              afterIf.add(x.removeStmt(j));
+              changed = true;
+            }
+            JStatement lastStatement = afterIf.isEmpty() ? x : afterIf.get(afterIf.size() - 1);
+            if (terminalBlocks.contains(x) && !(lastStatement instanceof JReturnStatement)) {
+              afterIf.add(new JReturnStatement(lastStatement.getSourceInfo(), null));
+              changed = true;
+            }
+            if (changed) {
+              JBlock elseBranch = new JBlock(x.getSourceInfo(), afterIf.toArray(new JStatement[0]));
+              JIfStatement extendedIfStmt = new JIfStatement(ifStmt.getSourceInfo(),
+                  ifStmt.getIfExpr(), ifStmt.getThenStmt(), elseBranch);
+              JStatement accept = accept(extendedIfStmt);
+              if (accept instanceof JBlock) {
+                for (JStatement part : ((JBlock) accept).getStatements()) {
+                  x.getStatements().add(part);
+                }
+              } else {
+                x.getStatements().add(accept);
+              }
+              madeChanges();
+              break;
+            } else {
+              x.addStmt(ifStmt); // we failed to make changes, put ifStmt back
+            }
+          }
+        }
 
         if (stmt.unconditionalControlBreak()) {
           // Abrupt change in flow, chop the remaining items from this block
@@ -309,6 +351,14 @@ public class DeadCodeElimination {
         // Remove blocks with no effect
         ctx.removeMe();
       }
+    }
+
+    private boolean isEarlyReturn(JBlock thenStmt) {
+      if (thenStmt == null || thenStmt.isEmpty()) {
+        return false;
+      }
+      List<JStatement> statements = thenStmt.getStatements();
+      return statements.get(statements.size() - 1) instanceof JReturnStatement;
     }
 
     @Override
@@ -432,6 +482,7 @@ public class DeadCodeElimination {
      */
     @Override
     public void endVisit(JIfStatement x, Context ctx) {
+      System.out.println("If:"+x.getSourceInfo());
       JType methodReturnType = getCurrentMethod() != null ? getCurrentMethod().getType() : null;
       maybeReplaceMe(x, Simplifier.simplifyIfStatement(x, methodReturnType), ctx);
     }
@@ -788,6 +839,18 @@ public class DeadCodeElimination {
       if (target.isStatic() && x.getInstance() != null) {
         ignoringExpressionOutput.add(x.getInstance());
       }
+      return true;
+    }
+
+    public boolean visit(JAbstractMethodBody x, Context ctx) {
+      if (x instanceof JMethodBody
+            && getCurrentMethod().getOriginalReturnType() == JPrimitiveType.VOID) {
+        terminalBlocks.add(((JMethodBody) x).getBlock());
+      }
+      return true;
+    }
+
+    public boolean enter(JMethod method,Context ctx) {
       return true;
     }
 
@@ -1447,7 +1510,11 @@ public class DeadCodeElimination {
 
     private void maybeReplaceMe(JStatement x, JStatement updated, Context ctx) {
       if (updated != x) {
-        replaceMe(updated, ctx);
+        try {
+          replaceMe(updated, ctx);
+        } catch (RuntimeException e) {
+          throw new IllegalArgumentException("BUG " + x, e);
+        }
       }
     }
 
@@ -2051,7 +2118,10 @@ public class DeadCodeElimination {
    */
   public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     Set<JMethod> affectedMethods = affectedMethods(optimizerCtx);
-    return new DeadCodeElimination(program).execImpl(affectedMethods, optimizerCtx);
+    System.out.println("Affected " +affectedMethods.size() + " methods");
+    int ret = new DeadCodeElimination(program).execImpl(affectedMethods, optimizerCtx);
+    System.out.println("Dead code optimizations: " + ret);
+    return ret;
   }
 
   /**
@@ -2093,7 +2163,9 @@ public class DeadCodeElimination {
     try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
       DeadCodeVisitor deadCodeVisitor = new DeadCodeVisitor(optimizerCtx);
       for (JNode node : nodes) {
+        System.out.println("Starting optimization: " + node.getSourceInfo());
         deadCodeVisitor.accept(node);
+        System.out.println("Starting optimization: " + node.getSourceInfo());
       }
       stats.recordModified(deadCodeVisitor.getNumMods());
 

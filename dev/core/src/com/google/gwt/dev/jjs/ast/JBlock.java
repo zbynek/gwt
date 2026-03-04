@@ -95,8 +95,8 @@ public class JBlock extends JStatement {
   /**
    * Removes the statement from this block at the specified index.
    */
-  public void removeStmt(int index) {
-    statements.remove(index);
+  public JStatement removeStmt(int index) {
+    return statements.remove(index);
   }
 
   @Override
