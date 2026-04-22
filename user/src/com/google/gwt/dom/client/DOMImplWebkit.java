@@ -21,7 +21,7 @@ package com.google.gwt.dom.client;
 class DOMImplWebkit extends DOMImplStandardBase {
 
   /**
-   * Webkit events sometimes target the text node inside of the element instead
+   * WebKit events sometimes target the text node inside the element instead
    * of the element itself, so we need to get the parent of the text node.
    */
   @Override
@@ -33,24 +33,30 @@ class DOMImplWebkit extends DOMImplStandardBase {
     return target;
   }-*/;
 
-  /**
-   * Webkit based browsers require that we set the webkit-user-drag style
-   * attribute to make an element draggable.
-   */
   @Override
-  public void setDraggable(Element elem, String draggable) {
-    super.setDraggable(elem, draggable);
-    if ("true".equals(draggable)) {
-      elem.getStyle().setProperty("webkitUserDrag", "element");
-    } else {
-      elem.getStyle().clearProperty("webkitUserDrag");
+  public native EventTarget eventGetCurrentTarget(NativeEvent event) /*-{
+    return event.currentTarget || $wnd;
+  }-*/;
+
+  @Override
+  public int getScrollLeft(Element elem) {
+    if (!elem.hasTagName(BodyElement.TAG) && isRTL(elem)) {
+      return super.getScrollLeft(elem)
+          - (elem.getScrollWidth() - elem.getClientWidth());
     }
+    return super.getScrollLeft(elem);
   }
 
   @Override
-  Element getLegacyDocumentScrollingElement(Document doc) {
-    // Old WebKit needs body.scrollLeft in both quirks mode and strict mode.
-    return doc.getBody();
+  public void setScrollLeft(Element elem, int left) {
+    if (!elem.hasTagName(BodyElement.TAG) && isRTL(elem)) {
+      left += elem.getScrollWidth() - elem.getClientWidth();
+    }
+    super.setScrollLeft(elem, left);
   }
+
+  protected native boolean isRTL(Element elem) /*-{
+    return elem.ownerDocument.defaultView.getComputedStyle(elem, '').direction == 'rtl';
+  }-*/;
 }
 

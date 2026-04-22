@@ -21,42 +21,6 @@ package com.google.gwt.dom.client;
 class DOMImplMozilla extends DOMImplStandard {
 
   @Override
-  public NativeEvent createKeyCodeEvent(Document doc, String type,
-      boolean ctrlKey, boolean altKey, boolean shiftKey, boolean metaKey,
-      int keyCode) {
-    return createKeyEventImpl(doc, type, true, true, ctrlKey, altKey, shiftKey,
-        metaKey, keyCode, 0);
-  }
-
-  @Override
-  @Deprecated
-  public NativeEvent createKeyEvent(Document doc, String type,
-      boolean canBubble, boolean cancelable, boolean ctrlKey, boolean altKey,
-      boolean shiftKey, boolean metaKey, int keyCode, int charCode) {
-    return createKeyEventImpl(doc, type, canBubble, cancelable, ctrlKey,
-        altKey, shiftKey, metaKey, keyCode, charCode);
-  }
-
-  @Override
-  public NativeEvent createKeyPressEvent(Document doc, boolean ctrlKey,
-      boolean altKey, boolean shiftKey, boolean metaKey, int charCode) {
-    return createKeyEventImpl(doc, "keypress", true, true, ctrlKey, altKey,
-        shiftKey, metaKey, 0, charCode);
-  }
-
-  @Override
-  public int getAbsoluteLeft(Element elem) {
-    return getAbsoluteLeftImpl(elem.getOwnerDocument().getViewportElement(),
-        elem);
-  }
-
-  @Override
-  public int getAbsoluteTop(Element elem) {
-    return getAbsoluteTopImpl(elem.getOwnerDocument().getViewportElement(),
-        elem);
-  }
-
-  @Override
   public native int getNodeType(Node node) /*-{
     try {
       return node.nodeType;
@@ -72,27 +36,5 @@ class DOMImplMozilla extends DOMImplStandard {
     }
   }-*/;
 
-  private native NativeEvent createKeyEventImpl(Document doc, String type,
-      boolean canBubble, boolean cancelable, boolean ctrlKey, boolean altKey,
-      boolean shiftKey, boolean metaKey, int keyCode, int charCode) /*-{
-    return new KeyboardEvent(type, {
-      ctrlKey: ctrlKey,
-      altKey: altKey,
-      shiftKey: shiftKey,
-      metaKey: metaKey,
-      keyCode: keyCode,
-      charCode: charCode,
-      bubbles: canBubble,
-      cancelable: cancelable
-    });
-  }-*/;
-
-  private native int getAbsoluteLeftImpl(Element viewport, Element elem) /*-{
-    return (elem.getBoundingClientRect().left + viewport.scrollLeft) | 0;
-  }-*/;
-
-  private native int getAbsoluteTopImpl(Element viewport, Element elem) /*-{
-    return (elem.getBoundingClientRect().top + viewport.scrollTop) | 0;
-  }-*/;
 }
 
