@@ -49,15 +49,6 @@ public class RootPanel extends AbsolutePanel {
       super(getBodyElement());
     }
 
-    @Override
-    protected void setWidgetPositionImpl(Widget w, int left, int top) {
-      // Account for the difference between absolute position and the
-      // body's positioning context.
-      left -= Document.get().getBodyOffsetLeft();
-      top -= Document.get().getBodyOffsetTop();
-
-      super.setWidgetPositionImpl(w, left, top);
-    }
   }
 
   /**

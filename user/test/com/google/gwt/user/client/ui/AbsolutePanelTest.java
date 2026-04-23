@@ -97,8 +97,8 @@ public class AbsolutePanelTest extends PanelTestBase<AbsolutePanel> {
     // wacky positioning of its children.
     int x = abs.getWidgetLeft(lbl);
     int y = abs.getWidgetTop(lbl);
-    int absX = lbl.getAbsoluteLeft() - Document.get().getBodyOffsetLeft();
-    int absY = lbl.getAbsoluteTop() - Document.get().getBodyOffsetTop();
+    int absX = lbl.getAbsoluteLeft();
+    int absY = lbl.getAbsoluteTop();
     assertEquals(3, x);
     assertEquals(7, y);
     assertEquals(

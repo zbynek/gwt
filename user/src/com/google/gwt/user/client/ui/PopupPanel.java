@@ -875,11 +875,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     leftPosition = left;
     topPosition = top;
 
-    // Account for the difference between absolute position and the
-    // body's positioning context.
-    left -= Document.get().getBodyOffsetLeft();
-    top -= Document.get().getBodyOffsetTop();
-
     // Set the popup's position manually, allowing setPopupPosition() to be
     // called before show() is called (so a popup can be positioned without it
     // 'jumping' on the screen).
