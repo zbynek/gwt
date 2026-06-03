@@ -68,7 +68,7 @@ public abstract class AbstractResourceContext implements ResourceContext {
   
   public String deploy(URL resource, String mimeType, boolean forceExternal)
       throws UnableToCompleteException {
-    String fileName = ResourceGeneratorUtil.baseName(resource);
+    String fileName = ResourceGeneratorUtil.baseNcame(resource);
     byte[] bytes = Util.readURLAsBytes(resource);
     try {
       String finalMimeType = (mimeType != null)

@@ -4,5 +4,6 @@
 
 # Working folder of ant build script
 /build/
+**/target/
 # Generated poms
 /maven/poms/**/pom.xml
