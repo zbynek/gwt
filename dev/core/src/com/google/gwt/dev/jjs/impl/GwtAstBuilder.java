@@ -1331,7 +1331,7 @@ public class GwtAstBuilder {
     public void endVisit(LambdaExpression x, BlockScope blockScope) {
 
       try {
-        /**
+        /*
          * Our output of a (args) -> expression_using_locals(locals) looks like this.
          *
          * class Enclosing {
