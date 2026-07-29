@@ -55,7 +55,6 @@ import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -147,6 +146,9 @@ public class JsStaticEval {
 
   /**
    * Describes how is the result of evaluation used.
+   *
+   * <p>In the future also string and number mode might be considered.
+   * <a href="https://github.com/gwtproject/gwt/pull/10261">#10261</a> removed unused string mode optimizations</p>
    */
   private enum EvalMode {
     BOOL, // result will be coerced to a boolean
@@ -168,11 +170,6 @@ public class JsStaticEval {
      * Missing entry = no coercion, difference between null and false matters.
      */
     private final Map<JsExpression, EvalMode> evalContext = new HashMap<>();
-
-    /**
-     * This is used by {@link #additionCoercesToString}.
-     */
-    private Map<JsExpression, Boolean> coercesToStringMap = new IdentityHashMap<>();
 
     @Override
     public boolean visit(JsExprStmt x, JsContext ctx) {
@@ -306,7 +303,7 @@ public class JsStaticEval {
         JsBinaryOperation condition = (JsBinaryOperation) condExpr;
         JsExpression newConditional = accept(new JsConditional(x.getSourceInfo(),
             condition.getArg2(), thenExpr, elseExpr));
-        ctx.replaceMe(withSideEffect(newConditional, condition.getArg1(), x.getSourceInfo()));
+        ctx.replaceMe(withSideEffect(condition.getArg1(), newConditional, x.getSourceInfo()));
       } else if (condExpr instanceof CanBooleanEval) {
         CanBooleanEval condEval = (CanBooleanEval) condExpr;
         if (condEval.isBooleanTrue()) {
@@ -532,52 +529,6 @@ public class JsStaticEval {
     }
 
     /**
-     * Given an expression, determine if the addition operator would cause a
-     * string coercion to happen.
-     */
-    private boolean additionCoercesToString(JsExpression expr) {
-      if (expr instanceof JsStringLiteral) {
-        return true;
-      }
-
-      /*
-       * Because the nodes passed into this method are visited on exit, it is
-       * worthwhile to memoize the result for this function.
-       */
-      Boolean toReturn = coercesToStringMap.get(expr);
-      if (toReturn != null) {
-        return toReturn;
-      }
-      toReturn = false;
-
-      if (expr instanceof JsBinaryOperation) {
-        JsBinaryOperation op = (JsBinaryOperation) expr;
-        switch (op.getOperator()) {
-          case ADD:
-            toReturn = additionCoercesToString(op.getArg1())
-                || additionCoercesToString(op.getArg2());
-            break;
-          case COMMA:
-            toReturn = additionCoercesToString(op.getArg2());
-            break;
-        }
-
-        if (op.getOperator().isAssignment()) {
-          toReturn = additionCoercesToString(op.getArg2());
-        }
-      }
-
-      /*
-       * TODO: Consider adding heuristics to detect String(foo), typeof(foo),
-       * and foo.toString(). The latter is debatable, since an implementation
-       * might not actually return a string.
-       */
-
-      coercesToStringMap.put(expr, toReturn);
-      return toReturn;
-    }
-
-    /**
      * This method MUST be called whenever any statements are removed from a
      * function. This is because some statements, such as JsVars or JsFunction
      * have the effect of defining local variables, no matter WHERE they are in
@@ -658,11 +609,12 @@ public class JsStaticEval {
   /**
    * Simplify short circuit AND expressions.
    *
+   * <p>In all contexts apply the following simplifications:</p>
    * <pre>
    * return true() && isWhatever() -> return isWhatever(), unless true() has side effects
    * return false() && isWhatever() -> return false()
    * </pre>
-   * In boolean context also
+   * In boolean context also apply these:
    * <pre>
    * if (isWhatever() && true()) -> if (isWhatever()) unless true() has side effects
    * if (isWhatever() && false()) -> if (false()) unless isWhatever() side effects
@@ -675,7 +627,7 @@ public class JsStaticEval {
     if (arg1 instanceof CanBooleanEval) {
       CanBooleanEval eval1 = (CanBooleanEval) arg1;
       if (eval1.isBooleanTrue()) {
-        return withSideEffect(arg2, arg1, expr.getSourceInfo());
+        return withSideEffect(arg1, arg2, expr.getSourceInfo());
       } else if (eval1.isBooleanFalse()) {
         return arg1;
       }
@@ -687,13 +639,17 @@ public class JsStaticEval {
       if (eval2.isBooleanTrue() && !arg2.hasSideEffects()) {
         return arg1;
       } else if (eval2.isBooleanFalse()) {
-        return withSideEffect(arg2, arg1, expr.getSourceInfo());
+        return withSideEffect(arg1, arg2, expr.getSourceInfo());
       }
     }
     return expr;
   }
 
-  private static JsExpression withSideEffect(JsExpression main, JsExpression sideEffect,
+  /**
+   * Returns either just {@code main} or {@code (sideEffect, main)}, depending on whether
+   * {@code sideEffect} actually has side effects.
+   */
+  private static JsExpression withSideEffect(JsExpression sideEffect, JsExpression main,
                                              SourceInfo sourceInfo) {
     return !sideEffect.hasSideEffects() ? main
         : new JsBinaryOperation(sourceInfo, JsBinaryOperator.COMMA, sideEffect, main);
@@ -702,11 +658,12 @@ public class JsStaticEval {
   /**
    * Simplify short circuit OR expressions.
    *
+   * <p>In all contexts apply the following simplifications:</p>
    * <pre>
    * return false() || isWhatever() -> return isWhatever(), unless false() has side effects
    * return true() && isWhatever() -> return true()
    * </pre>
-   * In boolean context also
+   * In boolean context also apply these:
    * <pre>
    * if (isWhatever() || false()) -> if (isWhatever()) unless false() has side effects
    * if (isWhatever() || true()) -> if (true()) unless isWhatever() side effects
@@ -719,7 +676,7 @@ public class JsStaticEval {
     if (arg1 instanceof CanBooleanEval) {
       CanBooleanEval eval1 = (CanBooleanEval) arg1;
       if (eval1.isBooleanFalse()) {
-        return withSideEffect(arg2, arg1, expr.getSourceInfo());
+        return withSideEffect(arg1, arg2, expr.getSourceInfo());
       } else if (eval1.isBooleanTrue()) {
         return arg1;
       }
@@ -731,7 +688,7 @@ public class JsStaticEval {
       if (eval2.isBooleanFalse() && !arg2.hasSideEffects()) {
         return arg1;
       } else if (eval2.isBooleanTrue()) {
-        return withSideEffect(arg2, arg1, expr.getSourceInfo());
+        return withSideEffect(arg1, arg2, expr.getSourceInfo());
       }
     }
     return expr;
