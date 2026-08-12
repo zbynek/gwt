@@ -214,6 +214,7 @@ public class JdtBehaviorTest extends TestCase {
   public void testIncrementalBuild() {
     List<MockResource> resources = new ArrayList<MockResource>();
     Collections.addAll(resources, JavaResourceBase.getStandardResources());
+    resources.addAll(JavaResourceBase.getReflectionResources());
     resources.add(JavaResourceBase.FOO);
     doCompile(resources);
 
@@ -224,6 +225,7 @@ public class JdtBehaviorTest extends TestCase {
   public void testSingleBuild() {
     List<MockResource> resources = new ArrayList<MockResource>();
     Collections.addAll(resources, JavaResourceBase.getStandardResources());
+    resources.addAll(JavaResourceBase.getReflectionResources());
     resources.add(JavaResourceBase.FOO);
     resources.add(JavaResourceBase.BAR);
     doCompile(resources);

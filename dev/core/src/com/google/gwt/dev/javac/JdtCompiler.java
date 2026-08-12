@@ -29,7 +29,6 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-import com.google.gwt.thirdparty.guava.common.io.BaseEncoding;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
@@ -444,100 +443,6 @@ public class JdtCompiler {
       return null;
     }
 
-    /*
-      Generated from:
-
-       public class LambdaMetafactory {
-        public static CallSite metafactory(MethodHandles.Lookup caller, String invokedName,
-            MethodType invokedType, MethodType samMethodType, MethodHandle implMethod,
-            MethodType instantiatedMethodType) {
-          return null;
-        }
-
-        public static CallSite altMetafactory(MethodHandles.Lookup caller, String invokedName,
-            MethodType invokedType, Object... args) {
-          return null;
-        }
-      }
-     */
-    private byte[] getLambdaMetafactoryBytes() {
-      return BaseEncoding.base64().decode(
-          "yv66vgAAADMAFwoAAwARBwASBwATAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJU"
-          + "YWJsZQEAC21ldGFmYWN0b3J5BwAVAQAGTG9va3VwAQAMSW5uZXJDbGFzc2VzAQDMKExqYXZhL2xh"
-          + "bmcvaW52b2tlL01ldGhvZEhhbmRsZXMkTG9va3VwO0xqYXZhL2xhbmcvU3RyaW5nO0xqYXZhL2xh"
-          + "bmcvaW52b2tlL01ldGhvZFR5cGU7TGphdmEvbGFuZy9pbnZva2UvTWV0aG9kVHlwZTtMamF2YS9s"
-          + "YW5nL2ludm9rZS9NZXRob2RIYW5kbGU7TGphdmEvbGFuZy9pbnZva2UvTWV0aG9kVHlwZTspTGph"
-          + "dmEvbGFuZy9pbnZva2UvQ2FsbFNpdGU7AQAOYWx0TWV0YWZhY3RvcnkBAIYoTGphdmEvbGFuZy9p"
-          + "bnZva2UvTWV0aG9kSGFuZGxlcyRMb29rdXA7TGphdmEvbGFuZy9TdHJpbmc7TGphdmEvbGFuZy9p"
-          + "bnZva2UvTWV0aG9kVHlwZTtbTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvaW52b2tlL0Nh"
-          + "bGxTaXRlOwEAClNvdXJjZUZpbGUBABZMYW1iZGFNZXRhZmFjdG9yeS5qYXZhDAAEAAUBACJqYXZh"
-          + "L2xhbmcvaW52b2tlL0xhbWJkYU1ldGFmYWN0b3J5AQAQamF2YS9sYW5nL09iamVjdAcAFgEAJWph"
-          + "dmEvbGFuZy9pbnZva2UvTWV0aG9kSGFuZGxlcyRMb29rdXABAB5qYXZhL2xhbmcvaW52b2tlL01l"
-          + "dGhvZEhhbmRsZXMAIQACAAMAAAAAAAMAAQAEAAUAAQAGAAAAHQABAAEAAAAFKrcAAbEAAAABAAcA"
-          + "AAAGAAEAAAAGAAkACAAMAAEABgAAABoAAQAGAAAAAgGwAAAAAQAHAAAABgABAAAAEACJAA0ADgAB"
-          + "AAYAAAAaAAEABAAAAAIBsAAAAAEABwAAAAYAAQAAABUAAgAPAAAAAgAQAAsAAAAKAAEACQAUAAoA"
-          + "GQ==");
-    }
-
-    /*
-      Generated from:
-
-      public class SerializedLambda {
-        public SerializedLambda(Class<?> capturingClass,
-                        String functionalInterfaceClass,
-                        String functionalInterfaceMethodName,
-                        String functionalInterfaceMethodSignature,
-                        int implMethodKind,
-                        String implClass,
-                        String implMethodName,
-                        String implMethodSignature,
-                        String instantiatedMethodType,
-                        Object[] capturedArgs) {
-        }
-
-        public String getCapturingClass() { return null; }
-        public String getFunctionalInterfaceClass() { return null; }
-        public String getFunctionalInterfaceMethodName() { return null; }
-        public String getFunctionalInterfaceMethodSignature() { return null; }
-        public String getImplClass() { return null; }
-        public String getImplMethodName() { return null; }
-        public String getImplMethodSignature() { return null; }
-        public int getImplMethodKind() { return 0; }
-        public final String getInstantiatedMethodType() { return null; }
-        public int getCapturedArgCount() { return 0; }
-        public Object getCapturedArg(int i) { return null; }
-        public String toString() { return super.toString(); }
-      }
-     */
-    private byte[] getSerializedLambdaBytes() {
-      return BaseEncoding.base64().decode(
-          "yv66vgAAADMAIQoABAAcCgAEAB0HAB4HAB8BAAY8aW5pdD4BAKYoTGphdmEvbGFuZy9DbGFzcztM"
-          + "amF2YS9sYW5nL1N0cmluZztMamF2YS9sYW5nL1N0cmluZztMamF2YS9sYW5nL1N0cmluZztJTGph"
-          + "dmEvbGFuZy9TdHJpbmc7TGphdmEvbGFuZy9TdHJpbmc7TGphdmEvbGFuZy9TdHJpbmc7TGphdmEv"
-          + "bGFuZy9TdHJpbmc7W0xqYXZhL2xhbmcvT2JqZWN0OylWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJs"
-          + "ZQEACVNpZ25hdHVyZQEAqShMamF2YS9sYW5nL0NsYXNzPCo+O0xqYXZhL2xhbmcvU3RyaW5nO0xq"
-          + "YXZhL2xhbmcvU3RyaW5nO0xqYXZhL2xhbmcvU3RyaW5nO0lMamF2YS9sYW5nL1N0cmluZztMamF2"
-          + "YS9sYW5nL1N0cmluZztMamF2YS9sYW5nL1N0cmluZztMamF2YS9sYW5nL1N0cmluZztbTGphdmEv"
-          + "bGFuZy9PYmplY3Q7KVYBABFnZXRDYXB0dXJpbmdDbGFzcwEAFCgpTGphdmEvbGFuZy9TdHJpbmc7"
-          + "AQAbZ2V0RnVuY3Rpb25hbEludGVyZmFjZUNsYXNzAQAgZ2V0RnVuY3Rpb25hbEludGVyZmFjZU1l"
-          + "dGhvZE5hbWUBACVnZXRGdW5jdGlvbmFsSW50ZXJmYWNlTWV0aG9kU2lnbmF0dXJlAQAMZ2V0SW1w"
-          + "bENsYXNzAQARZ2V0SW1wbE1ldGhvZE5hbWUBABZnZXRJbXBsTWV0aG9kU2lnbmF0dXJlAQARZ2V0"
-          + "SW1wbE1ldGhvZEtpbmQBAAMoKUkBABlnZXRJbnN0YW50aWF0ZWRNZXRob2RUeXBlAQATZ2V0Q2Fw"
-          + "dHVyZWRBcmdDb3VudAEADmdldENhcHR1cmVkQXJnAQAVKEkpTGphdmEvbGFuZy9PYmplY3Q7AQAI"
-          + "dG9TdHJpbmcBAApTb3VyY2VGaWxlAQAVU2VyaWFsaXplZExhbWJkYS5qYXZhDAAFACAMABkADAEA"
-          + "IWphdmEvbGFuZy9pbnZva2UvU2VyaWFsaXplZExhbWJkYQEAEGphdmEvbGFuZy9PYmplY3QBAAMo"
-          + "KVYAIQADAAQAAAAAAA0AAQAFAAYAAgAHAAAAIQABAAsAAAAFKrcAAbEAAAABAAgAAAAKAAIAAAAN"
-          + "AAQADgAJAAAAAgAKAAEACwAMAAEABwAAABoAAQABAAAAAgGwAAAAAQAIAAAABgABAAAAEAABAA0A"
-          + "DAABAAcAAAAaAAEAAQAAAAIBsAAAAAEACAAAAAYAAQAAABEAAQAOAAwAAQAHAAAAGgABAAEAAAAC"
-          + "AbAAAAABAAgAAAAGAAEAAAASAAEADwAMAAEABwAAABoAAQABAAAAAgGwAAAAAQAIAAAABgABAAAA"
-          + "EwABABAADAABAAcAAAAaAAEAAQAAAAIBsAAAAAEACAAAAAYAAQAAABQAAQARAAwAAQAHAAAAGgAB"
-          + "AAEAAAACAbAAAAABAAgAAAAGAAEAAAAVAAEAEgAMAAEABwAAABoAAQABAAAAAgGwAAAAAQAIAAAA"
-          + "BgABAAAAFgABABMAFAABAAcAAAAaAAEAAQAAAAIDrAAAAAEACAAAAAYAAQAAABcAEQAVAAwAAQAH"
-          + "AAAAGgABAAEAAAACAbAAAAABAAgAAAAGAAEAAAAYAAEAFgAUAAEABwAAABoAAQABAAAAAgOsAAAA"
-          + "AQAIAAAABgABAAAAGQABABcAGAABAAcAAAAaAAEAAgAAAAIBsAAAAAEACAAAAAYAAQAAABoAAQAZ"
-          + "AAwAAQAHAAAAHQABAAEAAAAFKrcAArAAAAABAAgAAAAGAAEAAAAbAAEAGgAAAAIAGw==");
-    }
-
     private NameEnvironmentAnswer findTypeInCache(String internalName) {
       if (!internalTypes.containsKey(internalName)) {
         return null;
@@ -577,27 +482,6 @@ public class JdtCompiler {
           }
         } catch (IOException | ClassFormatException e) {
           // returns null indicating a failure.
-        }
-      }
-      // LambdaMetafactory and SerializedLambda byte-code side-artifacts of JDT compile and actually
-      // not referenced by our AST. However, these classes are only available in JDK8+ so
-      // JdtCompiler fails to validate the classes that are referencing it. We tackle that by
-      // providing a stub version if it is not found in the class path.
-      if (internalName.equals("java/lang/invoke/LambdaMetafactory")) {
-        try {
-          ClassFileReader cfr = new ClassFileReader(getLambdaMetafactoryBytes(),
-              "synthetic:java/lang/invoke/LambdaMetafactory".toCharArray(), true);
-          return new NameEnvironmentAnswer(cfr, null);
-        } catch (ClassFormatException e) {
-          e.printStackTrace();
-        }
-      } else if (internalName.equals("java/lang/invoke/SerializedLambda")) {
-        try {
-          ClassFileReader cfr = new ClassFileReader(getSerializedLambdaBytes(),
-              "synthetic:java/lang/invoke/SerializedLambda".toCharArray(), true);
-          return new NameEnvironmentAnswer(cfr, null);
-        } catch (ClassFormatException e) {
-          e.printStackTrace();
         }
       }
       return null;
