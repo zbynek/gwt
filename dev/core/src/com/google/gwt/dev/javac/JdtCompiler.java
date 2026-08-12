@@ -290,7 +290,11 @@ public class JdtCompiler {
     public void process(CompilationUnitDeclaration cud, int i) {
       ignoreMissingAnnotationTarget(cud);
       try {
+        logger.log(TreeLogger.ERROR, "PROCESSING " + new String(cud.getMainTypeName()));
         super.process(cud, i);
+
+        logger.log(TreeLogger.ERROR, "PROCESSED " + new String(cud.getMainTypeName())
+                + ":" + cud.compilationResult.problemCount);
       } catch (AbortCompilation e) {
         abortCount++;
         String filename = new String(cud.getFileName());
