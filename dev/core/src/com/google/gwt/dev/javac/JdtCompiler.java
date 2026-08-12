@@ -38,6 +38,7 @@ import org.eclipse.jdt.internal.compiler.Compiler;
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
+import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.Argument;
 import org.eclipse.jdt.internal.compiler.ast.Block;
 import org.eclipse.jdt.internal.compiler.ast.Clinit;
@@ -288,6 +289,7 @@ public class JdtCompiler {
 
     @Override
     public void process(CompilationUnitDeclaration cud, int i) {
+      ignoreMissingAnnotationTarget(cud);
       try {
         super.process(cud, i);
       } catch (AbortCompilation e) {
@@ -329,6 +331,18 @@ public class JdtCompiler {
       List<ImportReference> cudOriginalImports =
           ((ParserImpl) parser).originalImportsByCud.removeAll(cud);
       processor.process(builder, cud, cudOriginalImports, compiledClasses);
+    }
+
+    private void ignoreMissingAnnotationTarget(CompilationUnitDeclaration cud) {
+      cud.problemReporter = new ProblemReporter(cud.problemReporter.policy,
+              cud.problemReporter.options,
+              new DefaultProblemFactory()) {
+
+        @Override
+        public void explitAnnotationTargetRequired(Annotation annotation) {
+          // these get wrongly reported for generics. They are not fatal => simply ignore.
+        }
+      };
     }
 
     /**
