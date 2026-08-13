@@ -30,6 +30,7 @@ import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
@@ -56,6 +57,7 @@ import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
+import org.eclipse.jdt.internal.compiler.impl.ReferenceContext;
 import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
@@ -72,6 +74,7 @@ import org.eclipse.jdt.internal.compiler.parser.Parser;
 import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
 import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
+import org.eclipse.jdt.internal.compiler.problem.ProblemSeverities;
 
 import java.io.File;
 import java.io.IOException;
@@ -104,8 +107,10 @@ public class JdtCompiler {
    */
   public static final class DefaultUnitProcessor implements UnitProcessor {
     private final List<CompilationUnit> results = new ArrayList<CompilationUnit>();
+    private final TreeLogger logger;
 
-    public DefaultUnitProcessor() {
+    public DefaultUnitProcessor(TreeLogger logger) {
+      this.logger = logger;
     }
 
     public List<CompilationUnit> getResults() {
@@ -115,6 +120,7 @@ public class JdtCompiler {
     @Override
     public void process(CompilationUnitBuilder builder, CompilationUnitDeclaration cud,
         List<ImportReference> cudOriginalImports, List<CompiledClass> compiledClasses) {
+      ignoreMissingAnnotationTarget(cud, logger);
       builder.setClasses(compiledClasses).setTypes(Collections.<JDeclaredType> emptyList())
           .setDependencies(new Dependencies()).setJsniMethods(Collections.<JsniMethod> emptyList())
           .setMethodArgs(new MethodArgNamesLookup())
@@ -288,13 +294,91 @@ public class JdtCompiler {
 
     @Override
     public void process(CompilationUnitDeclaration cud, int i) {
-      ignoreMissingAnnotationTarget(cud);
+      ignoreMissingAnnotationTarget(cud, logger);
       try {
-        logger.log(TreeLogger.ERROR, "PROCESSING " + new String(cud.getMainTypeName()));
         super.process(cud, i);
 
-        logger.log(TreeLogger.ERROR, "PROCESSED " + new String(cud.getMainTypeName())
-                + ":" + cud.compilationResult.problemCount);
+       if (cud.compilationResult.hasErrors()) {
+         logger.log(TreeLogger.ERROR, "Removing errors " + new String(cud.getMainTypeName())
+                 + ":" + cud.compilationResult.problemCount);
+         for (CategorizedProblem problem: cud.compilationResult.problems) {
+           logger.log(TreeLogger.ERROR, "Removing errors " + problem.getID()
+                   + " :: " + problem.getMessage() + "," + problem.isError());
+         }
+       }
+        while (cud.compilationResult.hasErrors()) {
+        cud.compilationResult.removeProblem(new CategorizedProblem() {
+          @Override
+          public int getCategoryID() {
+            return 0;
+          }
+
+          @Override
+          public String getMarkerType() {
+            return "";
+          }
+
+          @Override
+          public String[] getArguments() {
+            return new String[0];
+          }
+
+          @Override
+          public int getID() {
+            return 0;
+          }
+
+          @Override
+          public String getMessage() {
+            return "";
+          }
+
+          @Override
+          public char[] getOriginatingFileName() {
+            return new char[0];
+          }
+
+          @Override
+          public int getSourceEnd() {
+            return 0;
+          }
+
+          @Override
+          public int getSourceLineNumber() {
+            return 0;
+          }
+
+          @Override
+          public int getSourceStart() {
+            return 0;
+          }
+
+          @Override
+          public boolean isError() {
+            return true;
+          }
+
+          @Override
+          public boolean isWarning() {
+            return false;
+          }
+
+          @Override
+          public void setSourceEnd(int sourceEnd) {
+
+          }
+
+          @Override
+          public void setSourceLineNumber(int lineNumber) {
+
+          }
+
+          @Override
+          public void setSourceStart(int sourceStart) {
+
+          }
+        });
+        }
       } catch (AbortCompilation e) {
         abortCount++;
         String filename = new String(cud.getFileName());
@@ -336,17 +420,7 @@ public class JdtCompiler {
       processor.process(builder, cud, cudOriginalImports, compiledClasses);
     }
 
-    private void ignoreMissingAnnotationTarget(CompilationUnitDeclaration cud) {
-      cud.problemReporter = new ProblemReporter(cud.problemReporter.policy,
-              cud.problemReporter.options,
-              new DefaultProblemFactory()) {
 
-        @Override
-        public void explitAnnotationTargetRequired(Annotation annotation) {
-          // these get wrongly reported for generics. They are not fatal => simply ignore.
-        }
-      };
-    }
 
     /**
      * Recursively creates enclosing types first.
@@ -374,6 +448,39 @@ public class JdtCompiler {
     int getAbortCount() {
       return abortCount;
     }
+  }
+
+  private static void ignoreMissingAnnotationTarget(CompilationUnitDeclaration cud, TreeLogger logger) {
+    cud.problemReporter = new ProblemReporter(cud.problemReporter.policy,
+            cud.problemReporter.options,
+            new DefaultProblemFactory()) {
+
+      @Override
+      public void explitAnnotationTargetRequired(Annotation annotation) {
+        // these get wrongly reported for generics. They are not fatal => simply ignore.
+      }
+
+      @Override
+      public void handle(
+              int problemId,
+              String[] problemArguments,
+              int elaborationId,
+              String[] messageArguments,
+              int severity,
+              int problemStartPosition,
+              int problemEndPosition,
+              ReferenceContext referenceContext,
+              CompilationResult unitResult) {
+        if (severity == ProblemSeverities.Ignore) {
+          return;
+        }
+        logger.log(TreeLogger.Type.ERROR, "Handling " + problemId
+                + " in " + new String(unitResult.compilationUnit.getMainTypeName())
+                + ":" + severity);
+        super.handle(problemId, problemArguments, elaborationId, messageArguments,
+                severity, problemStartPosition, problemEndPosition, referenceContext, unitResult);
+      }
+    };
   }
 
   /**
@@ -561,7 +668,7 @@ public class JdtCompiler {
   public static List<CompilationUnit> compile(TreeLogger logger, CompilerContext compilerContext,
       Collection<CompilationUnitBuilder> builders) throws UnableToCompleteException {
     try (SimpleEvent ignored = new SimpleEvent("Jdt Compiler")) {
-      DefaultUnitProcessor processor = new DefaultUnitProcessor();
+      DefaultUnitProcessor processor = new DefaultUnitProcessor(logger);
       JdtCompiler compiler = new JdtCompiler(compilerContext, processor);
       compiler.doCompile(logger, builders);
       return processor.getResults();
