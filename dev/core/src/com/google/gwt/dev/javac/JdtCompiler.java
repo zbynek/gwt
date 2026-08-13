@@ -259,6 +259,15 @@ public class JdtCompiler {
           compilerOptions,
           new ICompilerRequestorImpl(),
           new DefaultProblemFactory(Locale.getDefault()));
+        problemReporter = new ProblemReporter(problemReporter.policy,
+                problemReporter.options,
+                new DefaultProblemFactory()) {
+
+          @Override
+          public void explitAnnotationTargetRequired(Annotation annotation) {
+            // these get wrongly reported for generics. They are not fatal => simply ignore.
+          }
+        };
       this.logger = logger;
       this.processor = processor;
       this.internalTypes = internalTypes;
