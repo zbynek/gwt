@@ -31,7 +31,9 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.BaseEncoding;
 
+import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.core.compiler.CharOperation;
+import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.internal.compiler.ClassFile;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
 import org.eclipse.jdt.internal.compiler.Compiler;
@@ -299,8 +301,16 @@ public class JdtCompiler {
     @Override
     public void process(CompilationUnitDeclaration cud, int i) {
       ignoreMissingAnnotationTarget(cud);
+      CompilationResult result = cud.compilationResult;
       try {
         super.process(cud, i);
+        for (CategorizedProblem problem: result.problems == null ? new CategorizedProblem[0] : result.problems) {
+          if (problem.getID() == IProblem.ExplicitAnnotationTargetRequired) {
+            result.removeProblem(problem);
+          } else if (problem.isError()) {
+            logger.log(TreeLogger.ERROR, "Unexpected JDT problem ID " + problem.getID());
+          }
+        }
       } catch (AbortCompilation e) {
         abortCount++;
         String filename = new String(cud.getFileName());
@@ -316,7 +326,7 @@ public class JdtCompiler {
         logger.log(TreeLogger.WARN, "JDT threw an exception: " + filename + ": " + e);
         if (abortCount >= ABORT_COUNT_MAX) {
           logger.log(TreeLogger.ERROR, "JDT threw too many exceptions.");
-          throw new AbortCompilation(cud.compilationResult, e);
+          throw new AbortCompilation(result, e);
         }
         return; // continue without it; it might be a server-side class.
       }
