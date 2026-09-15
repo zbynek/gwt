@@ -98,7 +98,7 @@ public abstract class JsNamer {
 
   protected final Set<JsName> referenced;
 
-  protected final ReservedNames reserved;
+  final ReservedNames reserved;
 
   public JsNamer(JsProgram program, ConfigurationProperties config) {
     this.program = program;
