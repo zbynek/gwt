@@ -38,8 +38,11 @@ import com.google.gwt.thirdparty.guava.common.collect.Multisets;
  * A namer that uses short, unrecognizable idents to minimize generated code
  * size. Counts occurrences of each symbol before starting to rename, so that more frequently
  * used symbols are allotted shorter names.
- *
- * There are two hierarchies of names here - like other namers, we visit the object and top scopes, and recursively visit all child scopes.
+ * <p>
+ * There are two hierarchies of names here - like other namers, we visit the object and top scopes,
+ * and recursively visit all child scopes.
+ * <p>
+ * Not suitable for use in incremental compilation, as names will change based on usage counts.
  */
 public class JsCountingObfuscateNamer implements FreshNameGenerator {
 
