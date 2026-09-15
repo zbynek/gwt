@@ -135,6 +135,7 @@ import com.google.gwt.dev.js.DuplicateClinitRemover;
 import com.google.gwt.dev.js.EvalFunctionsAtTopScope;
 import com.google.gwt.dev.js.FreshNameGenerator;
 import com.google.gwt.dev.js.JsBreakUpLargeVarStatements;
+import com.google.gwt.dev.js.JsCountingObfuscateNamer;
 import com.google.gwt.dev.js.JsDuplicateCaseFolder;
 import com.google.gwt.dev.js.JsDuplicateFunctionRemover;
 import com.google.gwt.dev.js.JsForceInliningChecker;
@@ -1079,7 +1080,7 @@ public final class JavaToJavaScriptCompiler {
     Map<JsName, JsLiteral> internedLiteralByVariableName =
         maybeInternLiterals(JsLiteralInterner.INTERN_ALL);
     FreshNameGenerator freshNameGenerator =
-        JsObfuscateNamer.exec(jsProgram, properties.getConfigurationProperties());
+        JsCountingObfuscateNamer.exec(jsProgram, properties.getConfigurationProperties());
     if (options.shouldRemoveDuplicateFunctions()
         && JsStackEmulator.getStackMode(properties) == JsStackEmulator.StackMode.STRIP) {
       JsDuplicateFunctionRemover.exec(jsProgram, freshNameGenerator);

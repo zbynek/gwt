@@ -34,6 +34,7 @@ import com.google.gwt.dev.cfg.Script;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.js.JsCountingObfuscateNamer;
 import com.google.gwt.dev.js.JsLiteralInterner;
 import com.google.gwt.dev.js.JsNamer.IllegalNameException;
 import com.google.gwt.dev.js.JsObfuscateNamer;
@@ -463,7 +464,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
            * function within the program.
            */
           TopFunctionStringInterner.exec(jsProgram);
-          JsObfuscateNamer.exec(jsProgram, null);
+          JsCountingObfuscateNamer.exec(jsProgram, null);
           break;
         case PRETTY:
           // We don't intern strings in pretty mode to improve readability

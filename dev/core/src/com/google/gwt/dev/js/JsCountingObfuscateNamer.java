@@ -28,13 +28,11 @@ import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVisitor;
+import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultiset;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMultiset;
 import com.google.gwt.thirdparty.guava.common.collect.Multiset;
 import com.google.gwt.thirdparty.guava.common.collect.Multisets;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A namer that uses short, unrecognizable idents to minimize generated code
@@ -70,8 +68,6 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
   public static FreshNameGenerator exec(JsProgram program, ConfigurationProperties config)
       throws JsNamer.IllegalNameException {
     JsCountingObfuscateNamer namer = new JsCountingObfuscateNamer(program, config);
-//    namer.execImpl();
-
 
     // Across distinct passes, we must also track the "total high water mark" so that the returned
     // namer can be used to generate unique fresh names.
@@ -153,7 +149,7 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
 
   /**
    * Maps each referenced name to its rank by descending reference count (rank 0 is the most
-   * frequently referenced). Populated by {@link #countReferences()} and used to allocate the
+   * frequently referenced). Populated by {@link #countReferences(JsProgram)} and used to allocate the
    * shortest idents to the highest-ranked names.
    */
   private final Multiset<JsName> referenceCounts;
@@ -195,10 +191,10 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
     // used in this env, then to iterate those used names and obfsucate them, skipping disallowed
     // names as needed, and tracking the high water mark from this set/subset.
     int curId = maxChildId;
-    List<JsName> usedNames = new ArrayList<>();
+    IdentityHashSet<JsName> usedNames = new IdentityHashSet<>();
     for (JsName name : scope.getAllNames()) {
-      int rank = referenceCounts.count(name);
-      if (rank == 0) {
+      int count = referenceCounts.count(name);
+      if (count == 0) {
         // Can't/shouldn't allocate idents for non-referenced names.
         continue;
       }
@@ -212,12 +208,12 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
     }
 
     // Filter the global counts to just this scope's names, and assign smallest idents to most-used names
-    for (JsName name : Multisets.filter(referenceCounts, usedNames::contains)) {
+    for (JsName name : Multisets.filter(referenceCounts, usedNames::contains).elementSet()) {
       String newIdent;
       do {
         // Get the next shortest obfuscated name that is legal
         newIdent = makeObfuscatedIdent(curId++);
-      } while (!isLegal(program.getScope(), newIdent));
+      } while (!isLegal(scope, newIdent));
 
       name.setShortIdent(newIdent);
     }
