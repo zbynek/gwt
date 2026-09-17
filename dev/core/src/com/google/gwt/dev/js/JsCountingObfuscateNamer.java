@@ -213,12 +213,12 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
       usedNames.add(name);
     }
 
-    if (usedNames.size() > 50) {
+    if ("Global->Root".equals(scope.toString())) {
       usedNames.sort(Comparator.comparingInt(referenceCounts::count).reversed());
     }
 
     // Filter the global counts to just this scope's names, and assign smallest idents to most-used names
-    String newIdent = null;
+    String newIdent;
     for (JsName name : usedNames) {
       do {
         // Get the next shortest obfuscated name that is legal
@@ -226,13 +226,6 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
       } while (!isLegal(scope, newIdent));
 
       name.setShortIdent(newIdent);
-    }
-    if (usedNames.size()  > 50 && usedNames.size() < 1000) {
-      System.out.println("Obfuscating scope " + scope + " with "
-              + usedNames.size() + " vars ending with " + newIdent);
-      for (JsName n: usedNames) {
-        System.out.println(n.toString());
-      }
     }
     // Record the new high water marks
     maxChildId = Math.max(mySiblingsMaxId, curId);
