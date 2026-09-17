@@ -213,8 +213,11 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
       usedNames.add(name);
     }
 
-    if ("Global->Root".equals(scope.toString())) {
-      usedNames.sort(Comparator.comparingInt(referenceCounts::count).reversed());
+    if (usedNames.size() > 50) {
+      List<JsName> sorted = usedNames.stream().sorted(
+              Comparator.comparingInt(referenceCounts::count).reversed()).toList();
+      usedNames.sort(Comparator.comparingInt(name ->
+              (int) Math.floor(Math.log(sorted.indexOf(name) / Math.log(64)))));
     }
 
     // Filter the global counts to just this scope's names, and assign smallest idents to most-used names
