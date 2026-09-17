@@ -618,12 +618,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   @Override
   public boolean visit(JsNameOf x, JsContext ctx) {
-    if (useLongIdents) {
-      printStringLiteral(x.getName().getIdent());
-    } else {
-      printStringLiteral(x.getName().getShortIdent());
-    }
-
+    printStringLiteral(getIdent(x.getName()));
     return false;
   }
 
@@ -927,6 +922,22 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     return false;
   }
 
+  protected String getIdent(JsName name) {
+    if (useLongIdents) {
+      return name.getIdent();
+    } else {
+      return name.getShortIdent();
+    }
+  }
+
+  protected String getIdent(JsNameRef name) {
+    if (useLongIdents) {
+      return name.getIdent();
+    } else {
+      return name.getShortIdent();
+    }
+  }
+
   protected void _newline() {
     p.newline();
   }
@@ -1117,11 +1128,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _nameDef(JsName name) {
-    if (useLongIdents) {
-      p.print(name.getIdent());
-    } else {
-      p.print(name.getShortIdent());
-    }
+    p.print(getIdent(name));
   }
 
   private void _nameOf(HasName hasName) {
@@ -1129,11 +1136,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _nameRef(JsNameRef nameRef) {
-    if (useLongIdents) {
-      p.print(nameRef.getIdent());
-    } else {
-      p.print(nameRef.getShortIdent());
-    }
+    p.print(getIdent(nameRef));
   }
 
   private boolean _nestedPop(JsStatement statement) {
