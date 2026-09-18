@@ -147,7 +147,7 @@ public class JsIncrementalNamer extends JsNamer {
   private String makeObfuscatedIdent() {
     while (true) {
       String obfuscatedIdent =
-          JsObfuscateNamer.makeObfuscatedIdent(++state.nextObfuscatedId) + RESERVED_IDENT_SUFFIX;
+          JsCountingObfuscateNamer.makeObfuscatedIdent(++state.nextObfuscatedId) + RESERVED_IDENT_SUFFIX;
       if (reserved.isAvailable(obfuscatedIdent) && !state.usedIdents.contains(obfuscatedIdent)) {
         return obfuscatedIdent;
       }

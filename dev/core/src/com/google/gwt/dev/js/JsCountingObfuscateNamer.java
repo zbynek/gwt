@@ -28,14 +28,13 @@ import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVisitor;
+import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultiset;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMultiset;
 import com.google.gwt.thirdparty.guava.common.collect.Multiset;
 import com.google.gwt.thirdparty.guava.common.collect.Multisets;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * A namer that uses short, unrecognizable idents to minimize generated code
@@ -52,7 +51,7 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
   /**
    * A lookup table of base-64 chars we use to encode idents.
    */
-  private static final char[] sBase64Chars = new char[]{
+  private static final byte[] sBase64Chars = new byte[]{
       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
       'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B',
       'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -145,7 +144,7 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
     String newIdent;
     do {
       // Get the next possible obfuscated name
-      newIdent = makeObfuscatedIdent(maxId++);
+      newIdent = makeObfuscatedIdent(maxId++, orderedBase54, orderedBase64);
     } while (!isLegal(program.getScope(), newIdent));
     return newIdent;
   }
@@ -170,6 +169,8 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
    * running the global renaming again.
    */
   private int maxId = -1;
+  private final byte[] orderedBase54 = new byte[54];
+  private final byte[] orderedBase64 = new byte[64];
 
   public JsCountingObfuscateNamer(JsProgram program, ConfigurationProperties config) {
     this.program = program;
@@ -177,6 +178,38 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
 
     // Walk the program and count references, sorting so that most frequently used names are first
     referenceCounts = countReferences(program);
+    DefaultTextOutput out = new DefaultTextOutput(false);
+    JsToStringGenerationVisitor v = new JsToStringGenerationVisitor(out) {
+      @Override
+      protected String getIdent(JsName name) {
+        return "";
+      }
+
+      @Override
+      protected String getIdent(JsNameRef name) {
+        return "";
+      }
+    };
+    v.accept(program);
+    String plain = out.toString();
+    HashMap<Integer, Integer> frequencies = new HashMap<>();
+    for (int i = 0; i < plain.length(); i++) {
+      char c = plain.charAt(i);
+      frequencies.put((int) c, frequencies.getOrDefault((int) c,  0) + 1);
+    }
+    Integer[] base64int = new Integer[64];
+    for (int i = 0; i < sBase64Chars.length; i++) {
+      base64int[i] = (int) sBase64Chars[i];
+    }
+    Arrays.sort(base64int, Comparator.comparingInt((c) -> -frequencies.getOrDefault(c, 0)));
+    int alpha = 0;
+    for (int i = 0; i < orderedBase64.length; i++) {
+      int next = base64int[i];
+      orderedBase64[i] = (byte) next;
+      if (next < '0' || next > '9') {
+        orderedBase54[alpha++] = (byte) next;
+      }
+    }
   }
 
   protected void visit(JsScope scope) {
@@ -225,7 +258,7 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
     for (JsName name : usedNames) {
       do {
         // Get the next shortest obfuscated name that is legal
-        newIdent = makeObfuscatedIdent(curId++);
+        newIdent = makeObfuscatedIdent(curId++, orderedBase54, orderedBase64);
       } while (!isLegal(scope, newIdent));
 
       name.setShortIdent(newIdent);
@@ -249,20 +282,24 @@ public class JsCountingObfuscateNamer implements FreshNameGenerator {
   }
 
   public static String makeObfuscatedIdent(int id) {
-    char[] sIdentBuf = new char[6];
+    return makeObfuscatedIdent(id, sBase64Chars, sBase64Chars);
+  }
+
+  private static String makeObfuscatedIdent(int id, byte[] orderedBase54, byte[] orderedBase64) {
+    byte[] sIdentBuf = new byte[6];
 
     // Use base-54 for the first character of the identifier,
     // so that we don't use any numbers (which are illegal at
     // the beginning of an identifier).
     //
     int i = 0;
-    sIdentBuf[i++] = sBase64Chars[id % 54];
+    sIdentBuf[i++] = orderedBase54[id % 54];
     id /= 54;
 
     // Use base-64 for the rest of the identifier.
     //
     while (id != 0) {
-      sIdentBuf[i++] = sBase64Chars[id & 0x3f];
+      sIdentBuf[i++] = orderedBase64[id & 0x3f];
       id >>= 6;
     }
 
