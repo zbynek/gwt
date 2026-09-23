@@ -1,7 +1,7 @@
 <!--
 Thanks for your contribution to the GWT Project!
 
-If there is no related issue, please create one first. 
+If there is no related issue, please create one first.
 Without an issue and time for discussion,
 it is unlikely that your pull request will be accepted.
 
