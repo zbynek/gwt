@@ -1,6 +1,6 @@
 name: 🚀 Feature request
 description: Create a report to help us improve
-labels: ["Type-Feature"]
+labels: ["feature-request"]
 assignees: []
 
 body:
