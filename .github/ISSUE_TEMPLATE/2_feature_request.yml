@@ -10,7 +10,7 @@ body:
         Please describe the feature you'd like to see. Note that some parts of GWT are in maintenance mode
         and will generally not receive new features, please consider using their replacements instead
         of filing a feature request (DOM can be replaced by [https://github.com/google/elemental2](Elemental2),
-        widgets by a UI library such as [Domino UI](https://github.com/DominoKit/domino-ui)).
+        widgets by an external UI library such as [Domino UI](https://github.com/DominoKit/domino-ui)).
   - type: textarea
     id: description
     attributes:
