@@ -42,11 +42,6 @@ import junit.framework.Assert;
 @DoNotRunWith(Platform.HtmlUnitUnknown)
 public abstract class MediaTest extends GWTTestCase {
 
-  static native boolean isFirefox35OrLater() /*-{
-    var geckoVersion = @com.google.gwt.dom.client.DOMImplMozilla::getGeckoVersion()();
-    return (geckoVersion != -1) && (geckoVersion >= 1009001);
-  }-*/;
-
   public void disabled_testPreload() {
     final MediaBase media = getMedia();
     if (media == null) {
@@ -296,10 +291,8 @@ public abstract class MediaTest extends GWTTestCase {
 
   public void testSupported() {
     // test the isxxxSupported() call if running known sup or not sup browsers.
-    if (isFirefox35OrLater()) {
-      assertTrue(Audio.isSupported());
-      assertTrue(Video.isSupported());
-    }
+    assertTrue(Audio.isSupported());
+    assertTrue(Video.isSupported());
   }
 
   public void testVolume() {
