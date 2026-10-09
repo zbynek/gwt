@@ -112,6 +112,8 @@ public class DeadCodeElimination {
    * that more simplifications can be made on a single pass through a tree.
    */
   public class DeadCodeVisitor extends JChangeTrackingVisitor {
+    JIfStatement lastSeenIf;
+    JBlock lastSeenLoopBody;
 
     public DeadCodeVisitor(OptimizerContext optimizerCtx) {
       super(optimizerCtx);
@@ -305,7 +307,11 @@ public class DeadCodeElimination {
         }
       }
 
-      if (ctx.canRemove() && x.getStatements().size() == 0) {
+      if (ctx.canRemove()
+              && x.getStatements().isEmpty()
+              && x != lastSeenLoopBody
+              && x != lastSeenIf.getElseStmt()
+              && x != lastSeenIf.getThenStmt()) {
         // Remove blocks with no effect
         ctx.removeMe();
       }
@@ -750,6 +756,31 @@ public class DeadCodeElimination {
         }
       }
     }
+
+    @Override
+    public boolean visit(JWhileStatement x, Context ctx) {
+      lastSeenLoopBody = x.getBody();
+      return true;
+    }
+
+    @Override
+    public boolean visit(JForStatement x, Context ctx) {
+      lastSeenLoopBody = x.getBody();
+      return true;
+    }
+
+    @Override
+    public boolean visit(JDoStatement x, Context ctx) {
+      lastSeenLoopBody = x.getBody();
+      return true;
+    }
+
+    @Override
+    public boolean visit(JIfStatement x, Context ctx) {
+      lastSeenIf = x;
+      return true;
+    }
+
 
     @Override
     public boolean visit(JBinaryOperation x, Context ctx) {
